@@ -1,55 +1,70 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext} from "react";
 import { Web5Context } from "../utils/Web5Context";
+// import {publicDid} from "../utils/constants"
 
 
 const Home = () => {
-  const { did, userType } = useContext(Web5Context);
+  const { web5, did } = useContext(Web5Context);
   useEffect(() => {
     if (did) {
       console.log("The DID : ", did);
     }
-  }, [did, userType]);
+  }, [web5, did]);
 
-  const [workouts, setWorkouts] = useState([]);
-  const [newWorkout, setNewWorkout] = useState({
+  const [allWorkout, setAllWorkout] = useState([]);
+  const [workout, setWorkout] = useState({
     workoutName: '',
     repTime: '',
     repetitions: '',
-    workoutType: 'cardio', // Default value
+    workoutType: 'other',
   });
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const getAllWorkouts = async() => {
+    const { records } = await web5.dwn.records.query({message: {
+      filter:{
+        schema: "https://schema.org/Fitbit",
+      }  
+    }});
+    const newList = await Promise.all(records.map(async (record) => {
+      const data = await record.data.json();
+      return data;
+    }));
+    setAllWorkout(newList);
     
-    // Add the new workout to the list
-    setWorkouts((prevWorkouts) => [...prevWorkouts, newWorkout]);
-
-    // Clear the form fields
-    setNewWorkout({
-      workoutName: '',
-      repTime: '',
-      repetitions: '',
-      workoutType: 'cardio',
+  }
+  const handleChange = (e) => {
+    setWorkout({
+      ...workout,
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleDeleteWorkout = (index) => {
-    // Remove the workout at the specified index
-    setWorkouts((prevWorkouts) => [
-      ...prevWorkouts.slice(0, index),
-      ...prevWorkouts.slice(index + 1),
-    ]);
+  const addWorkout = async () => {
+    try {
+      const { record } = await web5.dwn.records.write({
+        data: { ...workout },
+        message: {
+          schema: "https://schema.org/Fitbit",
+          dataFormat: 'application/json'
+        },
+      });
+      const {status} = await record.send(did);
+      console.log(status);
+      alert("Workout Created Successfully !")
+    } catch (error) {
+      alert("Workout Not Created ... ")
+      console.error("Error Creating Workout : ", error);
+    }
+    
   };
 
-  const handleCheckboxChange = (index) => {
-    // Toggle the "done" status of the workout at the specified index
-    setWorkouts((prevWorkouts) =>
-      prevWorkouts.map((workout, i) =>
-        i === index ? { ...workout, done: !workout.done } : workout
-      )
-    );
-  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    addWorkout();
+    console.log("Create Doctor Working Successfully !")
+  }
+
 
   return (
     <>
@@ -63,10 +78,11 @@ const Home = () => {
               Workout Name:
               <input
                 type="text"
+                id="workoutName"
                 name="workoutName"
-                value={newWorkout.workoutName}
-                onChange={(e) => setNewWorkout({ ...newWorkout, workoutName: e.target.value })}
                 required
+                value={workout.workoutName}
+                onChange={handleChange}
               />
             </label>
           </div>
@@ -75,10 +91,11 @@ const Home = () => {
               Rep Time (in seconds):
               <input
                 type="number"
+                id="repTime"
                 name="repTime"
-                value={newWorkout.repTime}
-                onChange={(e) => setNewWorkout({ ...newWorkout, repTime: e.target.value })}
                 required
+                value={workout.repTime}
+                onChange={handleChange}
               />
             </label>
           </div>
@@ -87,10 +104,11 @@ const Home = () => {
               Number of Repetitions:
               <input
                 type="number"
+                id="repetitions"
                 name="repetitions"
-                value={newWorkout.repetitions}
-                onChange={(e) => setNewWorkout({ ...newWorkout, repetitions: e.target.value })}
                 required
+                value={workout.repetitions}
+                onChange={handleChange}
               />
             </label>
           </div>
@@ -99,9 +117,10 @@ const Home = () => {
               Type of Workout:
               <select
                 name="workoutType"
-                value={newWorkout.workoutType}
-                onChange={(e) => setNewWorkout({ ...newWorkout, workoutType: e.target.value })}
+                id="workoutType"
                 required
+                value={workout.workoutType}
+                onChange={handleChange}
               >
                 <option value="cardio">Cardio</option>
                 <option value="strength">Strength</option>
@@ -115,11 +134,16 @@ const Home = () => {
         </form>
       </div>
       
+      <div>
+            <button type="submit" onClick={getAllWorkouts}>Get Workouts</button>
+      </div>
+
+
       {/* Right side - List of Workouts */}
       <div style={{ width: '50%', padding: '20px' }}>
         <h2>Workout List</h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {workouts.map((workout, index) => (
+          {allWorkout.map((workout, index) => (
             <li key={index} style={{ marginBottom: '15px', padding: '15px', border: '1px solid #ddd', borderRadius: '5px', position: 'relative' }}>
               <div>
                 <strong>{workout.workoutName}</strong> - {workout.repTime} seconds, {workout.repetitions} repetitions, {workout.workoutType}
@@ -140,7 +164,6 @@ const Home = () => {
         </ul>
       </div>
     </div>
-      {/* <h4>{did}</h4> */}
     </>
   );
 };
