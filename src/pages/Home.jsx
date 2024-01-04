@@ -16,6 +16,7 @@ const Home = () => {
     workoutName: '',
     repTime: '',
     repetitions: '',
+    completed: false,
     workoutType: 'other',
   });
 
@@ -27,8 +28,9 @@ const Home = () => {
     }});
     const newList = await Promise.all(records.map(async (record) => {
       const data = await record.data.json();
-      return data;
+      return { record, data, id: record.id };
     }));
+
     setAllWorkout(newList);
     
   }
@@ -57,6 +59,55 @@ const Home = () => {
     }
     
   };
+
+  const handleDeleteWorkout = async (workoutRecord) => {
+    try {
+      // Find the index of the workout to be deleted
+      const index = allWorkout.findIndex((record) => record.id === workoutRecord.id);
+  
+      if (index !== -1) {
+        // Create a new array without the deleted workout
+        const newList = [...allWorkout];
+        newList.splice(index, 1);
+        setAllWorkout(newList);
+  
+        // Delete the record in DWN
+        await web5.dwn.records.delete({
+          message: {
+            recordId: workoutRecord.id,
+          },
+        });
+  
+        console.log(`Deleted workout with record ID: ${workoutRecord.id}`);
+      } else {
+        console.error("Workout not found for deletion");
+      }
+    } catch (error) {
+      console.error("Error deleting workout: ", error);
+    }
+  };
+
+  const handleUpdateWorkout = async (workoutRecord) => {
+    console.log("Hehe");
+
+    const index = allWorkout.findIndex((record) => record.id === workoutRecord.id);
+    allWorkout[index].data.completed = !allWorkout[index].data.completed ;
+
+    
+
+  // Get record in DWN
+    const { record } = await web5.dwn.records.read({
+      message: {
+        filter: {
+          recordId: workoutRecord.id
+        }
+      }
+    });
+
+  // Update the record in DWN
+    await record.update({ data: allWorkout[index].data });
+  };
+  
 
 
   const handleFormSubmit = (e) => {
@@ -141,28 +192,35 @@ const Home = () => {
 
       {/* Right side - List of Workouts */}
       <div style={{ width: '50%', padding: '20px' }}>
-        <h2>Workout List</h2>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {allWorkout.map((workout, index) => (
-            <li key={index} style={{ marginBottom: '15px', padding: '15px', border: '1px solid #ddd', borderRadius: '5px', position: 'relative' }}>
-              <div>
-                <strong>{workout.workoutName}</strong> - {workout.repTime} seconds, {workout.repetitions} repetitions, {workout.workoutType}
-              </div>
-              <div style={{ position: 'absolute', top: '5px', right: '5px' }}>
-                <input
-                  type="checkbox"
-                  checked={workout.done || false}
-                  onChange={() => handleCheckboxChange(index)}
-                />{' '}
-                Done{' '}
-                <button onClick={() => handleDeleteWorkout(index)} style={{ marginLeft: '10px' }}>
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <h2>Workout List</h2>
+  <ul style={{ listStyle: 'none', padding: 0 }}>
+    {allWorkout.map(({ record, data, id }, index) => (
+      <li
+        key={index}
+        style={{
+          marginBottom: '15px',
+          padding: '15px',
+          border: '1px solid #ddd',
+          borderRadius: '5px',
+          position: 'relative',
+          backgroundColor: data.completed ? 'green' : 'red', // Set background color based on data.completed
+        }}
+      >
+        <div>
+          <strong>{data.workoutName}</strong> - {data.repTime} seconds, {data.repetitions} repetitions, {data.workoutType}
+        </div>
+        <div style={{ position: 'absolute', top: '5px', right: '5px' }}>
+          <button onClick={() => handleUpdateWorkout(record)} style={{ marginLeft: '10px' }}>
+            Done
+          </button>
+          <button onClick={() => handleDeleteWorkout(record)} style={{ marginLeft: '10px' }}>
+            Delete
+          </button>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>  
     </div>
     </>
   );
