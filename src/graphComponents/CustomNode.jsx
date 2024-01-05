@@ -12,7 +12,7 @@ export default memo(({ data, isConnectable }) => {
     <>
       <div
         style={{
-          background: '#1c1c1c',
+          // background: '#1c1c1c',
           padding: "5px",
           // paddingTop: '8px',
           // paddingBottom: '8px',
@@ -22,7 +22,7 @@ export default memo(({ data, isConnectable }) => {
           // border: '4px solid black'
         }}
       >
-        <img src={data.img} style={{height: "80px", width: "80px", borderRadius: '50px',}}/>
+        <img src={data.img} style={{height: "100px", width: "100px", borderRadius: '25px',}}/>
         {/* <div style={{fontSize: "12px"}}>{data.label}</div> */}
         <Handle
           type="target"

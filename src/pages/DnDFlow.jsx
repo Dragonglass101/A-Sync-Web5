@@ -1,13 +1,14 @@
 import React, { useCallback, useRef } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, Controls, updateEdge, addEdge, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
+import '../style/dnd.css'
 import CustomNode from '../graphComponents/CustomNode';
 import ConnectionLine from '../graphComponents/ConnectionLine';
 
-import spotifyLogo from "../assets/spotify-logo.png"
-import fitbitLogo from "../assets/fitbit-logo.png"
-import applemusicLogo from "../assets/applemusic-logo.png"
-import nutritionLogo from "../assets/nutrition-logo.png"
+import spotifyLogo from "../assets/images/spotify2.jpeg"
+import fitbitLogo from "../assets/images/workout.jpeg"
+import applemusicLogo from "../assets/images/music2.jpeg"
+import nutritionLogo from "../assets/images/health.jpeg"
 
 const initialNodes = [
   {
@@ -66,7 +67,7 @@ const DeleteEdgeDrop = () => {
   }, []);
 
   return (
-    <div style={{width:"600px", height:"600px", backgroundColor:"rgba(1,1,1,0.15)", borderRadius: "50px"}}>
+    <div className='graph-background' style={{width:"600px", height:"600px", borderRadius: "25px"}}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
