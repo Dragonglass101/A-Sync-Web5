@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, Controls, updateEdge, addEdge, Background } from 'reactflow';
+import ReactFlow, { useNodesState, useEdgesState, Controls, updateEdge, addEdge, Background, MarkerType } from 'reactflow';
 import 'reactflow/dist/style.css';
 import '../style/dnd.css'
 import CustomNode from '../graphComponents/CustomNode';
@@ -15,25 +15,25 @@ const initialNodes = [
     id: '1',
     type: 'custom',
     data: { label: 'Nutrition App', img: nutritionLogo },
-    position: { x: 100, y: 0 },
+    position: { x: 300, y: 0 },
   },
   {
     id: '2',
     type: 'custom',
     data: { label: 'Apple Music', img: applemusicLogo },
-    position: { x: 100, y: 200 },
+    position: { x: 300, y: 500 },
   },
   {
     id: '3',
     type: 'custom',
     data: { label: 'Spotify', img: spotifyLogo },
-    position: { x: 350, y: 200 },
+    position: { x: 800, y: 500 },
   },
   {
     id: '4',
     type: 'custom',
     data: { label: 'Fitbit', img: fitbitLogo },
-    position: { x: 350, y: 0 },
+    position: { x: 800, y: 0 },
   },
 ];
 
@@ -47,7 +47,28 @@ const DeleteEdgeDrop = () => {
   const edgeUpdateSuccessful = useRef(true);
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
+
+  function changeParams(params){
+    return {
+      source: params.source,
+      sourceHandle: "green",
+      target: params.target,
+      targetHandle: "lightred",
+      animated: true,
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        width: 20,
+        height: 20,
+        color: '#FF0072',
+      },
+      style: {
+        strokeWidth: 2,
+        stroke: '#FF0072',
+      },
+    };
+  }
+
+  const onConnect = useCallback((params) => setEdges((els) => addEdge(changeParams(params), els)), []);
 
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;
@@ -84,7 +105,7 @@ const DeleteEdgeDrop = () => {
         attributionPosition="top-right"
       >
         <Controls />
-        {/* <Background variant="lines" /> */}
+        <Background/>
       </ReactFlow>
     </div>
   );
