@@ -3,7 +3,7 @@ import { Web5Context } from "../utils/Web5Context";
 // import {publicDid} from "../utils/constants"
 
 
-const Home = () => {
+const FitbitHome = () => {
   const { web5, did } = useContext(Web5Context);
   useEffect(() => {
     if (did) {
@@ -17,8 +17,13 @@ const Home = () => {
     repTime: '',
     repetitions: '',
     completed: false,
+    calorie: 0,
     workoutType: 'other',
   });
+
+  const calculateCalorie = (repTime, repetitions) => {
+    return repTime * repetitions;
+  };
 
   const getAllWorkouts = async() => {
     const { records } = await web5.dwn.records.query({message: {
@@ -43,6 +48,7 @@ const Home = () => {
 
   const addWorkout = async () => {
     try {
+      workout.calorie = calculateCalorie(workout.repTime, workout.repetitions);
       const { record } = await web5.dwn.records.write({
         data: { ...workout },
         message: {
@@ -120,6 +126,7 @@ const Home = () => {
   return (
     <>
       <h1>Welcome to the FitBit !</h1>
+     
       <div style={{ display: 'flex', height: '70vh', margin: '0 auto', maxWidth: '70%', border: '1px solid #ccc', borderRadius: '5px' }}>
       <div style={{ width: '50%', borderRight: '1px solid #ccc', padding: '20px' }}>
         <h2>Add Workout</h2>
@@ -192,38 +199,42 @@ const Home = () => {
 
       {/* Right side - List of Workouts */}
       <div style={{ width: '50%', padding: '20px' }}>
-  <h2>Workout List</h2>
-  <ul style={{ listStyle: 'none', padding: 0 }}>
-    {allWorkout.map(({ record, data, id }, index) => (
-      <li
-        key={index}
-        style={{
-          marginBottom: '15px',
-          padding: '15px',
-          border: '1px solid #ddd',
-          borderRadius: '5px',
-          position: 'relative',
-          backgroundColor: data.completed ? 'green' : 'red', // Set background color based on data.completed
-        }}
-      >
-        <div>
-          <strong>{data.workoutName}</strong> - {data.repTime} seconds, {data.repetitions} repetitions, {data.workoutType}
-        </div>
-        <div style={{ position: 'absolute', top: '5px', right: '5px' }}>
-          <button onClick={() => handleUpdateWorkout(record)} style={{ marginLeft: '10px' }}>
-            Done
-          </button>
-          <button onClick={() => handleDeleteWorkout(record)} style={{ marginLeft: '10px' }}>
-            Delete
-          </button>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>  
+        <h2>Workout List</h2>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {allWorkout.map(({ record, data, id }, index) => (
+            <li
+              key={index}
+              style={{
+                marginBottom: '15px',
+                padding: '15px',
+                border: '1px solid #ddd',
+                borderRadius: '5px',
+                position: 'relative',
+                backgroundColor: data.completed ? 'green' : 'red', // Set background color based on data.completed
+              }}
+            >
+              <div>
+                <strong>{data.workoutName}</strong> 
+              </div>
+              <div style={{ marginTop: '10px' }}>
+                <strong style={{ fontSize: '16px' }}>Calorie:</strong>
+                <div style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '5px' }}>{data.calorie}</div>
+              </div>
+              <div style={{ position: 'absolute', top: '5px', right: '5px' }}>
+                <button onClick={() => handleUpdateWorkout(record)} style={{ marginLeft: '10px' }}>
+                  Done
+                </button>
+                <button onClick={() => handleDeleteWorkout(record)} style={{ marginLeft: '10px' }}>
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
     </>
   );
 };
 
-export default Home;
+export default FitbitHome;
