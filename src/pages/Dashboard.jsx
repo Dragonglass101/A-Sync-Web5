@@ -16,9 +16,10 @@ import img_health from "../assets/images/health.jpeg"
 const Dashboard = () => {
     return (
         <>
-            <h1 className='fw-bold text-light collection-slider my-5' style={{fontFamily:"Space Mono"}}>App Dashboard</h1>
+            <h1 className='fw-bold text-light collection-slider my-5' style={{ fontFamily: "Space Mono" }}>Dashboard</h1>
             <div className=' d-flex'>
                 <div className='w-50'>
+                    <h3 className="text-center text-secondary fw-bold">Applications</h3>
                     <div className='collection-slider'>
                         <div className='collection-card'>
                             <img src={img_music2} className='dashboard-app-card' />
@@ -48,13 +49,19 @@ const Dashboard = () => {
                                 <span className='text-secondary'>Nourish isn't just a diet app, it's a personalized journey to a healthier you.</span>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
-                <div className='w-50 text-light'>
+                <div className='w-50 text-light d-flex justify-content-center align-content-start flex-wrap flex-row'>
+                    <h3 className="text-center text-secondary fw-bold">Protocol Playground</h3>
                     <DeleteEdgeDrop/>
                 </div>
+                {/* display: flex;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: flex-start; */}
             </div>
         </>
     )
