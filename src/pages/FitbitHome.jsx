@@ -1,19 +1,91 @@
 import { useEffect, useState, useContext} from "react";
 import { Web5Context } from "../utils/Web5Context";
-import { protocolDefinition } from "../protocol";
-// import protocolDefinition from "../protocol";
-// import {publicDid} from "../utils/constants"
 
 
+const Home = () => {
+  const pd1 = {
+    protocol: "https://fitbit.org/protocol",
+    published: true,
+    types: {
+      users: {
+        schema: "https://schema.org/Fitbit",
+        dataFormats: ["application/json"],
+      },
+    },
+    structure: {
+      users: {
+        $actions: [
+          { who: "anyone", can: "write" },
+          { who: "anyone", can: "read" },
+        ],
+      }
+    },
+  };
+  const pd2 = {
+    protocol: "https://fitbit.org/protocol",
+    published: true,
+    types: {
+      users: {
+        schema: "https://schema.org/Fitbit",
+        dataFormats: ["application/json"],
+      },
+    },
+    structure: {
+      users: {
+        $actions: [
+          { who: "author", of: "users", can: "write" },
+          { who: "anyone", can: "read" },
+        ],
+      }
+    },
+  };
 const FitbitHome = () => {
   const { web5, did, protocolDefinition} = useContext(Web5Context);
   useEffect(() => {
-    if (did) {
-      console.log("The DID : ", did);
+    const installProtocol = async () => {
+      try {
+        console.log("Installing protocol ...");
+        const { protocol, status } = await web5.dwn.protocols.configure({
+          message: {
+            definition: pd1,
+          },
+        });
+        await protocol.send(did);
+        console.log("Protocol installed successfully.");
+      } catch (error) {
+        console.error("Error installing protocol: : ", error);
+      }
     }
-  }, [web5, did, protocolDefinition]);
+    installProtocol();
+  }, [web5, did]);
 
+  async function updateProtocol(){
+    try {
+      console.log("Installing protocol ...");
+      const { protocol, status } = await web5.dwn.protocols.configure({
+        message: {
+          definition: pd2,
+        },
+      });
+      await protocol.send(did);
+      console.log("Protocol installed successfully.");
+    } catch (error) {
+      console.error("Error installing protocol: : ", error);
+    }
+  }
 
+  async function getProtocol(){
+    const { protocols, status } = await web5.dwn.protocols.query({
+      message: {
+        filter: {
+          protocol: 'https://fitbit.org/protocol',
+        },
+      },
+    });
+  
+    // logs an array of protocol configurations installed on the user's DWN
+    console.log(protocols);
+  }
 
   const [allWorkout, setAllWorkout] = useState([]);
   const [allMeals, setAllMeals] = useState([]);
@@ -190,7 +262,7 @@ const FitbitHome = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addWorkout();
-    console.log("Create Doctor Working Successfully !")
+    console.log("Create Workout Successful !")
   }
 
 
@@ -343,6 +415,7 @@ const FitbitHome = () => {
   </>
 
   );
+}
 };
 
 export default FitbitHome;
