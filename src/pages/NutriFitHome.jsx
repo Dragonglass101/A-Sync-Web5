@@ -4,31 +4,32 @@ import { Web5Context } from "../utils/Web5Context";
 
 
 const NutriFitHome= () => {
-  const { web5, did } = useContext(Web5Context);
+  const { web5, did, protocolDefinition} = useContext(Web5Context);
   useEffect(() => {
     if (did) {
       console.log("The DID : ", did);
     }
-  }, [web5, did]);
+  }, [web5, did, protocolDefinition]);
 
-  const [allWorkout, setAllWorkout] = useState([]);
-  const [workout, setWorkout] = useState({
-    workoutName: '',
-    repTime: '',
-    repetitions: '',
+  const [allMeals, setAllMeals] = useState([]);
+  const [meal, setMeal] = useState({
+    mealName: '',
+    time: '',
+    dish: '',
     completed: false,
     calorie: 0,
-    workoutType: 'other',
+    mealType: 'other',
   });
 
-  const calculateCalorie = (repTime, repetitions) => {
-    return repTime * repetitions;
+  const calculateCalorie = (time, dish) => {
+    return time * dish;
   };
 
-  const getAllWorkouts = async() => {
+  const getAllMeals = async() => {
     const { records } = await web5.dwn.records.query({message: {
       filter:{
-        schema: "https://schema.org/Fitbit",
+        protocol: protocolDefinition.protocol,
+        schema: protocolDefinition.types.NutriFit.schema,
       }  
     }});
     const newList = await Promise.all(records.map(async (record) => {
@@ -36,89 +37,94 @@ const NutriFitHome= () => {
       return { record, data, id: record.id };
     }));
 
-    setAllWorkout(newList);
+    setAllMeals(newList);
     
   }
   const handleChange = (e) => {
-    setWorkout({
-      ...workout,
+    setMeal({
+      ...meal,
       [e.target.name]: e.target.value,
     });
   };
 
-  const addWorkout = async () => {
+  const addMeal = async () => {
     try {
-      workout.calorie = calculateCalorie(workout.repTime, workout.repetitions);
+      meal.calorie = calculateCalorie(meal.time, meal.dish);
       const { record } = await web5.dwn.records.write({
-        data: { ...workout },
+        data: { ...meal },
         message: {
-          schema: "https://schema.org/Fitbit",
+          sprotocol: protocolDefinition.protocol,
+          schema: protocolDefinition.types.NutriFit.schema,
           dataFormat: 'application/json'
         },
       });
       const {status} = await record.send(did);
       console.log(status);
-      alert("Workout Created Successfully !")
+      alert("Meal Created Successfully !")
     } catch (error) {
-      alert("Workout Not Created ... ")
-      console.error("Error Creating Workout : ", error);
+      alert("Meal Not Created ... ")
+      console.error("Error Creating Meal : ", error);
     }
     
   };
 
-  const handleDeleteWorkout = async (workoutRecord) => {
+  const handleDeleteMeal = async (mealRecord) => {
     try {
-      // Find the index of the workout to be deleted
-      const index = allWorkout.findIndex((record) => record.id === workoutRecord.id);
+      // Find the index of the meal to be deleted
+      const index = allMeals.findIndex((record) => record.id === mealRecord.id);
   
       if (index !== -1) {
-        // Create a new array without the deleted workout
-        const newList = [...allWorkout];
+        // Create a new array without the deleted meal
+        const newList = [...allMeals];
         newList.splice(index, 1);
-        setAllWorkout(newList);
+        setAllMeals(newList);
   
         // Delete the record in DWN
         await web5.dwn.records.delete({
+          protocol: protocolDefinition.protocol,
+          schema: protocolDefinition.types.NutriFit.schema,
           message: {
-            recordId: workoutRecord.id,
+            recordId: mealRecord.id,
           },
         });
   
-        console.log(`Deleted workout with record ID: ${workoutRecord.id}`);
+        console.log(`Deleted meal with record ID: ${mealRecord.id}`);
       } else {
-        console.error("Workout not found for deletion");
+        console.error("meal not found for deletion");
       }
     } catch (error) {
-      console.error("Error deleting workout: ", error);
+      console.error("Error deleting meal: ", error);
     }
   };
 
-  const handleUpdateWorkout = async (workoutRecord) => {
+  const handleUpdateMeal = async (mealRecord) => {
     console.log("Hehe");
 
-    const index = allWorkout.findIndex((record) => record.id === workoutRecord.id);
-    allWorkout[index].data.completed = !allWorkout[index].data.completed ;
+    const index = allMeals.findIndex((record) => record.id === mealRecord.id);
+    allMeals[index].data.completed = !allMeals[index].data.completed ;
 
     
 
   // Get record in DWN
     const { record } = await web5.dwn.records.read({
       message: {
+        protocol: protocolDefinition.protocol,
+        schema: protocolDefinition.types.NutriFit.schema,
         filter: {
-          recordId: workoutRecord.id
+          recordId: mealRecord.id
         }
       }
     });
 
   // Update the record in DWN
-    await record.update({ data: allWorkout[index].data });
+    await record.update({ data: allMeals[index].data });
   };
   
 
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addWorkout();
+    addMeal();
     console.log("Create Doctor Working Successfully !")
   }
 
@@ -129,79 +135,79 @@ const NutriFitHome= () => {
      
       <div style={{ display: 'flex', height: '70vh', margin: '0 auto', maxWidth: '70%', border: '1px solid #ccc', borderRadius: '5px' }}>
       <div style={{ width: '50%', borderRight: '1px solid #ccc', padding: '20px' }}>
-        <h2>Add Workout</h2>
+        <h2>Add meal</h2>
         <form onSubmit={handleFormSubmit}>
           <div style={{ marginBottom: '15px' }}>
             <label>
-              Workout Name:
+              Meal Name:
               <input
                 type="text"
-                id="workoutName"
-                name="workoutName"
+                id="mealName"
+                name="mealName"
                 required
-                value={workout.workoutName}
+                value={meal.mealName}
                 onChange={handleChange}
               />
             </label>
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label>
-              Rep Time (in seconds):
+              Time (in seconds):
               <input
                 type="number"
-                id="repTime"
-                name="repTime"
+                id="time"
+                name="time"
                 required
-                value={workout.repTime}
+                value={meal.time}
                 onChange={handleChange}
               />
             </label>
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label>
-              Number of Repetitions:
+              Number of dish:
               <input
                 type="number"
-                id="repetitions"
-                name="repetitions"
+                id="dish"
+                name="dish"
                 required
-                value={workout.repetitions}
+                value={meal.dish}
                 onChange={handleChange}
               />
             </label>
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label>
-              Type of Workout:
+              Type of meal:
               <select
-                name="workoutType"
-                id="workoutType"
+                name="mealType"
+                id="mealType"
                 required
-                value={workout.workoutType}
+                value={meal.mealType}
                 onChange={handleChange}
               >
-                <option value="cardio">Cardio</option>
-                <option value="strength">Strength</option>
+                <option value="carbsMajor">Carb</option>
+                <option value="fatMajor">Fat</option>
                 <option value="other">Other</option>
               </select>
             </label>
           </div>
           <div>
-            <button type="submit">Add Workout</button>
+            <button type="submit">Add meal</button>
           </div>
         </form>
       </div>
       
       <div>
-            <button type="submit" onClick={getAllWorkouts}>Get Workouts</button>
+            <button type="submit" onClick={getAllMeals}>Get meals</button>
       </div>
 
 
-      {/* Right side - List of Workouts */}
+      {/* Right side - List of meals */}
       <div style={{ width: '50%', padding: '20px' }}>
-        <h2>Workout List</h2>
+        <h2>meal List</h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {allWorkout.map(({ record, data, id }, index) => (
+          {allMeals.map(({ record, data, id }, index) => (
             <li
               key={index}
               style={{
@@ -214,17 +220,17 @@ const NutriFitHome= () => {
               }}
             >
               <div>
-                <strong>{data.workoutName}</strong> 
+                <strong>{data.mealName}</strong> 
               </div>
               <div style={{ marginTop: '10px' }}>
                 <strong style={{ fontSize: '16px' }}>Calorie:</strong>
                 <div style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '5px' }}>{data.calorie}</div>
               </div>
               <div style={{ position: 'absolute', top: '5px', right: '5px' }}>
-                <button onClick={() => handleUpdateWorkout(record)} style={{ marginLeft: '10px' }}>
+                <button onClick={() => handleUpdateMeal(record)} style={{ marginLeft: '10px' }}>
                   Done
                 </button>
-                <button onClick={() => handleDeleteWorkout(record)} style={{ marginLeft: '10px' }}>
+                <button onClick={() => handleDeleteMeal(record)} style={{ marginLeft: '10px' }}>
                   Delete
                 </button>
               </div>
