@@ -2,6 +2,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import DnDFlow from "./pages/DnDFlow";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/protocolmap" element={<DnDFlow/>}/>
         </Routes>
       </Router>
   );
