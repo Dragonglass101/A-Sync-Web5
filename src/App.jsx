@@ -5,15 +5,28 @@ import Home from "./pages/Home";
 import DnDFlow from "./pages/DnDFlow";
 import { BrowserRouter as Router } from "react-router-dom";
 
-const App = () => {
 
+
+const App = () => {
   return (
-      <Router>
+    <Router>
+      <div>
+        {/* Navigation for the home page */}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Define routes for Home, FitbitHome, and NutrifitHome */}
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/protocolmap" element={<DnDFlow/>}/>
         </Routes>
-      </Router>
+      </div>
+    </Router>
   );
 };
 
