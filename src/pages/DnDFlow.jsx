@@ -83,7 +83,7 @@ const DeleteEdgeDrop = () => {
         attributionPosition="top-right"
       >
         <Controls />
-        <Background variant="lines" />
+        {/* <Background variant="lines" /> */}
       </ReactFlow>
     </div>
   );
