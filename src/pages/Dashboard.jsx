@@ -54,8 +54,10 @@ const Dashboard = () => {
                 </div>
 
                 <div className='w-50 text-light d-flex justify-content-center align-content-start flex-wrap flex-row'>
-                    <h3 className="text-center text-secondary fw-bold">Protocol Playground</h3>
-                    <DeleteEdgeDrop/>
+                    <h3 className="text-center text-secondary fw-bold w-100 mb-4">Protocol Playground</h3>
+                    <div>
+                        <DeleteEdgeDrop />
+                    </div>
                 </div>
                 {/* display: flex;
                 justify-content: center;
