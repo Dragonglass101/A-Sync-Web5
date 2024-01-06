@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import DnDFlow from "./pages/DnDFlow";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./pages/Navbar";
+import WorkoutDashboard from "./pages/WorkoutDashboard";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/protocolmap" element={<DnDFlow />} />
+          <Route path="/workout-dashboard" element={<WorkoutDashboard/>} />
         </Routes>
       </Router>
     </>
