@@ -56,25 +56,26 @@ const ContextProvider = ({ children }) => {
   //   }
   // }
 
-  // useEffect(() => {
-  //   const installProtocol = async () => {
-  //     try {
-  //       console.log("Installing protocol ...");
-  //       const { protocol, status } = await web5.dwn.protocols.configure({
-  //         message: {
-  //           definition: protocolDefinition,
-  //         },
-  //       });
-  //       await protocol.send(did);
-  //       console.log("Protocol installed successfully.");
-  //     } catch (error) {
-  //       console.error("Error installing protocol: : ", error);
-  //     }
-  //   };
-  //   if (web5 && did) {
-  //     installProtocol();
-  //   }
-  // }, [web5, did]);
+  useEffect(() => {
+    const installProtocol = async () => {
+      try {
+        console.log("Installing protocol ...");
+        const { protocol, status } = await web5.dwn.protocols.configure({
+          message: {
+            definition: protocolDefinition,
+          },
+        });
+        await protocol.send(did);
+        console.log("Protocol installed successfully.");
+      } catch (error) {
+        console.error("Error installing protocol: : ", error);
+      }
+    };
+
+    if (web5 && did) {
+      // installProtocol();
+    }
+  }, [web5, did]);
 
 
 
