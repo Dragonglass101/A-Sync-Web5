@@ -46,6 +46,8 @@ const nodeTypes = {
 
 const initialEdges = [];
 
+const proOptions = { hideAttribution: true };
+
 const DeleteEdgeDrop = () => {
   const edgeUpdateSuccessful = useRef(true);
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
@@ -99,6 +101,7 @@ const DeleteEdgeDrop = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
+        proOptions={proOptions}
         snapToGrid
         connectionLineComponent={ConnectionLine}
         onEdgeUpdate={onEdgeUpdate}
