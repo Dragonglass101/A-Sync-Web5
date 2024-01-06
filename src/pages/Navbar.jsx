@@ -33,7 +33,7 @@ export default function Navbar() {
                 </Toolbar>
                 <div
                 style={{
-                    background: 'lime',
+                    background: '#e92a67',
                     height: '3px',
                 }}
             />
