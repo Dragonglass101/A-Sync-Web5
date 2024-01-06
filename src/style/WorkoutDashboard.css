@@ -356,9 +356,9 @@ h2 {
   font-size: 2rem;
 }
 
-a {
+/* a {
   color: var(--color-gray-100);
-}
+} */
 
 img {
   display: block;

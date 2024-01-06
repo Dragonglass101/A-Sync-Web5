@@ -6,7 +6,7 @@ import chestPressImg from "../assets/images/chestPress.jpeg"
 
 const Programs = () => {
   return (
-    <section className="programs">
+    <section className="programs pb-5">
       <div className="container programstocontainer">
         <div className="sectiontohead undefined">
           <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />

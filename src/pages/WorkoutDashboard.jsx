@@ -12,14 +12,17 @@ const WorkoutDashboard = () => {
   return (
     <>
       <MainHeader />
-      <div className="container">
-        <div className="sectiontohead undefined my-4">
-          <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-          <h2 className="fw-bold">Workout Analytics</h2>
-        </div>
-        <img src={workoutAnalytics} />
-      </div>
       <Programs />
+      <section className="programs py-5">
+        <div className="container programstocontainer">
+          <div className="sectiontohead undefined py-5">
+            <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
+            <h2 className="fw-bold">Workout Analytics</h2>
+          </div>
+          <img src={workoutAnalytics} />
+        </div>
+      </section>
+
 
       {/* <Values /> */}
       {/* <FAQs /> */}
