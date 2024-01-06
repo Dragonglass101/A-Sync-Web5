@@ -33,15 +33,26 @@ const AddWorkout = () => {
 
   
   const handleChange = (e) => {
-    setExercise({
-      ...exercise,
+    setWorkout({
+      ...workout,
       [e.target.name]: e.target.value,
     });
   };
 
   const createWorkout = async () => {
+    const selectedExercisesData = selectedExercises.map(
+      (index) => exerciseList[index]
+    );
+  
+    setWorkout({
+      ...workout,
+      Exercises: selectedExercisesData,
+    });
+
+    addWorkoutService.addWorkout(workout);
     
   };
+  
   async function addAllExercises(){
     const addExercise = async(exercise) => {
       try {
@@ -62,8 +73,6 @@ const AddWorkout = () => {
 
     exerciseList.forEach(addExercise);
 }
-
-
 
   async function fetchExercises(){
     try {
