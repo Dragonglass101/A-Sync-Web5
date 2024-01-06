@@ -65,6 +65,7 @@ const DeleteEdgeDrop = () => {
         strokeWidth: 2,
         stroke: '#FF0072',
       },
+      updatable: "target"
     };
   }
 
