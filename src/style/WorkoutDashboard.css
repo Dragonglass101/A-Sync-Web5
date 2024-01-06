@@ -455,6 +455,34 @@ section {
   font-weight: 300;
 }
 
+.cardClicked {
+  background: var(--color-gray-500);
+  border: 2px solid transparent;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 0 3rem 0 3rem;
+
+  background: transparent;
+  border-color: var(--color-gray-400);
+  cursor: default;
+}
+
+.cardClicked span {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  transition: var(--transition);
+
+  background: var(--color-secondary);
+  color: var(--color-gray-600);
+}
+
 .header {
   margin-top: 5rem;
   height: 20rem;
