@@ -14,8 +14,8 @@ const App = () => {
       <Navbar/>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/protocolmap" element={<DnDFlow />} />
         </Routes>
       </Router>
