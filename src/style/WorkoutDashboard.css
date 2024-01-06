@@ -93,7 +93,7 @@ body {
     margin-top: 4rem;
   }
   
-  .programstoprogram a {
+  /* .programstoprogram a {
     margin-top: 2.5rem;
     display: flex;
     align-items: center;
@@ -103,7 +103,7 @@ body {
   .programstoprogram:hover a {
     background: var(--color-secondary);
     color: var(--color-gray-600);
-  }
+  } */
   
   /* ========= VALUES ========= */
   .valuestocontainer {
@@ -665,3 +665,23 @@ section {
     text-align: center;
   }
 }
+
+/* .spInput {
+  width: 3rem;
+  height: 3rem;
+  background: var(--color-primary);
+  color: var(--color-gray-100);
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  transition: var(--transition);
+}
+
+.spInput:hover {
+  background: var(--color-secondary);
+  color: var(--color-gray-600);
+} */

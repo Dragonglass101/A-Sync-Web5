@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import DnDFlow from "./pages/DnDFlow";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./pages/Navbar";
+import MyWorkouts from "./pages/MyWorkouts";
+import CreateWorkout from "./pages/CreateWorkout";
 import WorkoutDashboard from "./pages/WorkoutDashboard";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/protocolmap" element={<DnDFlow />} />
           <Route path="/workout-dashboard" element={<WorkoutDashboard/>} />
+          <Route path="/my-workouts" element={<MyWorkouts/>} />
+          <Route path="/create-workout" element={<CreateWorkout/>} />
         </Routes>
       </Router>
     </>
