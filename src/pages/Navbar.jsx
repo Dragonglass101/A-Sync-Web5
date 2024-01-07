@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import WalletIcon from '@mui/icons-material/Wallet';
 import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return (
@@ -26,7 +27,15 @@ export default function Navbar() {
                     <Typography className='fw-bold' variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         App
                     </Typography>
-                    {/* <Button color="inherit">Login</Button> */}
+                    {
+                        document.location.href.split('/')[3] == "workout" ? 
+                        <>
+                        <Link to="workout/create">Create Workouts</Link>
+                        <Link to="workout/my">My Workouts</Link>
+                        </>
+                        :
+                        <></>
+                    }
                     <Button className="p-3 mt-2 fw-bold" variant="outlined" color="inherit" startIcon={<WalletIcon />}>
                         Wallet Connect
                     </Button>

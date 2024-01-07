@@ -78,8 +78,8 @@ const AddWorkout = () => {
   for(let exe of exerciseList){
     exerciseElements.push(
     <div>
-      <input type="checkbox" id={exe.name} onClick={addExercise} name="exercise" value={exe.name}/>
-      <label for="exercise1">{exe.name}</label>
+      <input type="checkbox" id={exe.name} onClick={addExercise} name={exe.name} value={exe.name}/>
+      <label forHtml={exe.name}>{exe.name}</label>
     </div>
     )
   }

@@ -2,8 +2,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import AddWorkout from "./pages/AddWorkout";
-import MyWorkout from "./pages/MyWorkout";
+import CreateWorkout from "./pages/CreateWorkout";
+import MyWorkouts from "./pages/MyWorkouts";
+
+// import MyWorkout from "./pages/MyWorkout";
 import AddMedia from "./pages/AddMedia";
 import MyMedia from "./pages/MyMedia";
 import Navbar from "./pages/Navbar";
@@ -15,16 +17,16 @@ const App = () => {
 
   return (
     <>
-      <Navbar/>
       <Router>
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/add-workout" element={<AddWorkout />} />
-          <Route path="/my-workouts" element={<MyWorkout />} />
+          <Route path="/workout/create" element={<CreateWorkout />} />
+          <Route path="/workout/my" element={<MyWorkouts />} />
           <Route path="/add-media" element={<AddMedia />} />
           <Route path="/my-media" element={<MyMedia />} />
           <Route path="/protocolmap" element={<DnDFlow />} />
-          <Route path="/workout-dashboard" element={<WorkoutDashboard/>} />
+          <Route path="/workout/dashboard" element={<WorkoutDashboard/>} />
         </Routes>
       </Router>
     </>
