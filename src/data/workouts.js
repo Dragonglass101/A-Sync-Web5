@@ -224,3 +224,5 @@ const workoutList = {
         },
     ]
 }
+
+export default workoutList

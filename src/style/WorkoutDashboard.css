@@ -1,7 +1,7 @@
 :root {
   --primary-hue: 210;
   --gray-hue: 240;
-  --color-primary: hsl(var(--primary-hue), 100%, 50%);
+  --color-primary: white;
   --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
   --color-secondary: #ffb116;
   --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
@@ -241,7 +241,8 @@ body {
   
   /* ========= Footer ========= */
   footer {
-    background: var(--color-primary);
+    /* background: var(--color-primary); */
+    background: black;
     margin-top: 7rem;
     padding-top: 7rem;
     font-size: 1rem;
@@ -320,7 +321,7 @@ body {
   --gray-hue: 240;
   --color-primary: hsl(var(--primary-hue), 100%, 50%);
   --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
-  --color-secondary: #ffb116;
+  --color-secondary: #c88500;
   --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
   --color-gray-200: hsl(var(--gray-hue), 26%, 75%);
   --color-gray-300: hsl(var(--gray-hue), 24%, 64%);
@@ -368,6 +369,7 @@ img {
 }
 
 .bttn {
+  font-family: 'Space Mono';
   color: var(--color-gray-100);
   width: fit-content;
   margin: 0 auto;
@@ -422,7 +424,16 @@ section {
   border: 2px solid transparent;
   text-align: center;
   padding: 3rem 2rem;
-  border-radius: 0 3rem 0 3rem;
+  border-radius: 3rem 3rem 3rem 3rem;
+  transition: var(--transition);
+}
+.selectedcard {
+  /* background: #006400; */
+  background: black;
+  border: 2px solid transparent;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 3rem 3rem 3rem 3rem;
   transition: var(--transition);
 }
 
@@ -430,6 +441,63 @@ section {
   background: black;
   border-color: var(--color-gray-400);
   cursor: default;
+}
+
+.selectedcard span {
+  opacity: 1;
+  width: 3rem;
+  height: 3rem;
+  /* background: rgb(11, 126, 20); */
+  background: rgb(11, 126, 20);
+  color: var(--color-gray-100);
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  transition: var(--transition);
+}
+
+.unselectedcard {
+  background: var(--color-gray-500);
+  border: 2px solid transparent;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 3rem 3rem 3rem 3rem;
+  transition: var(--transition);
+}
+
+.unselectedcard:hover {
+  background: black;
+  border-color: var(--color-gray-400);
+  cursor: default;
+}
+
+.unselectedcard span {
+  opacity: 0.3;
+  width: 3rem;
+  height: 3rem;
+  /* background: var(--color-primary); */
+  /* background: #20073A; */
+  background: black;
+  color: var(--color-gray-100);
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  transition: var(--transition);
+}
+
+.unselectedcard:hover span {
+  /* background: var(--color-secondary); */
+  background: #03326D;
+  /* color: var(--color-gray-600); */
+  color: white;
 }
 
 .card span {
@@ -460,34 +528,6 @@ section {
   margin-top: 1rem;
   display: block;
   font-weight: 300;
-}
-
-.cardClicked {
-  background: var(--color-gray-500);
-  border: 2px solid transparent;
-  text-align: center;
-  padding: 3rem 2rem;
-  border-radius: 0 3rem 0 3rem;
-
-  background: transparent;
-  border-color: var(--color-gray-400);
-  cursor: default;
-}
-
-.cardClicked span {
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.5rem;
-  padding: 0.8rem;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1.5rem;
-  margin-inline: auto;
-  border-radius: 1rem;
-  transition: var(--transition);
-
-  background: var(--color-secondary);
-  color: var(--color-gray-600);
 }
 
 .header {
@@ -699,6 +739,11 @@ section {
   .footertocontainer article p {
     text-align: center;
   }
+}
+
+.style-input{
+  font-family: 'Space Mono';
+  width: fit-content;
 }
 
 /* .spInput {

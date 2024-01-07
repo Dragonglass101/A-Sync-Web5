@@ -1,15 +1,50 @@
-// import Values from "../WorkoutComponents/Values"
-// import FAQs from "../WorkoutComponents/FAQs"
-// import Testimonails from "../WorkoutComponents/Testimonails"
-// import Footer from "../WorkoutComponents/Footer"
+import React, {useState, useContext, useEffect} from "react";
 import dumbleImg from "../assets/images/dumble.png"
 import benchImg from "../assets/images/bench.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import ShareIcon from '@mui/icons-material/Share';
+import MyWorkoutService from "../services/MyWorkoutService";
+import { Web5Context } from "../context/Web5Context";
 
 const MyWorkouts = () => {
+  const { web5, did} = useContext(Web5Context);
+  const [workouts, setWorkouts] = useState([]);
+  const myWorkoutService = MyWorkoutService();
+  const navigate = useNavigate();
+
+  function createWorkoutElements(workoutList){
+    const workoutElement = [];
+
+    for(let w of Object.values(workoutList)){
+      workoutElement.push(
+        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
+        <span className="h-100 m-0" style={{ width: '20%' }}>
+          <img src={benchImg} className="w-100" />
+        </span>
+        <h4 className="fw-bold w-50">{w.data.Name}</h4>
+        <button className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+        <button className="btn btn-light">
+          <ShareIcon className="text-dark" />
+        </button>
+      </article>
+      )
+    }
+    setWorkouts(workoutElement);
+  }
+
+  useEffect(() => {
+    const getWorkouts = async () => {
+      const workoutList = await myWorkoutService.getAllWorkout();
+      console.log(workoutList);
+
+      createWorkoutElements(workoutList);
+    };
+    if(web5)
+      getWorkouts();
+  }, [web5, did])
+  
 
 
   return (
@@ -23,21 +58,11 @@ const MyWorkouts = () => {
                 <h2 className="fw-bold">Your Workouts</h2>
               </div>
               <div className="programstowrapper d-flex flex-column">
-                <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
-                  <span className="h-100 m-0" style={{ width: '20%' }}>
-                    <img src={benchImg} className="w-100" />
-                  </span>
-                  <h4 className="fw-bold w-50">Workout-1</h4>
-                  <button className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-                  <button className="btn btn-light">
-                    <ShareIcon className="text-dark" />
-                  </button>
-                </article>
-
-                <button className="btn btn-dark h-100 m-0 text-center w-100 border border-3" style={{ borderRadius: '25px' }}>
+                <button onClick={()=>{navigate("/workout/create")}} className="btn btn-dark h-100 m-0 text-center w-100 border border-3" style={{ borderRadius: '25px' }}>
                   <AddCircleIcon style={{ height: '50px' }} />
                 </button>
 
+                {workouts}
               </div>
             </div>
             <div className="col text-center d-flex">

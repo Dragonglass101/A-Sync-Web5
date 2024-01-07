@@ -19,42 +19,34 @@ const ContextProvider = ({ children }) => {
     connectWeb5();
   }, []);
 
-  const schema = {
-    context: "https://schema.org/",
-    type: "apps",
-    get uri() {
-      return this.context + this.type;
-    },
-  };
+  // const schema = {
+  //   context: "https://schema.org/",
+  //   app: "Fitbit",
+  //   get uri() {
+  //     return this.context + this.app;
+  //   },
+  // };
 
   const protocolDefinition = {
-    "protocol": import.meta.env.VITE_PROTOCOL_URL,
-    "published": true,
-    "types": {
-      "Fitbit": {
-        "schema": `${schema.uri}/Fitbit`,
+    protocol: "https://Fitbittesting1",
+    published: true,
+    types: {
+      sharedWorkouts: {
+        "schema": "https://schema.org/Fitbit/sharedtesting1",
         "dataFormats": ["application/json"]
-      },
-      "NutriFit": {
-        "schema": `${schema.uri}/NutriFit`,
-        "dataFormats": ["application/json"]
-      },
+      }
     },
-    "structure": {
-      "FitBit": {
-        "$actions": [
-          { "who": "anyone", "can": "read" },
-          // { "who": "author", "of": "Fitbit", "can": "write" },
+    structure: {
+      sharedWorkouts: {
+        $actions: [
+          { "who": "anyone", "can": "write" },
+          { "who": "recipient", "of": "sharedWorkouts", "can": "read" }
         ]
-      },
-      "NutriFit": {
-        "$actions": [
-          { "who": "anyone", "can": "read" },
-          // { "who": "author", "of": "NutriFit", "can": "write" },
-        ]
-      },
+      }
     }
   }
+  
+
 
   useEffect(() => {
     const installProtocol = async () => {
