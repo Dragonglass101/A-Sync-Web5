@@ -21,6 +21,11 @@ const MyWorkout = () => {
     getWorkouts();
   };
 
+  const handleDeleteWorkout = async (workout) => {
+    await myWorkoutService.deleteWorkout(workout.id);
+    getWorkouts();
+  };
+
   return (
     <>
       <div>
@@ -46,6 +51,9 @@ const MyWorkout = () => {
                 </li>
               ))}
             </ul>
+            <button onClick={() => handleDeleteWorkout(workout)}>
+              Delete Workout
+            </button>
           </div>
         ))}
       </div>

@@ -19,14 +19,6 @@ const ContextProvider = ({ children }) => {
     connectWeb5();
   }, []);
 
-  // const schema = {
-  //   context: "https://schema.org/",
-  //   app: "Fitbit",
-  //   get uri() {
-  //     return this.context + this.app;
-  //   },
-  // };
-
   const protocolDefinition = {
     protocol: "https://Fitbit",
     published: true,
