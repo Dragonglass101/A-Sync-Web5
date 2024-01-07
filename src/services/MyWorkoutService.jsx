@@ -136,6 +136,28 @@ const MyWorkoutService = () => {
       console.error("Error toggling exercise status: ", error);
     }
   };
+
+  const shareWorkout = async(workoutRecord, recipientDID) => {
+    try {
+      const { record } = await web5.dwn.records.create({
+        data: { ...workoutRecord },
+        message: {
+            protocol: protocolDefinition.protocol,
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+            dataFormat: 'application/json',
+            recipient: recipientDID,
+        },
+    });
+      const {status} = await record.send(recipientDID);
+      console.log(status);
+      alert(`Workout Added Successfully!`)
+    } catch (error) {
+      console.error("Error Creating Workout : ", error);
+    }    
+  }
+
+ 
   
 
   return {
@@ -143,6 +165,7 @@ const MyWorkoutService = () => {
     deleteWorkout,
     updateWorkoutDeleteExercise,
     updateWorkoutExerciseToggle,
+    shareWorkout
   };
 };
 

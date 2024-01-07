@@ -12,6 +12,7 @@ const ContextProvider = ({ children }) => {
         const { web5, did } = await Web5.connect();
         setWeb5(web5);
         setDid(did);
+        console.log(did);
       } catch (error) {
         console.error(error);
       }
