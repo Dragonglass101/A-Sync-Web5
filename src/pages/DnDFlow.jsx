@@ -14,25 +14,25 @@ import nutritionLogo from "../assets/images/health.jpeg"
 
 const initialNodes = [
   {
-    id: '1',
+    id: 'Nutrifit',
     type: 'turbo',
     data: { label: 'Nutrition App', img: nutritionLogo },
     position: { x: 300, y: 0 },
   },
   {
-    id: '2',
+    id: 'AppleMusic',
     type: 'turbo',
     data: { label: 'Apple Music', img: applemusicLogo },
     position: { x: 300, y: 500 },
   },
   {
-    id: '3',
+    id: 'Spotify',
     type: 'turbo',
     data: { label: 'Spotify', img: spotifyLogo },
     position: { x: 800, y: 500 },
   },
   {
-    id: '4',
+    id: 'Fitbit',
     type: 'turbo',
     data: { label: 'Fitbit', img: fitbitLogo },
     position: { x: 800, y: 0 },

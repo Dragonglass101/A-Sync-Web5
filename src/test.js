@@ -1,27 +1,5 @@
-import { Web5 } from "@web5/api/browser";
-import React, { createContext, useEffect, useState } from "react";
-
-export const Web5Context = createContext();
-
-const ContextProvider = ({ children }) => {
-  const [web5, setWeb5] = useState(null);
-  const [did, setDid] = useState(null);
-  useEffect(() => {
-    const connectWeb5 = async () => {
-      try {
-        const { web5, did } = await Web5.connect();
-        setWeb5(web5);
-        setDid(did);
-        console.log(did);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    connectWeb5();
-  }, []);
-
-  const protocolDefinition = 
-  {
+const protocolDefinition = 
+{
     "protocol": "https://user.com",
     "published": true,
     "types": {
@@ -43,10 +21,10 @@ const ContextProvider = ({ children }) => {
         }
     },
     "structure": {
-        "fitbit": {
-            "$globalRole": true
-        },
         "userworkout": {
+            "fitbit":{
+                "$contextRole": true,
+            },
             "workout": {
                 "exercise": {
                     "$actions": [
@@ -58,10 +36,6 @@ const ContextProvider = ({ children }) => {
                         {
                             "who": "recipient",
                             "of": "workout",
-                            "can": "read"
-                        },
-                        {
-                            "role": "fitbit",
                             "can": "read"
                         }
                     ]
@@ -75,10 +49,6 @@ const ContextProvider = ({ children }) => {
                     {
                         "who": "recipient",
                         "of": "workout",
-                        "can": "read"
-                    },
-                    {
-                        "role": "fitbit",
                         "can": "read"
                     }
                 ]
@@ -96,41 +66,39 @@ const ContextProvider = ({ children }) => {
             ]
         }
     }
-  }
+}
+
   
-  useEffect(() => {
-    const installProtocol = async () => {
-      try {
-        console.log("Installing protocol ...");
-        const { protocol, status } = await web5.dwn.protocols.configure({
-          message: {
-            definition: protocolDefinition,
-          },
-        });
-        await protocol.send(did);
-        console.log("Protocol installed successfully.");
-      } catch (error) {
-        console.error("Error installing protocol: : ", error);
-      }
-    };
-    if (web5 && did) {
-      installProtocol();
+{
+    data: 'workout-1',
+    message: {
+        protocol: "https://user.com",
+        protocolPath: "workout",
+        schema: "https://schema.org/user/workouts",
+        dataFormat: 'application/json',
     }
-  }, [web5, did]);
+}
+{
+    data: {
+        name: "curl"
+    },
+    message: {
+        parentId: "bafyreihxvsccgizxpq5wfsb2wuzwrst4clt3zgebx6trpyf3dwwpq2mboq",
+        contextId: "bafyreihxvsccgizxpq5wfsb2wuzwrst4clt3zgebx6trpyf3dwwpq2mboq",
+        protocol: "https://user.com",
+        protocolPath: "exercise",
+        schema: "https://schema.org/user/exercise",
+        dataFormat: 'application/json',
+    }
+}
 
-
-
-  const value = {
-    web5,
-    did,
-    protocolDefinition,
-  };
-
-  return (
-    <div>
-      <Web5Context.Provider value={value}>{children}</Web5Context.Provider>
-    </div>
-  );
-};
-
-export default ContextProvider;
+{
+    message: {
+      protocol: "https://user.com",
+      filter: {
+        protocolPath: "workout/exercise",
+        schema: "https://schema.org/user/exercise",
+        parentId: "bafyreihxvsccgizxpq5wfsb2wuzwrst4clt3zgebx6trpyf3dwwpq2mboq"
+      }
+    }
+}
