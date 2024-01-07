@@ -1,8 +1,9 @@
 import "../style/WorkoutDashboard.css"
 import MainHeader from "../WorkoutComponents/MainHeader"
 import Programs from "../WorkoutComponents/Programs"
-import workoutAnalytics from "../assets/images/workoutAnalytics.svg"
+import workoutAnalytics from "../assets/images/analytics.svg"
 import dumbleImg from "../assets/images/dumble.png"
+import Footer from "../pages/Footer";
 // import Values from "../WorkoutComponents/Values"
 // import FAQs from "../WorkoutComponents/FAQs"
 // import Testimonails from "../WorkoutComponents/Testimonails"
@@ -22,6 +23,8 @@ const WorkoutDashboard = () => {
           <img src={workoutAnalytics} />
         </div>
       </section>
+      <Footer/>
+      
 
 
       {/* <Values /> */}

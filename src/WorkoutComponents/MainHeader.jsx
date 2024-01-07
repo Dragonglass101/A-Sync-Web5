@@ -14,7 +14,7 @@ const MainHeader = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Sit amet justo donec enim diam. Enim nulla aliquet porttitor lacus.
           </p>
-          <Link to="/plans" className="bttn lg fw-bold" style={{textDecoration:'none'}}>Get Started</Link>
+          <Link to="/plans" className="bttn lg fw-bold" style={{textDecoration:'none', fontFamily:'Space Mono'}}>Get Started</Link>
         </div>
         <div className="maintoheader-right">
           <div className="maintoheader-circle"></div>
