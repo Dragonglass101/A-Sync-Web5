@@ -20,8 +20,9 @@ body {
   color: var(--color-gray-200);
   line-height: 1.7;
   overflow-x: hidden;
+  /* background: rgb(71, 25, 8) url('../assets/images/bg_texture.png'); */
   /* background: var(--color-gray-600) url('../assets/images/bg_texture.png'); */
-  background: black url('../assets/images/bg_texture.png');
+  background: #20073a url('../assets/images/bg_texture.png');
 }
 
 .maintoheader {
@@ -371,14 +372,16 @@ img {
   width: fit-content;
   margin: 0 auto;
   padding: 0.9rem 2rem;
-  background: var(--color-primary);
+  /* background: var(--color-primary); */
+  background: #03326D;
   border-radius: 1.5rem;
   transition: var(--transition);
 }
 
 .bttn:hover {
+  /* background: var(--color-secondary); */
   background: var(--color-secondary);
-  color: var(--color-gray-100);
+  color: black;
 }
 
 .bttn.lg {
@@ -424,7 +427,7 @@ section {
 }
 
 .card:hover {
-  background: transparent;
+  background: black;
   border-color: var(--color-gray-400);
   cursor: default;
 }
@@ -432,7 +435,9 @@ section {
 .card span {
   width: 3rem;
   height: 3rem;
-  background: var(--color-primary);
+  /* background: var(--color-primary); */
+  /* background: #20073A; */
+  background: black;
   color: var(--color-gray-100);
   font-size: 1.5rem;
   padding: 0.8rem;
@@ -445,8 +450,10 @@ section {
 }
 
 .card:hover span {
-  background: var(--color-secondary);
-  color: var(--color-gray-600);
+  /* background: var(--color-secondary); */
+  background: #03326D;
+  /* color: var(--color-gray-600); */
+  color: white;
 }
 
 .card small {

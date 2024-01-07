@@ -35,74 +35,17 @@ const CreateWorkout = () => {
                                 <img src={benchImg} className="w-100" />
                             </span>
                             <div className="w-100 d-flex">
-                                <div className="w-50">
-                                    <p className="fw-bold text-white m-0 p-0">Chest Press</p>
+                                <div className="w-50 border-end py-2">
+                                    <p className="fw-bold text-white small m-0 p-0">Chest Press</p>
                                     <p className="text-secondary small m-0 p-0">Chest</p>
                                 </div>
-                                <div className="w-50">
-                                    <span className="p-0 m-0 w-100 border border-2" style={{fontSize: 'xx-small', borderRadius: '0px' }}>
-                                        765 kcal<br/>
-                                        15 reps
-                                    </span>
+                                <div className="w-50 border-start py-3">
+                                    <p className="text-white small m-0 p-0" style={{fontSize: 'xx-small'}}>765 kcal</p>
+                                    <p className="text-white small m-0 p-0" style={{fontSize: 'xx-small'}}>15 reps</p>
                                 </div>
                             </div>
                         </article>
                         
-
-                        <article className="card programstoprogram d-flex flex-column align-items-center p-0" style={{ borderRadius: '25px', width:'250px' }} >
-                            <span className="h-100 m-0" style={{ width: '100%', borderRadius: '25px 25px 0 0' }}>
-                                <img src={benchImg} className="w-100" />
-                            </span>
-                            <div className="w-100 d-flex">
-                                <div className="w-50">
-                                    <p className="fw-bold text-white m-0 p-0">Chest Press</p>
-                                    <p className="text-secondary small m-0 p-0">Chest</p>
-                                </div>
-                                <div className="w-50">
-                                    <span className="p-0 m-0 w-100 border border-2" style={{fontSize: 'xx-small', borderRadius: '0px' }}>
-                                        765 kcal<br/>
-                                        15 reps
-                                    </span>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article className="card programstoprogram d-flex flex-column align-items-center p-0" style={{ borderRadius: '25px', width:'250px' }} >
-                            <span className="h-100 m-0" style={{ width: '100%', borderRadius: '25px 25px 0 0' }}>
-                                <img src={benchImg} className="w-100" />
-                            </span>
-                            <div className="w-100 d-flex">
-                                <div className="w-50">
-                                    <p className="fw-bold text-white m-0 p-0">Chest Press</p>
-                                    <p className="text-secondary small m-0 p-0">Chest</p>
-                                </div>
-                                <div className="w-50">
-                                    <span className="p-0 m-0 w-100 border border-2" style={{fontSize: 'xx-small', borderRadius: '0px' }}>
-                                        765 kcal<br/>
-                                        15 reps
-                                    </span>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article className="card programstoprogram d-flex flex-column align-items-center p-0" style={{ borderRadius: '25px', width:'250px' }} >
-                            <span className="h-100 m-0" style={{ width: '100%', borderRadius: '25px 25px 0 0' }}>
-                                <img src={benchImg} className="w-100" />
-                            </span>
-                            <div className="w-100 d-flex">
-                                <div className="w-50">
-                                    <p className="fw-bold text-white m-0 p-0">Chest Press</p>
-                                    <p className="text-secondary small m-0 p-0">Chest</p>
-                                </div>
-                                <div className="w-50">
-                                    <span className="p-0 m-0 w-100 border border-2" style={{fontSize: 'xx-small', borderRadius: '0px' }}>
-                                        765 kcal<br/>
-                                        15 reps
-                                    </span>
-                                </div>
-                            </div>
-                        </article>
-
                     </div>
                 </div>
             </section>
