@@ -34,7 +34,7 @@ const ContextProvider = ({ children }) => {
             "dataFormats": ["application/json"]
         },
         "workout": {
-            "schema": "https://schema.org/user/workouts",
+            "schema": "https://schema.org/user/workout",
             "dataFormats": ["application/json"]
         },
         "exercise": {

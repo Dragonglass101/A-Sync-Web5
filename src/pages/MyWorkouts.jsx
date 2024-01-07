@@ -6,13 +6,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MyWorkoutService from "../services/MyWorkoutService";
 import { Web5Context } from "../context/Web5Context";
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import FitbitService from "../utils/fitbitService";
 
 const style = {
   position: 'absolute',
@@ -29,6 +29,7 @@ const style = {
 
 const MyWorkouts = () => {
   const { web5, did} = useContext(Web5Context);
+  const fitbitService = FitbitService();
 
   const recipientdidRef = useRef(null);
   const [workouts, setWorkouts] = useState([]);
@@ -36,24 +37,29 @@ const MyWorkouts = () => {
   const [selectedWorkout, setSelectedWorkout] = useState([]);
   const [sharedWorkouts, setSharedWorkouts] = useState([]);
 
-  const myWorkoutService = MyWorkoutService();
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (w) => {
-    setSelectedWorkout(w)
+  const handleOpen = async (wr) => {
+    setSelectedWorkout(wr);
+
+    const exerciseRecords = await fitbitService.getRecordsWithParentId(wr.id)
+    console.log("exercise records", exerciseRecords);
+
     const exerciseElements = [];
-    for(let exe of w.data.Exercises){
+    for(let exe of Object.values(exerciseRecords)){
       exerciseElements.push(
         <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
         <span className="h-100 m-0" style={{ width: '20%' }}>
-          <img src={exe.imageurl} className="w-100" />
+          <img src={exe.data.imageurl} className="w-100" />
         </span>
-        <h4 className="fw-bold w-50">{exe.name}</h4>
+        <h4 className="fw-bold w-50">{exe.data.name}</h4>
         <button className={"btn btn-outline-light fw-bold me-2"} 
-        onClick={()=>{myWorkoutService.updateWorkoutExerciseToggle(w.id, exe)}}
+        // onClick={()=>{myWorkoutService.updateWorkoutExerciseToggle(w.id, exe)}}
         style={{ width: '20%', backgroundColor: `${exe.completed ? 'green' : 'white'}`, color: 'black'}}
         >Completed</button>
-        <button onClick={()=>{myWorkoutService.updateWorkoutDeleteExercise(w.id, exe)}} className="btn btn-light">
+        <button 
+        // onClick={()=>{myWorkoutService.updateWorkoutDeleteExercise(w.id, exe)}} className="btn btn-light"
+        >
           <DeleteIcon className="text-dark" />
         </button>
       </article>
@@ -70,26 +76,28 @@ const MyWorkouts = () => {
   
   const navigate = useNavigate();
 
-  function createWorkoutElements(workoutList){
-    console.log("my", workoutList);
+  function createWorkoutElements(workoutRecords){
     const workoutElement = [];
 
-    for(let w of Object.values(workoutList)){
+    for(let wr of Object.values(workoutRecords)){
       workoutElement.push(
         <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
         <span className="h-100 m-0" style={{ width: '20%' }}>
           <img src={benchImg} className="w-100" />
         </span>
-        <h4 className="fw-bold w-50">{w.data.Name}</h4>
-        <button id={w.data.Name} onClick={()=>{handleOpen(w)}} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-        <button className="btn btn-light">
-          <DeleteIcon onClick={()=>{myWorkoutService.deleteWorkout(w.id)}}  className="text-dark" />
+        <h4 className="fw-bold w-50">{wr.data.Name}</h4>
+        <button id={wr.data.Name} onClick={()=>{handleOpen(wr)}} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+        <button 
+        // onClick={()=>{myWorkoutService.deleteWorkout(w.id)}} 
+        className="btn btn-light">
+          <DeleteIcon className="text-dark" />
         </button>
       </article>
       )
     }
     setWorkouts(workoutElement);
   }
+
   function createSharedWorkoutElements(sharedWorkoutList){
     console.log("shared")
     console.log(sharedWorkoutList);
@@ -116,11 +124,13 @@ const MyWorkouts = () => {
 
   useEffect(() => {
     const getWorkouts = async () => {
-      const workoutList = await myWorkoutService.getAllWorkout();
-      const sharedWorkoutList = await myWorkoutService.getAllSharedWorkout();
+      const userWorkoutRecord = await fitbitService.getUserWorkout();
+      const workoutRecords = await fitbitService.getRecordsWithParentId(userWorkoutRecord[0].id);
+      console.log("workout records", workoutRecords);
+      // const sharedWorkoutList = await myWorkoutService.getAllSharedWorkout();
 
-      createSharedWorkoutElements(sharedWorkoutList);
-      createWorkoutElements(workoutList);
+      // createSharedWorkoutElements(sharedWorkoutList);
+      createWorkoutElements(workoutRecords);
     };
 
     if(web5){
