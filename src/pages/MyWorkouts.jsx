@@ -5,13 +5,62 @@ import { Link, useNavigate } from "react-router-dom"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import ShareIcon from '@mui/icons-material/Share';
+import DeleteIcon from '@mui/icons-material/Delete';
 import MyWorkoutService from "../services/MyWorkoutService";
 import { Web5Context } from "../context/Web5Context";
+
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Avatar from '@mui/material/Avatar';
+import FolderIcon from '@mui/icons-material/Folder';
+import InfoIcon from '@mui/icons-material/Info';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 700,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 const MyWorkouts = () => {
   const { web5, did} = useContext(Web5Context);
   const [workouts, setWorkouts] = useState([]);
+  const [selected, setselected] = useState([]);
   const myWorkoutService = MyWorkoutService();
+  const [open, setOpen] = useState(false);
+  const handleOpen = (exercises) => {
+    const exerciseElements = [];
+    for(let exe of exercises){
+      exerciseElements.push(
+        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
+        <span className="h-100 m-0" style={{ width: '20%' }}>
+          <img src={exe.imageurl} className="w-100" />
+        </span>
+        <h4 className="fw-bold w-50">{exe.name}</h4>
+        <button className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Completed</button>
+        <button className="btn btn-light">
+          <DeleteIcon className="text-dark" />
+        </button>
+      </article>
+      )
+      setselected(exerciseElements);
+    }
+
+      setOpen(true);
+  }
+  const handleClose = () => {
+    setselected('');
+    setOpen(false);
+  }
+  
   const navigate = useNavigate();
 
   function createWorkoutElements(workoutList){
@@ -24,7 +73,7 @@ const MyWorkouts = () => {
           <img src={benchImg} className="w-100" />
         </span>
         <h4 className="fw-bold w-50">{w.data.Name}</h4>
-        <button className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+        <button id={w.data.Name} onClick={()=>{handleOpen(w.data.Exercises)}} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
         <button className="btn btn-light">
           <ShareIcon className="text-dark" />
         </button>
@@ -88,6 +137,29 @@ const MyWorkouts = () => {
           </div>
         </div>
       </section>
+      <div>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                        backdrop: {
+                            timeout: 500,
+                        },
+                    }}
+                >
+                    <Fade in={open}>
+                        <Box sx={style} className="bg-dark text-white">
+                          <div className="programstowrapper d-flex flex-column">
+                            {selected}
+                          </div>
+                        </Box>
+                    </Fade>
+                </Modal>
+            </div>
     </>
   )
 }

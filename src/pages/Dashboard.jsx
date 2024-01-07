@@ -1,5 +1,5 @@
 
-import DeleteEdgeDrop from "./DnDFlow";
+import DnDFlow from "./DnDFlow";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -89,7 +89,7 @@ const Dashboard = () => {
                 <div className='w-50 text-light d-flex justify-content-center align-content-start flex-wrap flex-row'>
                     <h3 className="text-center text-secondary fw-bold w-100 mb-4">Protocol Playground</h3>
                     <div>
-                        <DeleteEdgeDrop />
+                        <DnDFlow />
                     </div>
                 </div>
             </div>
