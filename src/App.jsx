@@ -7,6 +7,7 @@ import MyWorkout from "./pages/MyWorkout";
 import AddMedia from "./pages/AddMedia";
 import MyMedia from "./pages/MyMedia";
 import Navbar from "./pages/Navbar";
+import DnDFlow from "./pages/DnDFlow";
 import WorkoutDashboard from "./pages/WorkoutDashboard";
 import { BrowserRouter as Router } from "react-router-dom";
 

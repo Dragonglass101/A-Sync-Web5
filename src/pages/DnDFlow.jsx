@@ -48,7 +48,7 @@ const initialEdges = [];
 
 const proOptions = { hideAttribution: true };
 
-const DeleteEdgeDrop = () => {
+const DnDFlow = () => {
   const edgeUpdateSuccessful = useRef(true);
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -118,4 +118,4 @@ const DeleteEdgeDrop = () => {
   );
 };
 
-export default DeleteEdgeDrop;
+export default DnDFlow;

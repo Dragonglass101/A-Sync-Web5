@@ -3,14 +3,9 @@ import DeleteEdgeDrop from "./DnDFlow";
 import React, { useState } from 'react';
 
 import '../style/Dashboard.css';
-import img_spotify from "../assets/images/spotify.jpeg";
 import img_spotify2 from "../assets/images/spotify2.jpeg";
-import img_music from "../assets/images/music.jpeg";
 import img_music2 from "../assets/images/music2.jpeg";
 import img_workout from "../assets/images/workout.jpeg"
-import img_workout2 from "../assets/images/workout2.jpeg"
-import img_workout3 from "../assets/images/workout3.jpeg"
-import img_workout4 from "../assets/images/workout4.jpeg"
 import img_health from "../assets/images/health.jpeg"
 
 import Backdrop from '@mui/material/Backdrop';
