@@ -1,6 +1,7 @@
 
 import DeleteEdgeDrop from "./DnDFlow";
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import '../style/Dashboard.css';
 import img_spotify2 from "../assets/images/spotify2.jpeg";
@@ -31,9 +32,20 @@ const style = {
 };
 
 const Dashboard = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [open, setOpen] = useState(false);
+    const [selected, setselected] = useState('');
+    const navigate = useNavigate();
+    const handleOpen = (e) => {
+        setselected(e.target.id)
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setselected('')
+        setOpen(false);
+    }
+    const handleNavigate = () => {
+        navigate(selected + '/dashboard');
+    }
 
     return (
         <>
@@ -43,7 +55,21 @@ const Dashboard = () => {
                     <h3 className="text-center text-secondary fw-bold">Applications</h3>
                     <div className='collection-slider'>
                         <div className='collection-card'>
-                            <img onClick={handleOpen} src={img_music2} className='dashboard-app-card' />
+                            <img id="workout" onClick={handleOpen} src={img_workout} className='dashboard-app-card' />
+                            <div className='' style={{ width: '300px' }}>
+                                <h4 className='text-white fw-bold'>Kinetica</h4>
+                                <span className='text-secondary'>Own Your Sweat, Own Your Goals. Train free with Kinetica</span>
+                            </div>
+                        </div>
+                        <div className='collection-card'>
+                            <img onClick={handleOpen} src={img_health} className='dashboard-app-card' />
+                            <div className='' style={{ width: '300px' }}>
+                                <h4 className='text-white fw-bold'>Nourish</h4>
+                                <span className='text-secondary'>Nourish isn't just a diet app, it's a personalized journey to a healthier you.</span>
+                            </div>
+                        </div>
+                        <div className='collection-card'>
+                            <img src={img_music2} className='dashboard-app-card' />
                             <div className='' style={{ width: '300px' }}>
                                 <h4 className='text-white fw-bold' >Harmony 5.0</h4>
                                 <span className='text-secondary'>Unleash your music, own your data. Build your music world with Harmony.</span>
@@ -54,20 +80,6 @@ const Dashboard = () => {
                             <div className='' style={{ width: '300px' }}>
                                 <h4 className='text-white fw-bold'>Spotify 5.0</h4>
                                 <span className='text-secondary'>Your ears, your data, your choice. This is Spotify 5.0</span>
-                            </div>
-                        </div>
-                        <div className='collection-card'>
-                            <img src={img_workout} className='dashboard-app-card' />
-                            <div className='' style={{ width: '300px' }}>
-                                <h4 className='text-white fw-bold'>Kinetica</h4>
-                                <span className='text-secondary'>Own Your Sweat, Own Your Goals. Train free with Kinetica</span>
-                            </div>
-                        </div>
-                        <div className='collection-card'>
-                            <img src={img_health} className='dashboard-app-card' />
-                            <div className='' style={{ width: '300px' }}>
-                                <h4 className='text-white fw-bold'>Nourish</h4>
-                                <span className='text-secondary'>Nourish isn't just a diet app, it's a personalized journey to a healthier you.</span>
                             </div>
                         </div>
 
@@ -136,7 +148,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="d-flex justify-content-end mt-5">
                                     <Button onClick={handleClose} className="mx-2" variant="outlined">Cancel</Button>
-                                    <Button onClick={handleClose} className="mx-2" variant="contained">Allow</Button>
+                                    <Button onClick={handleNavigate} className="mx-2" variant="contained">Allow</Button>
                                 </div>
                             </div>
                         </Box>

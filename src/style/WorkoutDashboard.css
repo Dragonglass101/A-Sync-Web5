@@ -1,7 +1,7 @@
 :root {
   --primary-hue: 210;
   --gray-hue: 240;
-  --color-primary: hsl(var(--primary-hue), 100%, 50%);
+  --color-primary: white;
   --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
   --color-secondary: #ffb116;
   --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
@@ -21,7 +21,8 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   /* background: var(--color-gray-600) url('../assets/images/bg_texture.png'); */
-  background: black url('../assets/images/bg_texture.png');
+  /* background: rgb(133, 113, 47) url('../assets/images/bg_texture.png'); */
+  background: rgb(46, 0, 0);
 }
 
 .maintoheader {
@@ -319,7 +320,7 @@ body {
   --gray-hue: 240;
   --color-primary: hsl(var(--primary-hue), 100%, 50%);
   --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
-  --color-secondary: #ffb116;
+  --color-secondary: #c88500;
   --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
   --color-gray-200: hsl(var(--gray-hue), 26%, 75%);
   --color-gray-300: hsl(var(--gray-hue), 24%, 64%);
@@ -415,24 +416,47 @@ section {
 }
 
 .card {
-  background: var(--color-gray-500);
+  background: rgb(200, 93, 0);
   border: 2px solid transparent;
   text-align: center;
   padding: 3rem 2rem;
-  border-radius: 0 3rem 0 3rem;
+  border-radius: 3rem 3rem 3rem 3rem;
+  transition: var(--transition);
+}
+.selectedcard {
+  background: rgb(11, 126, 20);
+  border: 2px solid transparent;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 3rem 3rem 3rem 3rem;
   transition: var(--transition);
 }
 
-.card:hover {
+
+/* .card:hover {
   background: transparent;
   border-color: var(--color-gray-400);
   cursor: default;
-}
+} */
 
+.selectedcard span {
+  width: 3rem;
+  height: 3rem;
+  background: rgb(11, 126, 20);
+  color: var(--color-gray-100);
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  transition: var(--transition);
+}
 .card span {
   width: 3rem;
   height: 3rem;
-  background: var(--color-primary);
+  background: rgb(200, 93, 0);
   color: var(--color-gray-100);
   font-size: 1.5rem;
   padding: 0.8rem;
@@ -444,43 +468,15 @@ section {
   transition: var(--transition);
 }
 
-.card:hover span {
+/* .card:hover span {
   background: var(--color-secondary);
   color: var(--color-gray-600);
-}
+} */
 
 .card small {
   margin-top: 1rem;
   display: block;
   font-weight: 300;
-}
-
-.cardClicked {
-  background: var(--color-gray-500);
-  border: 2px solid transparent;
-  text-align: center;
-  padding: 3rem 2rem;
-  border-radius: 0 3rem 0 3rem;
-
-  background: transparent;
-  border-color: var(--color-gray-400);
-  cursor: default;
-}
-
-.cardClicked span {
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.5rem;
-  padding: 0.8rem;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1.5rem;
-  margin-inline: auto;
-  border-radius: 1rem;
-  transition: var(--transition);
-
-  background: var(--color-secondary);
-  color: var(--color-gray-600);
 }
 
 .header {
