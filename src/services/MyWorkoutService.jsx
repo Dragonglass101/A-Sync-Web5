@@ -96,10 +96,10 @@ const MyWorkoutService = () => {
     try {
       const { record } = await web5.dwn.records.read({
         message: {
-          filter: {
-            schema: "https://schema.org/Fitbit/Workouts",
-            recordId: workoutRecord.id,
-          },
+            filter: {
+              schema: "https://schema.org/Fitbit/Workouts",
+              recordId: workoutRecord.id,
+            },
         },
       });
       console.log(record);

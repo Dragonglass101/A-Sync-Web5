@@ -6,7 +6,7 @@ import {calcCalorie} from "../utils/calcCalorie"
 
 
 const AddWorkoutService = () => {
-  const { web5, did} = useContext(Web5Context);
+  const { web5, did, protocolDefinition} = useContext(Web5Context);
 
   const [allWorkout, setAllWorkout] = useState([]);
 
@@ -16,9 +16,12 @@ const AddWorkoutService = () => {
         const { record } = await web5.dwn.records.write({
         data: { ...workoutRecord },
         message: {
-            // protocol: protocolDefinition.protocol,
-            schema: "https://schema.org/Fitbit/Workouts",
-            dataFormat: 'application/json'
+            protocol: protocolDefinition.protocol,
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+            dataFormat: 'application/json',
+            recipient: did,
+            published: true,
         },
         });
         const {status} = await record.send(did);

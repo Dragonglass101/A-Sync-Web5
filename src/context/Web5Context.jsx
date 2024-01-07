@@ -21,58 +21,50 @@ const ContextProvider = ({ children }) => {
 
   // const schema = {
   //   context: "https://schema.org/",
-  //   type: "apps",
+  //   app: "Fitbit",
   //   get uri() {
-  //     return this.context + this.type;
+  //     return this.context + this.app;
   //   },
   // };
 
-  // const protocolDefinition = {
-  //   "protocol": import.meta.env.VITE_PROTOCOL_URL,
-  //   "published": true,
-  //   "types": {
-  //     "Fitbit": {
-  //       "schema": `${schema.uri}/Fitbit`,
-  //       "dataFormats": ["application/json"]
-  //     },
-  //     "NutriFit": {
-  //       "schema": `${schema.uri}/NutriFit`,
-  //       "dataFormats": ["application/json"]
-  //     },
-  //   },
-  //   "structure": {
-  //     "FitBit": {
-  //       "$actions": [
-  //         { "who": "anyone", "can": "read" },
-  //         // { "who": "author", "of": "Fitbit", "can": "write" },
-  //       ]
-  //     },
-  //     "NutriFit": {
-  //       "$actions": [
-  //         { "who": "anyone", "can": "read" },
-  //         // { "who": "author", "of": "NutriFit", "can": "write" },
-  //       ]
-  //     },
-  //   }
-  // }
+  const protocolDefinition = {
+    protocol: "https://Fitbit",
+    published: true,
+    types: {
+      sharedWorkouts: {
+        "schema": "https://schema.org/Fitbit/sharedWorkouts",
+        "dataFormats": ["application/json"]
+      }
+    },
+    structure: {
+      sharedWorkouts: {
+        $actions: [
+          { "who": "anyone", "can": "write" },
+          { "who": "recipient", "of": "sharedWorkouts", "can": "read" }
+        ]
+      }
+    }
+  }
+  
+
 
   useEffect(() => {
-    // const installProtocol = async () => {
-    //   try {
-    //     console.log("Installing protocol ...");
-    //     const { protocol, status } = await web5.dwn.protocols.configure({
-    //       message: {
-    //         definition: protocolDefinition,
-    //       },
-    //     });
-    //     await protocol.send(did);
-    //     console.log("Protocol installed successfully.");
-    //   } catch (error) {
-    //     console.error("Error installing protocol: : ", error);
-    //   }
-    // };
+    const installProtocol = async () => {
+      try {
+        console.log("Installing protocol ...");
+        const { protocol, status } = await web5.dwn.protocols.configure({
+          message: {
+            definition: protocolDefinition,
+          },
+        });
+        await protocol.send(did);
+        console.log("Protocol installed successfully.");
+      } catch (error) {
+        console.error("Error installing protocol: : ", error);
+      }
+    };
     if (web5 && did) {
-      // installProtocol();
+      installProtocol();
     }
   }, [web5, did]);
 
@@ -81,7 +73,7 @@ const ContextProvider = ({ children }) => {
   const value = {
     web5,
     did,
-    // protocolDefinition,
+    protocolDefinition,
   };
 
   return (
