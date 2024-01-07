@@ -14,7 +14,6 @@ const AddWorkout = () => {
     Exercises:[],
     Calorie:0,
   });
-  const [exerciseList, setExerciseList] = useState([]);
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const handleCheckboxChange = (exerciseIndex) => {
@@ -31,7 +30,6 @@ const AddWorkout = () => {
 
   };
 
-  
   const handleChange = (e) => {
     setWorkout({
       ...workout,
@@ -52,65 +50,42 @@ const AddWorkout = () => {
     addWorkoutService.addWorkout(workout);
     
   };
-  
-  async function addAllExercises(){
-    const addExercise = async(exercise) => {
-      try {
-      const { record } = await web5.dwn.records.write({
-        data: { exercise },
-        message: {
-        //   protocol: protocolDefinition.protocol,
-          schema: `https://schema.org/Fitbit/ExerciseList`,
-          dataFormat: 'application/json'
-        },
-      });
-      const {status} = await record.send(did);
-      console.log(status);
-      } catch (error) {
-        console.error("Error Adding Workout Name : ", error);
+
+  function addExercise(e){
+    const exerciseName = e.target.value;
+
+    for(let exe of exerciseList){
+
+    }
+
+    for(let exe of exerciseList){
+      if(exe.name === exerciseName){
+        const updatedExercises = [...workout.Exercises, exe];
+
+        // Update the workout state
+        setWorkout(prevWorkout => ({
+          ...prevWorkout,
+          Exercises: updatedExercises,
+        }));
       }
     }
 
-    exerciseList.forEach(addExercise);
-}
-
-  async function fetchExercises(){
-    try {
-      const { records, status } = await web5.dwn.records.query({
-        message: {
-          filter: {
-            // protocol: protocolDefinition.protocol,
-            schema: `https://schema.org/Fitbit/ExerciseList`,
-          },
-        },
-      });
-      console.log(status);
-  
-      const newList = await Promise.all(
-        records.map(async (record) => {
-          const data = await record.data.json();
-          return { data};
-        })
-      );
-
-      console.log("exercises fetched")
-      console.log(newList);
-      setExerciseList(newList);
-      return newList;
-  
-    } catch (error) {
-      console.error("Error Getting Workout", error);
-    }
   }
 
+  const exerciseElements = [];
+
+  console.log(exerciseList.length, "exercises");
+  for(let exe of exerciseList){
+    exerciseElements.push(
+    <div>
+      <input type="checkbox" id={exe.name} onClick={addExercise} name="exercise" value={exe.name}/>
+      <label for="exercise1">{exe.name}</label>
+    </div>
+    )
+  }
 
   return (
   <>
-  <h1>Welcome to FitBit!</h1>
-  <button onClick={addAllExercises}>Add Exercises to Record </button>
-  <button onClick={fetchExercises}>Load Workouts</button>
-
-
   <h1>Welcome to FitBit!</h1>
   <form>
         <label>
@@ -135,20 +110,7 @@ const AddWorkout = () => {
         </label>
         <div>
           <h2>Exercise List</h2>
-          <ul>
-            {exerciseList.map((exercise, index) => (
-              <li key={index}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={selectedExercises.includes(index)}
-                    onChange={() => handleCheckboxChange(index)}
-                  />
-                  {exercise.name}
-                </label>
-              </li>
-            ))}
-          </ul>
+            {exerciseElements}
         </div>
         <button type="button" onClick={createWorkout}>
           Create Workout

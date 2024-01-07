@@ -87,4 +87,6 @@ var exerciseList = [
     }
 ];
 
+console.log("total exercises", exerciseList.length)
+
 export default exerciseList

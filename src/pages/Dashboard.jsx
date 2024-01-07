@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Web5Context } from "../context/Web5Context";
 
 const Dashboard = () => {
-  const { web5, did } = useContext(Web5Context);
+  const { web5, did, protocolDefinition} = useContext(Web5Context);
 
   useEffect(() => {
     if (did) {
