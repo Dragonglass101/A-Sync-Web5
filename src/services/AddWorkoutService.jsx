@@ -3,10 +3,12 @@
 import { useContext, useState } from "react";
 import { Web5Context } from "../context/Web5Context";
 import {calcCalorie} from "../utils/calcCalorie"
+import { useNavigate } from "react-router-dom";
 
 
 const AddWorkoutService = () => {
   const { web5, did, protocolDefinition} = useContext(Web5Context);
+  const navigate = useNavigate();
 
   const [allWorkout, setAllWorkout] = useState([]);
 
@@ -16,8 +18,8 @@ const AddWorkoutService = () => {
             data: { ...workoutRecord },
             message: {
                 protocol: protocolDefinition.protocol,
-                protocolPath: "sharedWorkouts",
-                schema: protocolDefinition.types.sharedWorkouts.schema,
+                protocolPath: "myWorkouts",
+                schema: protocolDefinition.types.myWorkouts.schema,
                 dataFormat: 'application/json',
                 recipient: did,
             },
@@ -25,7 +27,7 @@ const AddWorkoutService = () => {
         const {status} = await record.send(did);
         console.log(status);
         alert(`Workout Added Successfully!`)
-        // window.location.reload();
+        navigate("/workout/my")
     } catch (error) {
         console.error("Error Creating Workout : ", error);
     }    

@@ -8,9 +8,33 @@ import {calcCalorie} from "../utils/calcCalorie"
 const MyWorkoutService = () => {
   const { web5, did, protocolDefinition} = useContext(Web5Context);
 
-
-
   const getAllWorkout = async () => {
+    try {
+      const { records, status } = await web5.dwn.records.query({
+        message: {
+          protocol: protocolDefinition.protocol,
+          filter: {
+            protocolPath: "myWorkouts",
+            schema: protocolDefinition.types.myWorkouts.schema,
+          },
+        },
+      });
+      console.log(status);
+      const newList = await Promise.all(
+        records.map(async (record) => {
+          const data = await record.data.json();
+          console.log("Got your Workouts Successfully !");
+          return { record, data, id: record.id };
+        })
+      );    
+      return newList;
+  
+    } catch (error) {
+      console.error("Error Getting Workouts", error);
+    }
+  };
+
+  const getAllSharedWorkout = async () => {
     try {
       const { records, status } = await web5.dwn.records.query({
         message: {
@@ -22,7 +46,6 @@ const MyWorkoutService = () => {
         },
       });
       console.log(status);
-  
       const newList = await Promise.all(
         records.map(async (record) => {
           const data = await record.data.json();
@@ -42,8 +65,8 @@ const MyWorkoutService = () => {
       await web5.dwn.records.delete({
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: "sharedWorkouts",
-          schema: protocolDefinition.types.sharedWorkouts.schema,
+          protocolPath: "myWorkouts",
+          schema: protocolDefinition.types.myWorkouts.schema,
           recordId: workoutRecordId,
         },
       });
@@ -62,8 +85,8 @@ const MyWorkoutService = () => {
         message: {
           protocol: protocolDefinition.protocol,
           filter: {
-            protocolPath: "sharedWorkouts",
-            schema: protocolDefinition.types.sharedWorkouts.schema,
+            protocolPath: "myWorkouts",
+            schema: protocolDefinition.types.myWorkouts.schema,
             recordId: workoutRecord.id,
           },
         },
@@ -104,8 +127,8 @@ const MyWorkoutService = () => {
         message: {
           protocol: protocolDefinition.protocol,
           filter: {
-            protocolPath: "sharedWorkouts",
-            schema: protocolDefinition.types.sharedWorkouts.schema,
+            protocolPath: "myWorkouts",
+            schema: protocolDefinition.types.myWorkouts.schema,
             recordId: workoutRecord.id,
           },
         },
@@ -163,6 +186,7 @@ const MyWorkoutService = () => {
 
   return {
     getAllWorkout,
+    getAllSharedWorkout,
     deleteWorkout,
     updateWorkoutDeleteExercise,
     updateWorkoutExerciseToggle,

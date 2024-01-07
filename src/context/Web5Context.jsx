@@ -21,11 +21,15 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   const protocolDefinition = {
-    protocol: "https://Fitbittesting1",
+    protocol: "https://Fitbittesting2",
     published: true,
     types: {
       sharedWorkouts: {
-        "schema": "https://schema.org/Fitbit/sharedtesting1",
+        "schema": "https://schema.org/Fitbit/sharedtesting2",
+        "dataFormats": ["application/json"]
+      },
+      myWorkouts: {
+        "schema": "https://schema.org/Fitbit/mytesting2",
         "dataFormats": ["application/json"]
       }
     },
@@ -35,12 +39,16 @@ const ContextProvider = ({ children }) => {
           { "who": "anyone", "can": "write" },
           { "who": "recipient", "of": "sharedWorkouts", "can": "read" }
         ]
+      },
+      myWorkouts: {
+        $actions: [
+          { "who": "author", "of":"myWorkouts", "can": "read" },
+          { "who": "author", "of":"myWorkouts", "can": "write" }
+        ]
       }
     }
   }
   
-
-
   useEffect(() => {
     const installProtocol = async () => {
       try {
