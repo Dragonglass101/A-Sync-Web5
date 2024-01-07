@@ -26,17 +26,13 @@ const CreateWorkout = () => {
     }
 
     const createWorkout = async () => {
-        const selectedExercisesData = selectedExercises.map(
-          (index) => exerciseList[index]
+        addWorkoutService.addWorkout(
+            {
+                Name: workoutName.current.value,
+                Day: workoutDay.current.value,
+                Exercises: selectedExercises,
+            }
         );
-      
-        setWorkout({
-          Name: workoutName.current.value,
-          Day: workoutDay.current.value,
-          Exercises: selectedExercisesData,
-        });
-    
-        addWorkoutService.addWorkout(workout);
     };
 
     for(let exe of exerciseList){

@@ -6,16 +6,14 @@ import {calcCalorie} from "../utils/calcCalorie"
 
 
 const MyWorkoutService = () => {
-  const { web5, did} = useContext(Web5Context);
-
-
+  const { web5, did, protocolDefinition} = useContext(Web5Context);
 
   const getAllWorkout = async () => {
     try {
       const { records, status } = await web5.dwn.records.query({
         message: {
           filter: {
-            schema: "https://schema.org/Fitbit/Workouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
           },
         },
       });

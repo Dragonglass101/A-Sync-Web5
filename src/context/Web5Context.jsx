@@ -28,11 +28,11 @@ const ContextProvider = ({ children }) => {
   // };
 
   const protocolDefinition = {
-    protocol: "https://Fitbittesting",
+    protocol: "https://Fitbittesting1",
     published: true,
     types: {
       sharedWorkouts: {
-        "schema": "https://schema.org/Fitbit/sharedtesting",
+        "schema": "https://schema.org/Fitbit/sharedtesting1",
         "dataFormats": ["application/json"]
       }
     },

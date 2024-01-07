@@ -26,7 +26,7 @@ const AddWorkoutService = () => {
         const {status} = await record.send(did);
         console.log(status);
         alert(`Workout Added Successfully!`)
-        window.location.reload();
+        // window.location.reload();
     } catch (error) {
         console.error("Error Creating Workout : ", error);
     }    
