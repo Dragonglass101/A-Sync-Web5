@@ -41,13 +41,9 @@ const MyWorkout = () => {
   };
 
   const handleShareWorkout = (e) => {
-    // Perform the sharing logic here using recipientDID and selectedWorkout
-    // You can call the relevant service function to share the workout with the specified recipientDID
-    // After sharing, close the modal
     e.preventDefault();
     console.log('Entering handleShareWorkout');
-    console.log(recipientDID, selectedWorkout);
-    myWorkoutService.shareWorkout(recipientDID, selectedWorkout);
+    myWorkoutService.shareWorkout(selectedWorkout, recipientDID);
     setShareModalIsOpen(false);
     console.log('Exiting handleShareWorkout');
   };

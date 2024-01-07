@@ -139,7 +139,7 @@ const MyWorkoutService = () => {
 
   const shareWorkout = async(workoutRecord, recipientDID) => {
     try {
-      const { record } = await web5.dwn.records.create({
+      const { record, status: statusWrite } = await web5.dwn.records.write({
         data: { ...workoutRecord },
         message: {
             protocol: protocolDefinition.protocol,
@@ -149,8 +149,9 @@ const MyWorkoutService = () => {
             recipient: recipientDID,
         },
     });
-      const {status} = await record.send(recipientDID);
-      console.log(status);
+      console.log(statusWrite);
+      const {status: statusSendToRecipient} = await record.send(recipientDID);
+      console.log(statusSendToRecipient);
       alert(`Workout Added Successfully!`)
     } catch (error) {
       console.error("Error Creating Workout : ", error);
