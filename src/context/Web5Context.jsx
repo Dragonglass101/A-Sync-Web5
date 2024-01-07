@@ -12,20 +12,13 @@ const ContextProvider = ({ children }) => {
         const { web5, did } = await Web5.connect();
         setWeb5(web5);
         setDid(did);
+        console.log(did);
       } catch (error) {
         console.error(error);
       }
     };
     connectWeb5();
   }, []);
-
-  // const schema = {
-  //   context: "https://schema.org/",
-  //   app: "Fitbit",
-  //   get uri() {
-  //     return this.context + this.app;
-  //   },
-  // };
 
   const protocolDefinition = {
     protocol: "https://Fitbit",

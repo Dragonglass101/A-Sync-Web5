@@ -6,7 +6,7 @@ import {calcCalorie} from "../utils/calcCalorie"
 
 
 const MyWorkoutService = () => {
-  const { web5, did} = useContext(Web5Context);
+  const { web5, did, protocolDefinition} = useContext(Web5Context);
 
 
 
@@ -14,8 +14,10 @@ const MyWorkoutService = () => {
     try {
       const { records, status } = await web5.dwn.records.query({
         message: {
+          protocol: protocolDefinition.protocol,
           filter: {
-            schema: "https://schema.org/Fitbit/Workouts",
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
           },
         },
       });
@@ -37,12 +39,14 @@ const MyWorkoutService = () => {
 
   const deleteWorkout = async (workoutRecordId) => {
     try {
-        await web5.dwn.records.delete({
-          message: {
-            schema: "https://schema.org/Fitbit/Workouts",
-            recordId: workoutRecordId ,
-          },
-        });
+      await web5.dwn.records.delete({
+        message: {
+          protocol: protocolDefinition.protocol,
+          protocolPath: "sharedWorkouts",
+          schema: protocolDefinition.types.sharedWorkouts.schema,
+          recordId: workoutRecordId,
+        },
+      });
     } catch (error) {
       console.error("Error Deleting Workout Name: ", error);
     }
@@ -56,8 +60,10 @@ const MyWorkoutService = () => {
       console.log("Hehe");
       const { record } = await web5.dwn.records.read({
         message: {
+          protocol: protocolDefinition.protocol,
           filter: {
-            schema: "https://schema.org/Fitbit/Workouts",
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
             recordId: workoutRecord.id,
           },
         },
@@ -96,10 +102,12 @@ const MyWorkoutService = () => {
     try {
       const { record } = await web5.dwn.records.read({
         message: {
-            filter: {
-              schema: "https://schema.org/Fitbit/Workouts",
-              recordId: workoutRecord.id,
-            },
+          protocol: protocolDefinition.protocol,
+          filter: {
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+            recordId: workoutRecord.id,
+          },
         },
       });
       console.log(record);
@@ -128,6 +136,29 @@ const MyWorkoutService = () => {
       console.error("Error toggling exercise status: ", error);
     }
   };
+
+  const shareWorkout = async(workoutRecord, recipientDID) => {
+    try {
+      const { record, status: statusWrite } = await web5.dwn.records.write({
+        data: { ...workoutRecord },
+        message: {
+            protocol: protocolDefinition.protocol,
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+            dataFormat: 'application/json',
+            recipient: recipientDID,
+        },
+    });
+      console.log(statusWrite);
+      const {status: statusSendToRecipient} = await record.send(recipientDID);
+      console.log(statusSendToRecipient);
+      alert(`Workout Added Successfully!`)
+    } catch (error) {
+      console.error("Error Creating Workout : ", error);
+    }    
+  }
+
+ 
   
 
   return {
@@ -135,6 +166,7 @@ const MyWorkoutService = () => {
     deleteWorkout,
     updateWorkoutDeleteExercise,
     updateWorkoutExerciseToggle,
+    shareWorkout
   };
 };
 
