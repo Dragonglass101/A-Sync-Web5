@@ -12,7 +12,6 @@ const AddWorkoutService = () => {
 
   const addWorkout = async(workoutRecord) => {
     try {
-        workoutRecord.calorie = calcCalorie();
         const { record } = await web5.dwn.records.write({
         data: { ...workoutRecord },
         message: {
@@ -27,6 +26,7 @@ const AddWorkoutService = () => {
         const {status} = await record.send(did);
         console.log(status);
         alert(`Workout Added Successfully!`)
+        window.location.reload();
     } catch (error) {
         console.error("Error Creating Workout : ", error);
     }    

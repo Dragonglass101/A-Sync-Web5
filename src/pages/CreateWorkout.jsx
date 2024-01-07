@@ -1,23 +1,14 @@
-// import Values from "../WorkoutComponents/Values"
-// import FAQs from "../WorkoutComponents/FAQs"
-// import Testimonails from "../WorkoutComponents/Testimonails"
-// import Footer from "../WorkoutComponents/Footer"
 import dumbleImg from "../assets/images/dumble.png"
-import chestPressImg from "../assets/images/chestPress.jpeg"
-import { Link } from "react-router-dom"
-import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
-import Button from '@mui/material/Button'
-import InputAdornment from '@mui/material/InputAdornment';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import ShareIcon from '@mui/icons-material/Share';
-import benchImg from "../assets/images/bench.png"
 import exerciseList from "../data/exercises.js"
-import { useState } from "react";
+import AddWorkoutService from "../services/AddWorkoutService.jsx";
+import { useRef, useState } from "react";
 
 const CreateWorkout = () => {
-
+    const addWorkoutService = AddWorkoutService();
     const [selectedExercises, setselectedExercises] = useState([]);
+    const [workout, setWorkout] = useState([]);
+    const workoutName = useRef('default');
+    const workoutDay = useRef('default');
 
     const exerciseCards = [];
 
@@ -26,13 +17,27 @@ const CreateWorkout = () => {
         const card = event.currentTarget;
 
         if(card.classList.contains('selectedcard')) return;
-        
+
         card.classList.add('selectedcard');
         card.classList.remove('card');
 
         setselectedExercises([...selectedExercises, exe])
         console.log(selectedExercises);
     }
+
+    const createWorkout = async () => {
+        const selectedExercisesData = selectedExercises.map(
+          (index) => exerciseList[index]
+        );
+      
+        setWorkout({
+          Name: workoutName.current.value,
+          Day: workoutDay.current.value,
+          Exercises: selectedExercisesData,
+        });
+    
+        addWorkoutService.addWorkout(workout);
+    };
 
     for(let exe of exerciseList){
         exerciseCards.push(
@@ -47,7 +52,7 @@ const CreateWorkout = () => {
                     </div>
                     <div className="w-50">
                         <span className="p-0 m-0 w-100 border border-2" style={{fontSize: 'xx-small', borderRadius: '0px' }}>
-                            765 kcal<br/>
+                            {exe.cal} kcal<br/>
                             {exe.reps} reps
                         </span>
                     </div>
@@ -64,9 +69,11 @@ const CreateWorkout = () => {
                     <div className="sectiontohead undefined">
                         <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-                            <label forHtml="floatingInput">Workout Name</label>
+                            <input ref={workoutName} type="text" className="form-control" id="workout-name" placeholder="Workout Name" />
+                            <label forHtml="workout-name">Workout Name</label>
                         </div>
+                            <input ref={workoutDay} type="text" className="form-control" id="workout-day" placeholder="Workout Day" />
+                        <button onClick={createWorkout} style={{padding: '5px',backgroundColor: 'darkgreen', color: 'white'}}>Create Workout</button>
                     </div>
 
                     <div className="programstowrapper d-flex flex-wrap">
