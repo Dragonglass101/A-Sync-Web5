@@ -5,7 +5,7 @@ import exerciseList from "../data/exercises.js"
 
 const AddWorkout = () => {
 
-  const { web5, did, protocolDefinition} = useContext(Web5Context);
+  const { web5, did} = useContext(Web5Context);
   const addWorkoutService = AddWorkoutService();
 
   const [workout, setWorkout] = useState({

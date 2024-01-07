@@ -15,7 +15,6 @@ const MyWorkoutService = () => {
       const { records, status } = await web5.dwn.records.query({
         message: {
           filter: {
-            // protocol: protocolDefinition.protocol,
             schema: "https://schema.org/Fitbit/Workouts",
           },
         },
@@ -40,7 +39,6 @@ const MyWorkoutService = () => {
     try {
         await web5.dwn.records.delete({
           message: {
-            // protocol: protocolDefinition.protocol,
             schema: "https://schema.org/Fitbit/Workouts",
             recordId: workoutRecordId ,
           },
@@ -53,17 +51,19 @@ const MyWorkoutService = () => {
 
 
   const updateWorkoutDeleteExercise = async (workoutRecord, exerciseToDelete) => {
+    
     try {
       console.log("Hehe");
       const { record } = await web5.dwn.records.read({
         message: {
-          // protocol: protocolDefinition.protocol,
-          schema: "https://schema.org/Fitbit/Workouts",
-          recordId: workoutRecord.id,
+          filter: {
+            schema: "https://schema.org/Fitbit/Workouts",
+            recordId: workoutRecord.id,
+          },
         },
       });
   
-      const currentExerciseList = await workoutRecord.data.json();
+      const currentExerciseList = await record.data.json();
   
       const exerciseIndex = currentExerciseList.Exercises.findIndex(
         (exercise) => exercise.name === exerciseToDelete.name
@@ -96,11 +96,13 @@ const MyWorkoutService = () => {
     try {
       const { record } = await web5.dwn.records.read({
         message: {
-          // protocol: protocolDefinition.protocol,
-          schema: "https://schema.org/Fitbit/Workouts",
-          recordId: workoutRecord.id,
+          filter: {
+            schema: "https://schema.org/Fitbit/Workouts",
+            recordId: workoutRecord.id,
+          },
         },
       });
+      console.log(record);
   
       const currentExerciseList = await record.data.json();
   
@@ -127,10 +129,6 @@ const MyWorkoutService = () => {
     }
   };
   
-
-
-
-
 
   return {
     getAllWorkout,
