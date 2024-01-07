@@ -13,15 +13,14 @@ const AddWorkoutService = () => {
   const addWorkout = async(workoutRecord) => {
     try {
         const { record } = await web5.dwn.records.write({
-        data: { ...workoutRecord },
-        message: {
-            protocol: protocolDefinition.protocol,
-            protocolPath: "sharedWorkouts",
-            schema: protocolDefinition.types.sharedWorkouts.schema,
-            dataFormat: 'application/json',
-            recipient: did,
-            published: true,
-        },
+            data: { ...workoutRecord },
+            message: {
+                protocol: protocolDefinition.protocol,
+                protocolPath: "sharedWorkouts",
+                schema: protocolDefinition.types.sharedWorkouts.schema,
+                dataFormat: 'application/json',
+                recipient: did,
+            },
         });
         const {status} = await record.send(did);
         console.log(status);
