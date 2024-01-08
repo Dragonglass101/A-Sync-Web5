@@ -1,5 +1,5 @@
 import workoutIcon from "../assets/images/workoutIcon.png"
-import calendarIcon from "../assets/images/calendarIcon.png"
+import calendarIcon from "../assets/images/calendarIconImg.png"
 import exerciseList from "../data/exercises.js"
 import FitbitService from "../utils/fitbitService";
 import { useRef, useState } from "react";
@@ -39,10 +39,6 @@ const CreateWorkout = () => {
                         <p className="text-secondary small m-0 p-0">{exe.type}</p>
                     </div>
                     <div className="w-25 border-start py-3">
-                        {/* <span className="p-0 m-0 w-100 border border-2" style={{ fontSize: 'xx-small', borderRadius: '0px' }}>
-                            {exe.cal} kcal<br />
-                            {exe.reps} reps
-                        </span> */}
                         <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{exe.cal} kcal</p>
                         <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{exe.reps} reps</p>
                     </div>
@@ -68,11 +64,13 @@ const CreateWorkout = () => {
                     <div className="sectiontohead undefined w-75">
                         <div className="d-flex justify-content-center">
                             <img className="me-4" src={workoutIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control style-input" id="workout-name" placeholder="Workout Name" />
+                            {/* <input ref={workoutName} type="text" className="form-control style-input" id="workout-name" placeholder="Workout Name" /> */}
+                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-name" placeholder="Workout Name" />
                         </div>
                         <div className="d-flex justify-content-center">
-                            <img className="me-4" src={calendarIcon} style={{ width: '70px' }} />
-                            <input ref={workoutDay} type="number" className="form-control style-input" id="workout-day" placeholder="Workout Day" />
+                            <img className="me-4" src={calendarIcon} style={{ width: '80px' }} />
+                            {/* <input ref={workoutDay} type="number" className="form-control style-input" id="workout-day" placeholder="Workout Day" /> */}
+                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
                         </div>
                         <button onClick={createWorkout} className="bttn fw-bold">Create</button>
                     </div>

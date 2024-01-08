@@ -1,7 +1,7 @@
 // import { FaCrown } from "react-icons/fa"
 import { Link } from "react-router-dom"
 // import { AiFillCaretRight } from "react-icons/ai"
-import dumbleImg from "../assets/images/dumble.png"
+import dumbleImg from "../assets/images/workoutIcon.png"
 import chestPressImg from "../assets/images/chestPress.jpeg"
 
 const Programs = () => {
@@ -9,7 +9,7 @@ const Programs = () => {
     <section className="programs pb-5">
       <div className="container programstocontainer">
         <div className="sectiontohead undefined">
-          <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
+          <img className="me-4" src={dumbleImg} style={{ width: '100px' }} />
           <h2 className="fw-bold">Recommended Workout</h2>
         </div>
         <div className="programstowrapper">
