@@ -4,6 +4,7 @@ import Programs from "../WorkoutComponents/Programs"
 import workoutAnalytics from "../assets/images/analytics.svg"
 import dumbleImg from "../assets/images/dumble.png"
 import Footer from "../pages/Footer";
+import Navbar from "./Navbar"
 // import Values from "../WorkoutComponents/Values"
 // import FAQs from "../WorkoutComponents/FAQs"
 // import Testimonails from "../WorkoutComponents/Testimonails"
@@ -12,7 +13,7 @@ import Footer from "../pages/Footer";
 const WorkoutDashboard = () => {
   return (
     <>
-      <div className="backgroundWorkout">
+        <Navbar/>
         <MainHeader />
         <Programs />
         <section className="programs py-5">
@@ -31,7 +32,6 @@ const WorkoutDashboard = () => {
         {/* <Values /> */}
         {/* <FAQs /> */}
         {/* <Testimonails /> */}
-      </div>
     </>
   )
 }

@@ -73,8 +73,8 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="container d-flex flex-column align-items-center justify-content-center" style={{height:'100vh'}}>
-                <h1 className='fw-bold' style={{ fontFamily: "Space Mono", color:'#12b981' }}>Dashboard</h1>
+            <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
+                <h1 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Dashboard</h1>
 
                 <div>
                     <Modal
@@ -140,14 +140,18 @@ const Dashboard = () => {
 
                 <Tabs defaultValue={1} orientation="vertical" className="mx-auto justify-content-center py-5">
                     <TabsList>
-                        <Tab value={0}> <AccountCircleIcon className="me-3"/> User Profile</Tab>
-                        <Tab value={1}> <AppsIcon className="me-3"/> My Apps</Tab>
-                        <Tab value={2}> <SettingsIcon className="me-3"/> Manage Permissions</Tab>
+                        <Tab value={0}> <AccountCircleIcon className="me-3" /> User Profile</Tab>
+                        <Tab value={1}> <AppsIcon className="me-3" /> My Apps</Tab>
+                        <Tab value={2}> <SettingsIcon className="me-3" /> Manage Permissions</Tab>
                     </TabsList>
                     <TabPanel value={0}>
-                        <div className="w-50 my-2">
+                        <div className="w-50 my-2 h-100">
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">What is your full legal name?</label>
-                            <input type="text" className="form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name"/>
+                            <input type="text" className="form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
+
+                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
+                                submit
+                            </Button>
                         </div>
                     </TabPanel>
                     <TabPanel value={1}>
