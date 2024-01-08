@@ -500,8 +500,9 @@ section {
 
 .unselectedcard span {
   opacity: 0.3;
-  filter: invert();
-  filter: sepia();
+  /* filter: invert();
+  filter: sepia(); */
+  filter: invert(1) saturate(0.4);
   width: 3rem;
   height: 3rem;
   /* background: var(--color-primary); */
