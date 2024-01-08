@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import FitbitService from "../utils/fitbitService";
+import Navbar from "./Navbar";
 
 const style = {
   position: 'absolute',
@@ -149,6 +150,7 @@ const MyWorkouts = () => {
   
   return (
     <>
+      <Navbar/>
       <section className="programs">
         <div className="container programstocontainer">
           <div className="row justify-content-evenly">

@@ -1,10 +1,12 @@
 import "../style/WorkoutDashboard.css"
 import MainHeader from "../WorkoutComponents/MainHeader"
 import Programs from "../WorkoutComponents/Programs"
-import workoutAnalytics from "../assets/images/analytics.svg"
+import workoutAnalytics from "../assets/images/transportable.svg"
 import dumbleImg from "../assets/images/workoutIcon.png"
 import Footer from "../pages/Footer";
 import Navbar from "./Navbar"
+import exerciseList from "../data/exercises.js"
+import pushWallImg from '../assets/images/pushWall.png'
 // import Values from "../WorkoutComponents/Values"
 // import FAQs from "../WorkoutComponents/FAQs"
 // import Testimonails from "../WorkoutComponents/Testimonails"
@@ -13,25 +15,34 @@ import Navbar from "./Navbar"
 const WorkoutDashboard = () => {
   return (
     <>
-        <Navbar/>
-        <MainHeader />
-        <Programs />
-        <section className="programs py-5">
-          <div className="container programstocontainer">
-            <div className="sectiontohead undefined py-5">
-              <img className="me-4" src={dumbleImg} style={{ width: '100px' }} />
-              <h2 className="fw-bold">Workout Analytics</h2>
-            </div>
-            <img src={workoutAnalytics} />
+      <Navbar />
+      <MainHeader />
+      <Programs />
+      <section className="programs py-5">
+        <div className="container programstocontainer">
+          <div className="sectiontohead undefined py-5">
+            <img className="me-4" src={dumbleImg} style={{ width: '100px' }} />
+            <h2 className="fw-bold" style={{ color: '#C0DEDD' }}>Workout Analytics</h2>
           </div>
-        </section>
-        <Footer />
+        </div>
+        <div className="d-flex align-items-center">
+          <div style={{ width: '60%' }}>
+            <div className="container me-0">
+              <img className="me-3" src={workoutAnalytics} />
+            </div>
+          </div>
+          <div style={{ width: '40%' }}>
+            <img className="" src={pushWallImg} />
+          </div>
+        </div>
+      </section>
+      <Footer />
 
 
 
-        {/* <Values /> */}
-        {/* <FAQs /> */}
-        {/* <Testimonails /> */}
+      {/* <Values /> */}
+      {/* <FAQs /> */}
+      {/* <Testimonails /> */}
     </>
   )
 }

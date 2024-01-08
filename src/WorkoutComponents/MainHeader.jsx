@@ -5,7 +5,7 @@ import Image from "../assets/images/chestPress2.png"
 
 const MainHeader = () => {
   return (
-    <header className="maintoheader">
+    <div className="maintoheader">
       <div className="container maintoheader-container">
         <div className="maintoheader-left">
           {/* <h4>#100DaysOfWorkOut</h4> */}
@@ -26,7 +26,7 @@ const MainHeader = () => {
           </div>
         </div>
       </div>
-    </header>
+    </div>
   )
 }
 
