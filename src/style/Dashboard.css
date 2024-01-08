@@ -1,11 +1,12 @@
 /* @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,600|Space+Mono:700,400"); */
 
 body{
-  background: #121117;
+  /* background: #121117; */
+  background: rgb(16,20,24);
   font-family: 'Space Mono', monospace !important;
 }
 
-h1,h2,h3,h4,h5,span,p{
+h1,h2,h3,h4,h5,span,p,label,input{
     font-family: 'Space Mono', monospace !important;
 }
 
@@ -13,8 +14,9 @@ h1,h2,h3,h4,h5,span,p{
   align-self: stretch;
   background-color: transparent;
   cursor: pointer;
-  height: 350px;
-  min-width: 350px;
+  height: 150px;
+  width: 150px;
+  /* min-width: 350px; */
   mix-blend-mode: normal;
   object-fit: cover;
   pointer-events: auto;
@@ -90,7 +92,8 @@ h1,h2,h3,h4,h5,span,p{
   height: auto;
   /* overflow-x: scroll; */
   position: relative;
-  /* width: 690px; */
+  width: 650px;
+  height: 600px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

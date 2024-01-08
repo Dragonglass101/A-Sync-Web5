@@ -8,11 +8,14 @@ const MainHeader = () => {
     <header className="maintoheader">
       <div className="container maintoheader-container">
         <div className="maintoheader-left">
-          <h4>#100DaysOfWorkOut</h4>
-          <h1 className="fw-bold">Join The Legends Of The Fitness World</h1>
-          <p className="text-secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Sit amet justo donec enim diam. Enim nulla aliquet porttitor lacus.
+          {/* <h4>#100DaysOfWorkOut</h4> */}
+          <h1 className="fw-bold">
+            Own your <mark style={{color:'#c88500', tectDecoration:'none', background:'none'}}>movement</mark>,<br/> 
+            Own your <mark style={{color:'#c88500', tectDecoration:'none', background:'none'}}>data</mark>
+          </h1>
+          <p className="text-secondary" style={{fontSize:'small'}}>
+          
+          Design personalized training plans, and celebrate your achievements – all while safeguarding your privacy. Your fitness, your rules. Move with Kinetica.
           </p>
           <Link to="/plans" className="bttn lg fw-bold" style={{textDecoration:'none', fontFamily:'Space Mono'}}>Get Started</Link>
         </div>

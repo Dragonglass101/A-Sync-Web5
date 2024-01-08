@@ -11,13 +11,16 @@ import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import Avatar from '@mui/material/Avatar';
+
+import workoutIcon from '../assets/images/workoutIcon.png'
 
 export default function Navbar() {
     return (
         <React.Fragment>
             <AppBar style={{ backgroundColor: 'black' }} position="fixed" color='secondary' enableColorOnDark>
                 <Toolbar className='my-3'>
-                    <IconButton
+                    {/* <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
@@ -25,9 +28,11 @@ export default function Navbar() {
                         sx={{ mr: 2 }}
                     >
                         <MenuIcon />
-                    </IconButton>
-                    <Typography className='fw-bold' variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        App
+                    </IconButton> */}
+                    {/* <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color:'#c88500' }} /> */}
+                    {/* <img className='ms-3' src={workoutIcon} style={{height:'80px', width:'auto'}}/> */}
+                    <Typography className='ms-4 fw-bold' style={{fontFamily:'Tektur', fontSize:'25px'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Kinetica
                     </Typography>
                     {
                         document.location.href.split('/')[3] == "workout" ?
@@ -37,21 +42,21 @@ export default function Navbar() {
                                 {/* </Button> */}
                                 {/* <Button style={{fontFamily:'Space Mono', textTransform:'capitalize'}} className="p-3 mt-2 mx-2 fw-bold" variant="outlined" color="inherit" startIcon={<FitnessCenterIcon />}> */}
                                 {/* </Button> */}
-                                <div style={{fontFamily:'Space Mono'}} className='fw-bold w-25 d-flex justify-content-evenly'>
-                                    <Link className='text-white' style={{ textDecoration: 'none' }} to="workout/create">Create Workouts</Link>
-                                    <Link className='text-white' style={{ textDecoration: 'none' }} to="workout/my">My Workouts</Link>
+                                <div style={{fontFamily:'Space Mono'}} className='fw-bold w-50 d-flex justify-content-end'>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/create">Create Workouts</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/my">My Workouts</Link>
                                 </div>
                             </>
                             :
                             <></>
                     }
-                    <Button className="p-3 mt-2 fw-bold" variant="outlined" color="inherit" startIcon={<WalletIcon />}>
+                    {/* <Button className="p-3 mt-2 fw-bold" variant="outlined" color="inherit" startIcon={<WalletIcon />}>
                         Wallet Connect
-                    </Button>
+                    </Button> */}
                 </Toolbar>
                 <div
                     style={{
-                        background: '#e92a67',
+                        background: '#c88500',
                         height: '3px',
                     }}
                 />
