@@ -36,13 +36,13 @@ const Programs = () => {
   }
 
   return (
-    <section className="programs pb-5" style={{backgroundColor:'#1b1b1c'}}>
+    <section className="programs pb-5 mx-5 border border-2 border-top-0" style={{backgroundColor:'#1B1B1C', borderRadius:'25px', borderColor:'rgb(192, 222, 221) !important'}}>
       <div className="container programstocontainer">
         <div className="sectiontohead pt-4 undefined">
           <img className="me-4" src={dumbleImg} style={{ width: '100px' }} />
           <h2 className="fw-bold" style={{color:'#C0DEDD'}}>Recommended Workout</h2>
         </div>
-        <div className="programstowrapper">
+        <div className="programstowrapper d-flex">
           {exerciseCards}
         </div>
       </div>
