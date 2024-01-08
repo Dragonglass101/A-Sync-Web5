@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import { Web5Context } from "../context/Web5Context";
 import {calcCalorie} from "../utils/calcCalorie"
 
-
 const MyWorkoutService = () => {
   const { web5, did, protocolDefinition} = useContext(Web5Context);
 

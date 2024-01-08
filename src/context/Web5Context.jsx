@@ -20,32 +20,81 @@ const ContextProvider = ({ children }) => {
     connectWeb5();
   }, []);
 
-  const protocolDefinition = {
-    protocol: "https://Fitbittesting2",
-    published: true,
-    types: {
-      sharedWorkouts: {
-        "schema": "https://schema.org/Fitbit/sharedtesting2",
-        "dataFormats": ["application/json"]
-      },
-      myWorkouts: {
-        "schema": "https://schema.org/Fitbit/mytesting2",
-        "dataFormats": ["application/json"]
-      }
+  const protocolDefinition = 
+  {
+    "protocol": "https://user.com",
+    "published": true,
+    "types": {
+        "fitbit": {
+            "schema": "https://schema.org/user/fitbit",
+            "dataFormats": ["application/json"]
+        },
+        "userworkout": {
+            "schema": "https://schema.org/user/userworkout",
+            "dataFormats": ["application/json"]
+        },
+        "workout": {
+            "schema": "https://schema.org/user/workout",
+            "dataFormats": ["application/json"]
+        },
+        "exercise": {
+            "schema": "https://schema.org/user/exercise",
+            "dataFormats": ["application/json"]
+        }
     },
-    structure: {
-      sharedWorkouts: {
-        $actions: [
-          { "who": "anyone", "can": "write" },
-          { "who": "recipient", "of": "sharedWorkouts", "can": "read" }
-        ]
-      },
-      myWorkouts: {
-        $actions: [
-          { "who": "author", "of":"myWorkouts", "can": "read" },
-          { "who": "author", "of":"myWorkouts", "can": "write" }
-        ]
-      }
+    "structure": {
+        "fitbit": {
+            "$globalRole": true
+        },
+        "userworkout": {
+            "workout": {
+                "exercise": {
+                    "$actions": [
+                        {
+                            "who": "recipient",
+                            "of": "workout",
+                            "can": "write"
+                        },
+                        {
+                            "who": "recipient",
+                            "of": "workout",
+                            "can": "read"
+                        },
+                        {
+                            "role": "fitbit",
+                            "can": "read"
+                        }
+                    ]
+                },
+                "$actions": [
+                    {
+                        "who": "author",
+                        "of": "workout",
+                        "can": "write"
+                    },
+                    {
+                        "who": "recipient",
+                        "of": "workout",
+                        "can": "read"
+                    },
+                    {
+                        "role": "fitbit",
+                        "can": "read"
+                    }
+                ]
+            },
+            "$actions": [
+                {
+                    "who": "author",
+                    "of": "userworkout",
+                    "can": "write"
+                },
+                {
+                    "role": "fitbit",
+                    "can": "read"
+                }
+            ]
+        }
     }
   }
   

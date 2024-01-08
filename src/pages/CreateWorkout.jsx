@@ -1,18 +1,19 @@
 import workoutIcon from "../assets/images/workoutIcon.png"
 import calendarIcon from "../assets/images/calendarIcon.png"
 import exerciseList from "../data/exercises.js"
-import AddWorkoutService from "../services/AddWorkoutService.jsx";
+import FitbitService from "../utils/fitbitService";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateWorkout = () => {
-    const addWorkoutService = AddWorkoutService();
+    const fitbitService = FitbitService();
     const [selectedExercises, setselectedExercises] = useState([]);
     const [workout, setWorkout] = useState([]);
     const workoutName = useRef('default');
     const workoutDay = useRef('default');
+    const navigate = useNavigate();
 
     const exerciseCards = [];
-
 
     function handleSelectExercise(event, exe) {
         const card = event.currentTarget;
@@ -25,16 +26,6 @@ const CreateWorkout = () => {
         setselectedExercises([...selectedExercises, exe])
         console.log(selectedExercises);
     }
-
-    const createWorkout = async () => {
-        addWorkoutService.addWorkout(
-            {
-                Name: workoutName.current.value,
-                Day: workoutDay.current.value,
-                Exercises: selectedExercises,
-            }
-        );
-    };
 
     for (let exe of exerciseList) {
         exerciseCards.push(
@@ -61,6 +52,14 @@ const CreateWorkout = () => {
         )
     }
 
+    async function createWorkout(){
+        const workoutRecord = await fitbitService.createWorkout({"Name": workoutName.current.value, "Day": workoutDay.current.value});
+        console.log("workout record", workoutRecord);
+        for(let e of selectedExercises){
+            await fitbitService.createExercise(e, workoutRecord.id)
+        }
+        navigate("/workout/my");
+    }
 
     return (
         <>

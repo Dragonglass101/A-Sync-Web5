@@ -2,6 +2,7 @@
 import DnDFlow from "./DnDFlow";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import FitbitService from "../utils/fitbitService";
 
 import '../style/Dashboard.css';
 import img_spotify2 from "../assets/images/spotify2.jpeg";
@@ -32,18 +33,29 @@ const style = {
 };
 
 const Dashboard = () => {
+    const fitbitService = FitbitService();
     const [open, setOpen] = useState(false);
     const [selected, setselected] = useState('');
     const navigate = useNavigate();
-    const handleOpen = (e) => {
-        setselected(e.target.id)
-        setOpen(true);
+
+    const handleOpen = async (e) => {
+        const userworkoutList = await fitbitService.getUserWorkout();
+        console.log(userworkoutList);
+
+        if(userworkoutList.length === 0){
+            setselected(e.target.id);
+            setOpen(true);
+        }
+        else{
+            navigate(e.target.id + '/dashboard');
+        }
     }
     const handleClose = () => {
         setselected('')
         setOpen(false);
     }
-    const handleNavigate = () => {
+    const handleNavigate = async () => {
+        await fitbitService.createUserWorkout();
         navigate(selected + '/dashboard');
     }
 
@@ -90,6 +102,7 @@ const Dashboard = () => {
                     <h3 className="text-center text-secondary fw-bold w-100 mb-4">Protocol Playground</h3>
                     <div>
                         <DnDFlow />
+                        <button>Update Protocols</button>
                     </div>
                 </div>
             </div>
