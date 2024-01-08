@@ -22,7 +22,13 @@ body {
   overflow-x: hidden;
   /* background: rgb(71, 25, 8) url('../assets/images/bg_texture.png'); */
   /* background: var(--color-gray-600) url('../assets/images/bg_texture.png'); */
-  background: #20073a url('../assets/images/bg_texture.png');
+  /* background: #20073a url('../assets/images/bg_texture.png'); */
+}
+
+.backgroundWorkout{
+  /* background: #1F1D2B url('../assets/images/bg_texture.png'); */
+  background: rgb(26,28,30);
+  background: rgb(38,40,54);
 }
 
 .maintoheader {
@@ -420,7 +426,9 @@ section {
 }
 
 .card {
-  background: var(--color-gray-500);
+  /* background: var(--color-gray-500); */
+  background: #1F1D2B;
+  /* background: radial-gradient(30.34% 30.34% at 34.14% 12.45%, #375DBE 3%, #102A6D 93%, rgba(16, 42, 109, 0) 100%)'; */
   border: 2px solid transparent;
   text-align: center;
   padding: 3rem 2rem;

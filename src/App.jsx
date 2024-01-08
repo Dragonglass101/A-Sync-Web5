@@ -19,7 +19,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar/>
+        {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/workout/create" element={<CreateWorkout />} />
@@ -29,6 +29,7 @@ const App = () => {
           <Route path="/protocolmap" element={<DnDFlow />} />
           <Route path="/workout/dashboard" element={<WorkoutDashboard/>} />
           <Route path="/health/dashboard" element={<HealthDashboard/>} />
+          
         </Routes>
       </Router>
     </>

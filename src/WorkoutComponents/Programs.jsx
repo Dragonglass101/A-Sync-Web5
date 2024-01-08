@@ -27,8 +27,8 @@ const Programs = () => {
             </span>
             <h4 className="fw-bold">Chest Press</h4>
             <div className="d-flex text-muted mt-3">
-              <span style={{width:'fit-content', fontSize:'small'}}>765 kcal</span>
-              <span style={{width:'fit-content', fontSize:'small'}}>15 reps</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
             </div>
           </article>
 
@@ -38,8 +38,8 @@ const Programs = () => {
             </span>
             <h4 className="fw-bold">Chest Press</h4>
             <div className="d-flex text-muted mt-3">
-              <span style={{width:'fit-content', fontSize:'small'}}>765 kcal</span>
-              <span style={{width:'fit-content', fontSize:'small'}}>15 reps</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
             </div>
           </article>
 
@@ -49,8 +49,8 @@ const Programs = () => {
             </span>
             <h4 className="fw-bold">Chest Press</h4>
             <div className="d-flex text-muted mt-3">
-              <span style={{width:'fit-content', fontSize:'small'}}>765 kcal</span>
-              <span style={{width:'fit-content', fontSize:'small'}}>15 reps</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
             </div>
           </article>
 
@@ -60,8 +60,8 @@ const Programs = () => {
             </span>
             <h4 className="fw-bold">Chest Press</h4>
             <div className="d-flex text-muted mt-3">
-              <span style={{width:'fit-content', fontSize:'small'}}>765 kcal</span>
-              <span style={{width:'fit-content', fontSize:'small'}}>15 reps</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
+              <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
             </div>
           </article>
 

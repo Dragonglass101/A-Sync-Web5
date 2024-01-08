@@ -12,24 +12,26 @@ import Footer from "../pages/Footer";
 const WorkoutDashboard = () => {
   return (
     <>
-      <MainHeader />
-      <Programs />
-      <section className="programs py-5">
-        <div className="container programstocontainer">
-          <div className="sectiontohead undefined py-5">
-            <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-            <h2 className="fw-bold">Workout Analytics</h2>
+      <div className="backgroundWorkout">
+        <MainHeader />
+        <Programs />
+        <section className="programs py-5">
+          <div className="container programstocontainer">
+            <div className="sectiontohead undefined py-5">
+              <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
+              <h2 className="fw-bold">Workout Analytics</h2>
+            </div>
+            <img src={workoutAnalytics} />
           </div>
-          <img src={workoutAnalytics} />
-        </div>
-      </section>
-      <Footer/>
-      
+        </section>
+        <Footer />
 
 
-      {/* <Values /> */}
-      {/* <FAQs /> */}
-      {/* <Testimonails /> */}
+
+        {/* <Values /> */}
+        {/* <FAQs /> */}
+        {/* <Testimonails /> */}
+      </div>
     </>
   )
 }

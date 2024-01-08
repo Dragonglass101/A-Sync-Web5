@@ -1,0 +1,19 @@
+/* color pallete */
+/* #331D2C
+#3F2E3E
+#A78295
+#EFE1D1 */
+
+.backgroundHealth {
+    background: rgb(38,40,54) url('../assets/images/bg_texture.png');
+    min-height: 100vh; /* minimum height of page would be equal to available view-port height */
+}
+
+.cardHealth {
+    background: rgb(31,29,43);
+    border: 2px solid transparent;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 3rem 3rem 3rem 3rem;
+    transition: var(--transition);
+  }
