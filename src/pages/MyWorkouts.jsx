@@ -27,6 +27,7 @@ import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
+import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 
 const style = {
   position: 'absolute',
@@ -178,7 +179,7 @@ const MyWorkouts = () => {
 
         <Tabs defaultValue={0} className="mx-auto justify-content-center align-items-top py-5">
           <TabsList className='flex-row'>
-            <Tab value={0}> <AccountCircleIcon className="me-3" /> My Workouts</Tab>
+            <Tab value={0}> <SportsGymnasticsIcon className="me-3" /> My Workouts</Tab>
             <Tab value={1}> <AppsIcon className="me-3" />Shared Workouts</Tab>
           </TabsList>
           <TabPanel value={0} style={{overflowY:'scroll'}} className="scrollset">

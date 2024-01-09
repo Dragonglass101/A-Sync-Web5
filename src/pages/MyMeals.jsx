@@ -25,6 +25,7 @@ import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
+import { RamenDiningSharp } from "@mui/icons-material";
 
 const style = {
   position: 'absolute',
@@ -170,7 +171,7 @@ const MyMeals = () => {
       <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '90vh' }}>
         <Tabs defaultValue={0} className="mx-auto justify-content-center align-items-top py-5">
           <TabsList className='flex-row'>
-            <Tab value={0}> <AccountCircleIcon className="me-3" /> My Meals</Tab>
+            <Tab value={0}> <RamenDiningSharp className="me-3" /> My Meals</Tab>
             <Tab value={1}> <AppsIcon className="me-3" />Shared Meals</Tab>
           </TabsList>
           <TabPanel value={0} style={{ overflowY: 'scroll' }} className="scrollset">
