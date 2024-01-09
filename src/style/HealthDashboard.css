@@ -4,11 +4,6 @@
 #A78295
 #EFE1D1 */
 
-.backgroundHealth {
-    background: rgb(38,40,54) url('../assets/images/bg_texture.png');
-    min-height: 100vh; /* minimum height of page would be equal to available view-port height */
-}
-
 .cardHealth {
     background: rgb(31,29,43);
     border: 2px solid transparent;
@@ -16,4 +11,88 @@
     padding: 3rem 2rem;
     border-radius: 3rem 3rem 3rem 3rem;
     transition: var(--transition);
+  }
+
+  .selectedHealthcard span {
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    /* background: rgb(11, 126, 20); */
+    /* background: rgb(18, 185, 129); */
+    background: white;
+    color: var(--color-gray-100);
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.5rem;
+    margin-inline: auto;
+    border-radius: 1rem;
+    transition: var(--transition);
+  }
+
+  .selectedHealthcard {
+    /* background: #006400; */
+    background: black;
+    /* border: 2px solid rgb(18, 185, 129); */
+    /* border: 2px solid white; */
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 3rem 3rem 3rem 3rem;
+    transition: var(--transition);
+  }
+  
+  .selectedHealthcard p{
+    /* color : rgb(18, 185, 129) !important; */
+  }
+
+  .unselectedHealthcard p{
+    color : rgb(74, 74, 74) !important;
+  }
+  
+  .unselectedHealthcard {
+    /* background: var(--color-gray-500); */
+    
+    background: black;
+    border: 2px solid transparent;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 3rem 3rem 3rem 3rem;
+    transition: var(--transition);
+  }
+  
+  .unselectedHealthcard span {
+    opacity: 0.3;
+    /* filter: invert();
+    filter: sepia(); */
+    /* filter: invert(1) saturate(0.4); */
+    width: 3rem;
+    height: 3rem;
+    /* background: var(--color-primary); */
+    /* background: #20073A; */
+    
+    background: #03326D;
+    color: var(--color-gray-100);
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.5rem;
+    margin-inline: auto;
+    border-radius: 1rem;
+    transition: var(--transition);
+  }
+
+  .unselectedHealthcard:hover {
+    background: #242a38;
+    border-color: var(--color-gray-400);
+    cursor: default;
+  }
+  
+  .unselectedHealthcard:hover span {
+    /* background: var(--color-secondary); */
+    background: black;
+    /* color: var(--color-gray-600); */
+    color: white;
   }

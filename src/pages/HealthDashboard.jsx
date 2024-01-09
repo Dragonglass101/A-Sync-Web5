@@ -1,12 +1,16 @@
 import "../style/HealthDashboard.css"
 import MainHeader from "../WorkoutComponents/MainHeader"
-import Programs from "../WorkoutComponents/Programs"
-import workoutAnalytics from "../assets/images/analytics.svg"
-import dumbleImg from "../assets/images/dumble.png"
+import Programs from "../WorkoutComponents/HealthPrograms"
+import workoutAnalytics from "../assets/images/transportable.svg"
+import dumbleImg from "../assets/images/fruitpile.png"
 import Footer from "../pages/Footer";
 import Image from "../assets/images/bowl1_ai.png"
 import { Link } from "react-router-dom"
 import chestPressImg from "../assets/images/chestPress.jpeg"
+import HealthNavbar from "./HealthNavbar"
+import fruitPileImg from "../assets/images/fruitpile.png"
+import junkPileImg from "../assets/images/junkpile.png"
+import healthOverview from "../assets/images/healthOverview.svg"
 // import Values from "../WorkoutComponents/Values"
 // import FAQs from "../WorkoutComponents/FAQs"
 // import Testimonails from "../WorkoutComponents/Testimonails"
@@ -16,6 +20,7 @@ const HealthDashboard = () => {
     return (
         <>
             <div className="backgroundHealth">
+                <HealthNavbar />
                 <header className="maintoheader">
                     <div className="container maintoheader-container">
                         <div className="maintoheader-left">
@@ -35,67 +40,13 @@ const HealthDashboard = () => {
                         </div>
                     </div>
                 </header>
-                <section className="programs pb-5">
-                    <div className="container programstocontainer">
-                        <div className="sectiontohead undefined">
-                            <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-                            <h2 className="fw-bold">Recommended Workout</h2>
-                        </div>
-                        <div className="programstowrapper">
-                            <article className="card programstoprogram pb-2" style={{ width: '300px' }}>
-                                <span className="w-100 h-100">
-                                    <img src={chestPressImg} className="w-100" />
-                                </span>
-                                <h4 className="fw-bold">Chest Press</h4>
-                                <div className="d-flex text-muted mt-3">
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
-                                </div>
-                            </article>
-
-                            <article className="card programstoprogram pb-2" style={{ width: '300px' }}>
-                                <span className="w-100 h-100">
-                                    <img src={chestPressImg} className="w-100" />
-                                </span>
-                                <h4 className="fw-bold">Chest Press</h4>
-                                <div className="d-flex text-muted mt-3">
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
-                                </div>
-                            </article>
-
-                            <article className="card programstoprogram pb-2" style={{ width: '300px' }}>
-                                <span className="w-100 h-100">
-                                    <img src={chestPressImg} className="w-100" />
-                                </span>
-                                <h4 className="fw-bold">Chest Press</h4>
-                                <div className="d-flex text-muted mt-3">
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
-                                </div>
-                            </article>
-
-                            <article className="card programstoprogram pb-2" style={{ width: '300px' }}>
-                                <span className="w-100 h-100">
-                                    <img src={chestPressImg} className="w-100" />
-                                </span>
-                                <h4 className="fw-bold">Chest Press</h4>
-                                <div className="d-flex text-muted mt-3">
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>765 kcal</span>
-                                    <span style={{ width: 'fit-content', fontSize: 'small' }}>15 reps</span>
-                                </div>
-                            </article>
-
-                        </div>
-                    </div>
-                </section>
+                <Programs />
                 <section className="programs py-5">
                     <div className="container programstocontainer">
-                        <div className="sectiontohead undefined py-5">
-                            <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-                            <h2 className="fw-bold">Workout Analytics</h2>
+                        <div className="sectiontohead undefined py-5 flex-column">
+                            <h2 className="fw-bold" style={{ color: '#C0DEDD' }}>Health Analytics</h2>
+                            <img src={healthOverview} />
                         </div>
-                        <img src={workoutAnalytics} />
                     </div>
                 </section>
                 <Footer />

@@ -74,7 +74,7 @@ const Dashboard = () => {
     return (
         <>
             <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
-                <h1 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Dashboard</h1>
+                <h1 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Wallet</h1>
 
                 <div>
                     <Modal
@@ -146,8 +146,15 @@ const Dashboard = () => {
                     </TabsList>
                     <TabPanel value={0}>
                         <div className="w-50 my-2 h-100">
-                            <label for="exampleFormControlInput1" className="form-label font15 fw-bold">What is your full legal name?</label>
-                            <input type="text" className="form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
+                            <Avatar className="mb-3 mx-auto" style={{height:'150px', width:'150px'}}/>
+                            <label for="exampleFormControlInput1" className="form-label font15 fw-bold">User Name</label>
+                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
+
+                            <label for="exampleFormControlInput1" className="form-label font15 fw-bold">Full Name</label>
+                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
+
+                            <label for="exampleFormControlInput1" className="form-label font15 fw-bold">Email Account</label>
+                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
 
                             <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
                                 submit
@@ -190,7 +197,10 @@ const Dashboard = () => {
                     <TabPanel value={2}>
                         <div>
                             <DnDFlow />
-                            <button>Update Protocols</button>
+                            {/* <button>Update Protocols</button> */}
+                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
+                                Update Protocol
+                            </Button>
                         </div>
                     </TabPanel>
                 </Tabs>

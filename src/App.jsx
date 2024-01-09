@@ -12,6 +12,8 @@ import Navbar from "./pages/Navbar";
 import DnDFlow from "./pages/DnDFlow";
 import WorkoutDashboard from "./pages/WorkoutDashboard";
 import HealthDashboard from "./pages/HealthDashboard";
+import CreateHealth from "./pages/CreateHealth";
+
 import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/protocolmap" element={<DnDFlow />} />
           <Route path="/workout/dashboard" element={<WorkoutDashboard/>} />
           <Route path="/health/dashboard" element={<HealthDashboard/>} />
+          <Route path="/health/create" element={<CreateHealth/>} />
           
         </Routes>
       </Router>
