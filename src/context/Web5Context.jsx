@@ -22,29 +22,35 @@ const ContextProvider = ({ children }) => {
 
   const protocolDefinition = 
   {
-    "protocol": "https://user.com",
+    "protocol": "https://usertest1.com",
     "published": true,
     "types": {
         "fitbit": {
-            "schema": "https://schema.org/user/fitbit",
+            "schema": "https://schema.org/usertest1/fitbit",
             "dataFormats": ["application/json"]
         },
         "userworkout": {
-            "schema": "https://schema.org/user/userworkout",
+            "schema": "https://schema.org/usertest1/userworkout",
             "dataFormats": ["application/json"]
         },
         "workout": {
-            "schema": "https://schema.org/user/workout",
+            "schema": "https://schema.org/usertest1/workouts",
             "dataFormats": ["application/json"]
         },
         "exercise": {
-            "schema": "https://schema.org/user/exercise",
+            "schema": "https://schema.org/usertest1/exercise",
             "dataFormats": ["application/json"]
         }
     },
     "structure": {
         "fitbit": {
-            "$globalRole": true
+            "$globalRole": true,
+            "$actions": [
+                {
+                    "who": "anyone",
+                    "can": "write"
+                }
+            ]
         },
         "userworkout": {
             "workout": {
@@ -58,10 +64,6 @@ const ContextProvider = ({ children }) => {
                         {
                             "who": "recipient",
                             "of": "workout",
-                            "can": "read"
-                        },
-                        {
-                            "role": "fitbit",
                             "can": "read"
                         }
                     ]
@@ -96,7 +98,7 @@ const ContextProvider = ({ children }) => {
             ]
         }
     }
-  }
+}
   
   useEffect(() => {
     const installProtocol = async () => {

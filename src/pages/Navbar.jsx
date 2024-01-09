@@ -32,14 +32,14 @@ export default function Navbar() {
                     {/* <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color:'#c88500' }} /> */}
                     {/* <img className='ms-3' src={workoutIcon} style={{height:'80px', width:'auto'}}/> */}
                     <Typography className='ms-4 fw-bold' style={{fontFamily:'Tektur', fontSize:'25px'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Kinetica
+                        <Link to="/workout/dashboard" >Kinetica</Link>
                     </Typography>
                     {
                         document.location.href.split('/')[3] == "workout" ?
                             <>
                                 <div style={{fontFamily:'Space Mono'}} className='fw-bold w-50 d-flex justify-content-end'>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/create">Create Workouts</Link>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/my">My Workouts</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/create">Create Workouts</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/my">My Workouts</Link>
                                 </div>
                             </>
                             :

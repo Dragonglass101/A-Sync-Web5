@@ -8,10 +8,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { Web5Context } from "../context/Web5Context";
 
 const CreateWorkout = () => {
+    const { web5, did, protocolDefinition} = useContext(Web5Context);
+
     const fitbitService = FitbitService();
     const [selectedExercises, setselectedExercises] = useState([]);
     const [workout, setWorkout] = useState([]);
@@ -59,7 +62,8 @@ const CreateWorkout = () => {
     async function createWorkout() {
         const workoutRecord = await fitbitService.createWorkout({ "Name": workoutName.current.value, "Day": workoutDay.current.value });
         console.log("workout record", workoutRecord);
-        for (let e of selectedExercises) {
+
+        for(let e of selectedExercises){
             await fitbitService.createExercise(e, workoutRecord.id)
         }
         navigate("/workout/my");
@@ -89,15 +93,7 @@ const CreateWorkout = () => {
                         </div>
                         <div className="input-group my-3">
                             <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
-                        </div>
-                        <div className="input-group my-3">
-                            <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
-                        </div>
-                        <div className="input-group my-3">
-                            <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
+                            <input ref={workoutDay} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
                         </div>
                         <button onClick={createWorkout} className="bttn fw-bold w-100 mt-4" style={{ borderRadius: '8px !important' }}>Create</button>
                     </div>

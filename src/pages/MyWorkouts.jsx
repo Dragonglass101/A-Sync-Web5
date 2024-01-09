@@ -27,7 +27,6 @@ const style = {
   p: 4,
 };
 
-
 const MyWorkouts = () => {
   const { web5, did} = useContext(Web5Context);
   const fitbitService = FitbitService();
@@ -40,6 +39,16 @@ const MyWorkouts = () => {
 
   const [open, setOpen] = useState(false);
 
+  const getWorkouts = async () => {
+    const userWorkoutRecord = await fitbitService.getUserWorkout();
+    const workoutRecords = await fitbitService.getRecordsWithParentId(userWorkoutRecord[0].id);
+    console.log("workout records", workoutRecords);
+    // const sharedWorkoutList = await myWorkoutService.getAllSharedWorkout();
+    // createSharedWorkoutElements(sharedWorkoutList);
+    createWorkoutElements(workoutRecords);
+  };
+
+
   const handleOpen = async (wr) => {
     setSelectedWorkout(wr);
 
@@ -49,7 +58,7 @@ const MyWorkouts = () => {
     const exerciseElements = [];
     for(let exe of Object.values(exerciseRecords)){
       exerciseElements.push(
-        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
+        <article id={exe.data.name} className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
         <span className="h-100 m-0" style={{ width: '20%' }}>
           <img src={exe.data.imageurl} className="w-100" />
         </span>
@@ -59,7 +68,11 @@ const MyWorkouts = () => {
         style={{ width: '20%', backgroundColor: `${exe.completed ? 'green' : 'white'}`, color: 'black'}}
         >Completed</button>
         <button 
-        // onClick={()=>{myWorkoutService.updateWorkoutDeleteExercise(w.id, exe)}} className="btn btn-light"
+        onClick={()=>{
+          fitbitService.deleteWithRecordId(exe.id);
+          // handleClose();
+          setTimeout(()=>{handleOpen(wr)}, 300);
+        }} className="btn btn-light"
         >
           <DeleteIcon className="text-dark" />
         </button>
@@ -89,7 +102,10 @@ const MyWorkouts = () => {
         <h4 className="fw-bold w-50">{wr.data.Name}</h4>
         <button id={wr.data.Name} onClick={()=>{handleOpen(wr)}} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
         <button 
-        // onClick={()=>{myWorkoutService.deleteWorkout(w.id)}} 
+        onClick={async ()=>{
+          fitbitService.deleteWithRecordId(wr.id);
+          getWorkouts();
+        }} 
         className="btn btn-light">
           <DeleteIcon className="text-dark" />
         </button>
@@ -124,16 +140,6 @@ const MyWorkouts = () => {
   }
 
   useEffect(() => {
-    const getWorkouts = async () => {
-      const userWorkoutRecord = await fitbitService.getUserWorkout();
-      const workoutRecords = await fitbitService.getRecordsWithParentId(userWorkoutRecord[0].id);
-      console.log("workout records", workoutRecords);
-      // const sharedWorkoutList = await myWorkoutService.getAllSharedWorkout();
-
-      // createSharedWorkoutElements(sharedWorkoutList);
-      createWorkoutElements(workoutRecords);
-    };
-
     if(web5){
       getWorkouts();
     }

@@ -74,12 +74,9 @@ const MyWorkoutService = () => {
     }
   };
 
-
-
   const updateWorkoutDeleteExercise = async (workoutRecord, exerciseToDelete) => {
     
     try {
-      console.log("Hehe");
       const { record } = await web5.dwn.records.read({
         message: {
           protocol: protocolDefinition.protocol,
