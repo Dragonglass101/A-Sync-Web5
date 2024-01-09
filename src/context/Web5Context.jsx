@@ -243,7 +243,7 @@ const ContextProvider = ({ children }) => {
         }
         const { protocol, status } = await web5.dwn.protocols.configure({
           message: {
-            definition: protocolDefinition,
+            definition: protocolDef,
           },
         });
         await protocol.send(did);

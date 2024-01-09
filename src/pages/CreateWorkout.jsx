@@ -7,20 +7,26 @@ import FitbitService from "../utils/fitbitService";
 import EditIcon from '@mui/icons-material/Edit';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Web5Context } from "../context/Web5Context";
 
 const CreateWorkout = () => {
-    const { web5, did, protocolDefinition} = useContext(Web5Context);
-
     const fitbitService = FitbitService();
     const [selectedExercises, setselectedExercises] = useState([]);
-    const [workout, setWorkout] = useState([]);
     const workoutName = useRef('default');
     const workoutDay = useRef('default');
     const navigate = useNavigate();
+
+    const [backdropOpen, setBackdropOpen] = useState(false);
+    const closeBackdrop = () => {
+        setBackdropOpen(false);
+    };
+    const openBackdrop = () => {
+        setBackdropOpen(true);
+    };
 
     const exerciseCards = [];
 
@@ -60,18 +66,29 @@ const CreateWorkout = () => {
     }
 
     async function createWorkout() {
+        openBackdrop();
         const workoutRecord = await fitbitService.createWorkout({ "Name": workoutName.current.value, "Day": workoutDay.current.value });
         console.log("workout record", workoutRecord);
 
         for(let e of selectedExercises){
             await fitbitService.createExercise(e, workoutRecord.id)
         }
+        closeBackdrop();
         navigate("/workout/my");
     }
 
     return (
         <>
             <Navbar />
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={backdropOpen}
+            >
+                <div className="d-flex justify-content-center p-5" style={{backgroundColor:'black'}}>
+                    <CircularProgress color="inherit" />
+                    <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Creating Workout ...</h3>
+                </div>
+            </Backdrop>
             <section className="programs">
                 <div className="mx-auto programstocontainer d-flex mb-3" style={{ width: '90%' }}>
                     <div className="w-25 text-start fw-bold">

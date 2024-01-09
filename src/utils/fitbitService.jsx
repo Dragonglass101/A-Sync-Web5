@@ -15,7 +15,6 @@ const FitbitService = () => {
               },
             },
           });
-          console.log(status);
           const newList = await Promise.all(
             records.map(async (record) => {
               const data = await record.data.json();
@@ -40,7 +39,6 @@ const FitbitService = () => {
                 },
               },
             });
-            console.log(records, status);
             const newList = await Promise.all(
               records.map(async (record) => {
                 const data = await record.data.json();
@@ -64,7 +62,6 @@ const FitbitService = () => {
             },
           },
         });
-        console.log(records, status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -88,7 +85,6 @@ const FitbitService = () => {
             }
           },
         });
-        console.log(status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -113,7 +109,6 @@ const FitbitService = () => {
             dateSort: 'createdDescending',
           },
         });
-        console.log(records, status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -142,7 +137,6 @@ const FitbitService = () => {
               }
           });
           const {status} = await record.send(did);
-          console.log(status);
       } catch (error) {
           console.error("Error Creating Workout : ", error);
       }    
@@ -164,7 +158,6 @@ const FitbitService = () => {
               }
           });
           const {status} = await record.send(did);
-          console.log("create workout status:", record, status);
           return record;
       } catch (error) {
           console.error("Error Creating Workout : ", error);
@@ -187,7 +180,6 @@ const FitbitService = () => {
               }
           });
           const {status} = await record.send(did);
-          console.log(status);
           return record;
       } catch (error) {
           console.error("Error Creating Workout : ", error);
@@ -207,10 +199,8 @@ const FitbitService = () => {
           },
         },
       });
-      console.log(record);
   
       const currentExerciseData = await record.data.json();
-      console.log(currentExerciseData);
       const updatedExerciseData =  {
             ...currentExerciseData,
             completed: !currentExerciseData.completed,
@@ -221,8 +211,6 @@ const FitbitService = () => {
           ...updatedExerciseData,
         },
       });
-  
-      console.log("Exercise status toggled successfully!");
     } catch (error) {
       console.error("Error toggling exercise status: ", error);
     }
@@ -239,9 +227,7 @@ const FitbitService = () => {
                 "dataFormat": "application/json"
             }
         });
-        console.log("rec" ,response);
         const {status} = await record.send(userDid);
-        // console.log(status);
         return record;
     } catch (error) {
         console.error("Error Creating Workout : ", error);
@@ -256,7 +242,6 @@ const FitbitService = () => {
           recordId: RecordId,
         },
       });
-      console.log("record deleted successfully")
     } catch (error) {
       console.error("Error Deleting Workout Name: ", error);
     }
@@ -264,7 +249,6 @@ const FitbitService = () => {
 
   const readSharedExercises = async (workoutId) => {
     try {
-      console.log("reading Exercises");
       const {records, status} = await web5.dwn.records.query({
         message: {
           protocol: protocolDefinition.protocol,
@@ -275,12 +259,9 @@ const FitbitService = () => {
           }
         },
       });
-      console.log(status);
-      console.log(records);
       const newList = await Promise.all(
         records.map(async (record) => {
           const data = await record.data.json();
-          console.log(data);
           return { record, data, id: record.id };
         })
       );
@@ -302,11 +283,9 @@ const FitbitService = () => {
           }
         },
       });
-      console.log(status);
       const newList = await Promise.all(
         records.map(async (record) => {
           const data = await record.data.json();
-          console.log(data);
           return { record, data, id: record.id };
         })
       );
@@ -318,8 +297,6 @@ const FitbitService = () => {
       console.error("Error Getting Workouts", error);
     }
   }
-
-
 
   const shareWorkout = async(workoutRecord, recipientDID) => {
     try {
@@ -335,8 +312,6 @@ const FitbitService = () => {
         },
       });
       const{status: statusSend} = record.send(recipientDID);
-      console.log(statusWrite);
-      console.log("Workout Record Shared Sucessfully !")
 
       const { records, status: statusQuery } = await web5.dwn.records.query({
         message: {
@@ -348,13 +323,10 @@ const FitbitService = () => {
             },
         },
       });
-      console.log(records);
-      console.log("Fetched All Exercises!");
 
       const newList = await Promise.all(
         records.map(async (exe) => {
           const data = await exe.data.json();
-          console.log(data);
           const { record, status: statusWriteExe } = await web5.dwn.records.write({
           data: { ...data },
           message: {
@@ -366,14 +338,10 @@ const FitbitService = () => {
               recipient: recipientDID,
           },
         });
-        console.log(statusWriteExe);
         const {status: statusSendToRecipient} = await record.send(recipientDID);
-        console.log(statusSendToRecipient);
-        console.log("Exercise Record Shared Sucessfully !")
           return { exe, data, id: record.id };
         })
       );
-      // alert(`Workout Added Successfully!`)
     } catch (error) {
       console.error("Error Creating Workout : ", error);
     }    
