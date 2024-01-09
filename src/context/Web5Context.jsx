@@ -25,6 +25,10 @@ const ContextProvider = ({ children }) => {
     "protocol": "https://usertest1.com",
     "published": true,
     "types": {
+        "profile": {
+          "schema": "https://schema.org/usertest1/profile",
+          "dataFormats": ["application/json"]
+        },
         "fitbit": {
             "schema": "https://schema.org/usertest1/fitbit",
             "dataFormats": ["application/json"]
@@ -103,10 +107,6 @@ const ContextProvider = ({ children }) => {
                         "who": "recipient",
                         "of": "workout",
                         "can": "read"
-                    },
-                    {
-                        "role": "fitbit",
-                        "can": "read"
                     }
                 ]
             },
@@ -117,8 +117,8 @@ const ContextProvider = ({ children }) => {
                     "can": "write"
                 },
                 {
-                    "role": "fitbit",
-                    "can": "read"
+                  "role": "fitbit",
+                  "can": "read"
                 }
             ]
         },
@@ -147,10 +147,6 @@ const ContextProvider = ({ children }) => {
                     {
                         "who": "recipient",
                         "of": "meal",
-                        "can": "read"
-                    },
-                    {
-                        "role": "nutrifit",
                         "can": "read"
                     }
                 ]
