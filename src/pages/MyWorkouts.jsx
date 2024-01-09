@@ -27,6 +27,7 @@ import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
+import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 
 const style = {
   position: 'absolute',
@@ -132,29 +133,29 @@ const MyWorkouts = () => {
     setWorkouts(workoutElement);
   }
 
-  function createSharedWorkoutElements(sharedWorkoutList) {
-    console.log("shared")
-    console.log(sharedWorkoutList);
-    const sharedWorkoutElement = [];
+  // function createSharedWorkoutElements(sharedWorkoutList) {
+  //   console.log("shared")
+  //   console.log(sharedWorkoutList);
+  //   const sharedWorkoutElement = [];
 
-    for (let w of Object.values(sharedWorkoutList)) {
-      if (w.data.record.author != did) {
-        sharedWorkoutElement.push(
-          <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
-            <span className="h-100 m-0" style={{ width: '20%' }}>
-              <img src={benchImg} className="w-100" />
-            </span>
-            <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
-            <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-            <button onClick={() => { myWorkoutService.deleteWorkout(w.id) }} className="btn btn-light">
-              <DeleteIcon className="text-dark" />
-            </button>
-          </article>
-        )
-      }
-    }
-    setSharedWorkouts(sharedWorkoutElement);
-  }
+  //   for (let w of Object.values(sharedWorkoutList)) {
+  //     if (w.data.record.author != did) {
+  //       sharedWorkoutElement.push(
+  //         <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
+  //           <span className="h-100 m-0" style={{ width: '20%' }}>
+  //             <img src={benchImg} className="w-100" />
+  //           </span>
+  //           <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
+  //           <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+  //           <button onClick={() => { myWorkoutService.deleteWorkout(w.id) }} className="btn btn-light">
+  //             <DeleteIcon className="text-dark" />
+  //           </button>
+  //         </article>
+  //       )
+  //     }
+  //   }
+  //   setSharedWorkouts(sharedWorkoutElement);
+  // }
 
   useEffect(() => {
     if (web5) {
@@ -162,12 +163,17 @@ const MyWorkouts = () => {
     }
   }, [web5, did])
 
-
+  const readSharedWorkout = (e) => {
+    e.preventDefault();
+    console.log('Entering readSharedWorkout');
+    fitbitService.readSharedWorkout();
+    console.log('Exiting readSharedWorkout');
+  };
   const handleShareWorkout = (e) => {
     console.log('Entering handleShareWorkout');
     console.log(recipientdidRef.current.value);
     console.log(selectedWorkout);
-    myWorkoutService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
+    fitbitService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
     console.log('Exiting handleShareWorkout');
   };
 
@@ -178,13 +184,16 @@ const MyWorkouts = () => {
 
         <Tabs defaultValue={0} className="mx-auto justify-content-center align-items-top py-5">
           <TabsList className='flex-row'>
-            <Tab value={0}> <AccountCircleIcon className="me-3" /> My Workouts</Tab>
+            <Tab value={0}> <SportsGymnasticsIcon className="me-3" /> My Workouts</Tab>
             <Tab value={1}> <AppsIcon className="me-3" />Shared Workouts</Tab>
           </TabsList>
           <TabPanel value={0} style={{overflowY:'scroll'}} className="scrollset">
             <div className="d-flex flex-column">
               <Button onClick={() => { navigate("/workout/create") }} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
                 Create New Workout
+              </Button>
+              <Button onClick={ readSharedWorkout} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
+                Read Shared Workout
               </Button>
               {workouts}
             </div>

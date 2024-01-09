@@ -41,6 +41,14 @@ const ContextProvider = ({ children }) => {
             "schema": "https://schema.org/usertest1/workout",
             "dataFormats": ["application/json"]
         },
+        "sharedWorkouts": {
+          "schema": "https://schema.org/usertest1/sharedWorkouts",
+          "dataFormats": ["application/json"]
+        },
+        "sharedExercises": {
+          "schema": "https://schema.org/usertest1/sharedExercises",
+          "dataFormats": ["application/json"]
+        },
         "exercise": {
             "schema": "https://schema.org/usertest1/exercise",
             "dataFormats": ["application/json"]
@@ -96,6 +104,34 @@ const ContextProvider = ({ children }) => {
               "role": "nutrifit",
               "can": "read"
             },
+          ]
+        },
+        "sharedWorkouts":{
+          "$actions": [
+         
+            {
+              "who": "anyone",
+              "can": "write"
+            },
+            {
+              "who": "anyone",
+              "can": "read",
+            },
+        
+          ]
+        },
+        "sharedExercises":{
+          "$actions": [
+           
+            {
+              "who": "anyone",
+              "can": "write"
+            },
+            {
+              "who": "anyone",
+              "can": "read",
+            },
+           
           ]
         },
         "userworkout": {
@@ -207,7 +243,7 @@ const ContextProvider = ({ children }) => {
         }
         const { protocol, status } = await web5.dwn.protocols.configure({
           message: {
-            definition: protocolDef,
+            definition: protocolDefinition,
           },
         });
         await protocol.send(did);
