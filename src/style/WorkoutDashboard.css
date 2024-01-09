@@ -33,7 +33,7 @@ body {
 
 .maintoheader {
   width: 100vw;
-  height: calc(100vh - 3rem);
+  height: 80vh;
   display: grid;
   place-items: center;
   margin-top: 3rem;
@@ -248,7 +248,9 @@ body {
 /* ========= Footer ========= */
 footer {
   /* background: var(--color-primary); */
-  background: black;
+  /* background: black; */
+  background: #1B1B1C;
+  border-top: 2px solid #C0DEDD;
   margin-top: 7rem;
   padding-top: 7rem;
   font-size: 1rem;
@@ -305,7 +307,8 @@ footer {
   color: var(--color-gray-100);
   text-align: center;
   padding: 1.5rem 0;
-  border-top: 2px solid var(--color-primary-variant);
+  /* border-top: 2px solid var(--color-primary-variant); */
+  border-top: 2px solid #C0DEDD;
   margin-top: 5rem;
 }
 
@@ -428,6 +431,7 @@ section {
 .card {
   /* background: var(--color-gray-500); */
   background: rgb(18, 24, 39);
+  filter: brightness(0.9);
   box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
   /* background: radial-gradient(30.34% 30.34% at 34.14% 12.45%, #375DBE 3%, #102A6D 93%, rgba(16, 42, 109, 0) 100%)'; */
   border: 2px solid transparent;
