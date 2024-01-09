@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import dumbleImg from "../assets/images/dumble.png"
-import benchImg from "../assets/images/bench.png"
+import benchImg from "../assets/images/bowl1_ai.png"
+// import fruitPileImg from "../assets/images/fruitpile.png"
 import { Link, useNavigate } from "react-router-dom"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
@@ -106,7 +107,7 @@ const MyMeals = () => {
 
     for (let ml of Object.values(mealRecords)) {
       mealElement.push(
-        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '0px' }} >
+        <article className="card programstoprogram d-flex flex-row align-items-center p-0 px-4" style={{ borderRadius: '0px' }} >
           <span className="h-100 m-0" style={{ width: '20%' }}>
             <img src={benchImg} className="w-100" />
           </span>
@@ -134,7 +135,7 @@ const MyMeals = () => {
     for (let w of Object.values(sharedWorkoutList)) {
       if (w.data.record.author != did) {
         sharedWorkoutElement.push(
-          <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
+          <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '25px' }} >
             <span className="h-100 m-0" style={{ width: '20%' }}>
               <img src={benchImg} className="w-100" />
             </span>
