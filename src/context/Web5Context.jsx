@@ -25,6 +25,10 @@ const ContextProvider = ({ children }) => {
     "protocol": "https://usertest1.com",
     "published": true,
     "types": {
+        "profile": {
+          "schema": "https://schema.org/usertest1/profile",
+          "dataFormats": ["application/json"]
+        },
         "fitbit": {
             "schema": "https://schema.org/usertest1/fitbit",
             "dataFormats": ["application/json"]
@@ -103,10 +107,6 @@ const ContextProvider = ({ children }) => {
                         "who": "recipient",
                         "of": "workout",
                         "can": "read"
-                    },
-                    {
-                        "role": "fitbit",
-                        "can": "read"
                     }
                 ]
             },
@@ -117,8 +117,8 @@ const ContextProvider = ({ children }) => {
                     "can": "write"
                 },
                 {
-                    "role": "fitbit",
-                    "can": "read"
+                  "role": "fitbit",
+                  "can": "read"
                 }
             ]
         },
@@ -148,10 +148,6 @@ const ContextProvider = ({ children }) => {
                         "who": "recipient",
                         "of": "meal",
                         "can": "read"
-                    },
-                    {
-                        "role": "nutrifit",
-                        "can": "read"
                     }
                 ]
             },
@@ -171,12 +167,30 @@ const ContextProvider = ({ children }) => {
 }
   
   useEffect(() => {
+    const queryProtocol = async () => {
+      const { protocols, status } = await web5.dwn.protocols.query({
+        message: {
+          filter: {
+            protocol: protocolDefinition.protocol,
+          },
+        },
+      });
+    
+      console.log("protocol", protocols);
+      return protocols;
+    }
     const installProtocol = async () => {
       try {
         console.log("Installing protocol ...");
+
+        var protocolsList = await queryProtocol();
+        var protocolDef = protocolDefinition;
+        if(protocolsList.length != 0){
+          protocolDef = protocolsList[0].definition;
+        }
         const { protocol, status } = await web5.dwn.protocols.configure({
           message: {
-            definition: protocolDefinition,
+            definition: protocolDef,
           },
         });
         await protocol.send(did);

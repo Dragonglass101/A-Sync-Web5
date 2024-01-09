@@ -237,9 +237,9 @@ const Dashboard = () => {
                         <div>
                             <DnDFlow />
                             {/* <button>Update Protocols</button> */}
-                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{ color: '#12b981', borderColor: '#12b981' }}>
+                            {/* <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{ color: '#12b981', borderColor: '#12b981' }}>
                                 Update Protocol
-                            </Button>
+                            </Button> */}
                         </div>
                     </TabPanel>
                 </Tabs>
