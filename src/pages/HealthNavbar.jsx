@@ -32,7 +32,7 @@ export default function HealthNavbar() {
                     {/* <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color:'#c88500' }} /> */}
                     {/* <img className='ms-3' src={workoutIcon} style={{height:'80px', width:'auto'}}/> */}
                     <Typography className='ms-4 fw-bold' style={{fontFamily:'Tektur', fontSize:'25px'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Nourish
+                        <Link to="/health/dashboard" >Nourish</Link>
                     </Typography>
                     {
                         document.location.href.split('/')[3] == "health" ?
