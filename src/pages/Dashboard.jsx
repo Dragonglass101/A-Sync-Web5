@@ -56,7 +56,7 @@ const Dashboard = () => {
     const { web5, did, protocolDefinition} = useContext(Web5Context);
     
     //BACKDROP
-    const [backdropOpen, setBackdropOpen] = React.useState(false);
+    const [backdropOpen, setBackdropOpen] = React.useState(true);
     const closeBackdrop = () => {
         setBackdropOpen(false);
     };
@@ -93,6 +93,7 @@ const Dashboard = () => {
     
     useEffect(() => {
         if(web5){
+            closeBackdrop();
             queryProfile();
         }
     }, [web5, did])
@@ -145,15 +146,14 @@ const Dashboard = () => {
         <>
             <div className="container d-flex flex-column align-items-center justify-content-center mt-3">
                 <div>
-                    <Button onClick={openBackdrop}>Show backdrop</Button>
                     <Backdrop
                         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                         open={backdropOpen}
-                        onClick={closeBackdrop}
+                        // onClick={closeBackdrop}
                     >
                         <div className="d-flex justify-content-center p-5" style={{backgroundColor:'black'}}>
                             <CircularProgress color="inherit" />
-                            <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Protocol Loading ...</h3>
+                            <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Initializing Web5 and Installing Protocol ...</h3>
                         </div>
                     </Backdrop>
                 </div>

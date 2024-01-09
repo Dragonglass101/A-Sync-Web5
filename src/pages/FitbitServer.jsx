@@ -30,7 +30,7 @@ const FitbitServer = () => {
         const exerciseRecords = await fitbitService.queryExerciseRecords(workoutRecords[0].id, userDid);
         const exerciseRecords1 = await fitbitService.queryExerciseRecords(workoutRecords1[0].id, fitbitServerDid);
         console.log(workoutRecords);
-        // console.log(exerciseRecords);
+        console.log(exerciseRecords);
         console.log(workoutRecords1);
         console.log(exerciseRecords1);
     }
