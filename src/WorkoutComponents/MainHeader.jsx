@@ -17,7 +17,7 @@ const MainHeader = () => {
           
           Design personalized training plans, and celebrate your achievements – all while safeguarding your privacy. Your fitness, your rules. Move with Fitbit.
           </p>
-          <Link to="/plans" className="bttn lg fw-bold" style={{textDecoration:'none', fontFamily:'Space Mono'}}>Get Started</Link>
+          <Link to="/workout/create" className="bttn lg fw-bold" style={{textDecoration:'none', fontFamily:'Space Mono'}}>Get Started</Link>
         </div>
         <div className="maintoheader-right">
           <div className="maintoheader-circle"></div>

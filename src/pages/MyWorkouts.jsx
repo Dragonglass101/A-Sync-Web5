@@ -77,7 +77,11 @@ const MyWorkouts = () => {
           </span>
           <h4 className="fw-bold w-50">{exe.data.name}</h4>
           <button className={"btn btn-outline-light fw-bold me-2"}
-            onClick={()=>{fitbitService.updateExerciseStatus(exe.id, !exe.data.complete)}}
+            onClick={()=>{
+              fitbitService.toggleExerciseStatus(wr.id, exe.id);
+              // handleClose();
+              setTimeout(() => { handleOpen(wr) }, 1000)
+            }}
             style={{ width: '20%', backgroundColor: `${exe.data.completed ? 'green' : 'white'}`, color: 'black' }}
           >Completed</button>
           <button

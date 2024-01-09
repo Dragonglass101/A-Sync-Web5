@@ -4,7 +4,7 @@ import { FaLinkedin, FaFacebookF } from "react-icons/fa"
 import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai"
 
 import img_workout from "../assets/images/workoutIcon.png"
-import img_health from "../assets/images/fruitPile.png"
+import img_health from "../assets/images/fruitpile.png"
 import Image from "../assets/images/bowl1_ai.png"
 
 const FooterHealth = () => {
