@@ -20,19 +20,16 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h1 align="center"> DevilsList </h1>
+  <h1 align="center"> Fitbit-NutriFit </h1>
 
   <p align="center">
-    An On-Chain AngelList on Tezos BlockChain!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <a href="https://youtu.be/m3xArqbYJ1A">View Demo</a>
     .
     <a href="https://decentralizedangellist.web.app">View Site</a>
-    <!-- <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a> -->
+
   </p>
 </div>
 
@@ -80,8 +77,8 @@ In essence, our Web5 project empowers users to selectively share and leverage th
 
 By building these applications on the foundation of Web5, we aspire to contribute to a paradigm shift in the digital landscape, championing a future where technology is not just powerful but, more importantly, beneficial and empowering for every user.
 
-### Features
-<img src='assets/architecture.png'>
+### Architecture
+<img src='assets/images/Architecture.png'>
 
 ### Features
 
