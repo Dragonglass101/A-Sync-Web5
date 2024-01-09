@@ -76,7 +76,7 @@ const MyMeals = () => {
           <h4 className="fw-bold w-50">{fd.data.name}</h4>
           <button className={"btn btn-outline-light fw-bold me-2"}
             // onClick={()=>{myWorkoutService.updateWorkoutExerciseToggle(w.id, fd)}}
-            style={{ width: '20%', backgroundColor: `${fd.completed ? 'green' : 'white'}`, color: 'black' }}
+            style={{ width: '20%', backgroundColor: `${fd.data.completed ? 'green' : 'white'}`, color: 'black' }}
           >Eaten</button>
           <button
             onClick={() => {

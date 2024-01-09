@@ -6,6 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +19,15 @@ const CreateHealth = () => {
     const mealName = useRef('default');
     const mealDay = useRef('default');
     const navigate = useNavigate();
+
+    const [backdropOpen, setBackdropOpen] = useState(false);
+    const closeBackdrop = () => {
+        setBackdropOpen(false);
+    };
+    const openBackdrop = () => {
+        setBackdropOpen(true);
+    };
+
 
     const foodCards = [];
 
@@ -55,16 +66,27 @@ const CreateHealth = () => {
     }
 
     async function createMeal() {
+        openBackdrop();
         const mealRecord = await nutrifitService.createMeal({ "Name": mealName.current.value, "Day": mealDay.current.value });
         console.log("meal record", mealRecord);
         for (let f of selectedFoods) {
             await nutrifitService.createFood(f, mealRecord.id)
         }
-        // navigate("/meal/my");
+        closeBackdrop();
+        navigate("/health/my");
     }
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={backdropOpen}
+            >
+                <div className="d-flex justify-content-center p-5" style={{backgroundColor:'black'}}>
+                    <CircularProgress color="inherit" />
+                    <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Logging Meal ...</h3>
+                </div>
+            </Backdrop>
             <HealthNavbar />
             <section className="programs">
                 <div className="mx-auto programstocontainer d-flex mb-3" style={{ width: '90%' }}>
