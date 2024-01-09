@@ -1,0 +1,58 @@
+import React from "react";
+import FitbitService from "../utils/fitbitService";
+import exerciseList from "../data/exercises";
+
+const userDid = "did:ion:EiDbkSjMyUujcP2oc5SEzSvd94u0VIb2vpQOkrVg8ZXqig:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoiMlJhMy1JODRjSlFJUnlyNmNQT1M4TG9LUlkxejhzWnV1S1lWRXFhLXNHdyJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiJxbmdsQ1F0TmVpMjV1Y2FmNmFQMHJrejJNYXlBODRhWDZJMlktUldsVmFvIiwieSI6Ik9rb0NfWXQwZldLb2lFaGxtdHdKcVV0WmtmbldhVklKLVhVcDFXQTdtd3MifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduMCIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNiJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlDeEVaa0tRNVBEbEJVWEN5VDlsYjVVX29pek1PYlRsbFNNVUtCSmI5U01wZyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpQzlCeVliUXpDN1ZBNW9YOGlWMUUzcWdKYXU3WWpONFBjQllnamVSVkZKM0EiLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUI2ZTEyUzI5Z1JBN2xTSzZWQTZKazhqTlRiQzRNQnY0S2FfMzBqSlo5cV9nIn19"
+
+const FitbitServer = () => {
+    const fitbitService = FitbitService();
+
+    function getRandomElements(arr, count) {
+        const copyArray = [...arr];
+        count = Math.min(count, copyArray.length);
+      
+        for (let i = copyArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copyArray[i], copyArray[j]] = [copyArray[j], copyArray[i]];
+        }
+      
+        return copyArray.slice(0, count);
+      }
+
+    async function handleReadWorkout(){
+        const workoutRecords = await fitbitService.queryWorkoutRecords(userDid);
+        const exerciseRecords = await fitbitService.queryExerciseRecords(workoutRecords[0].id, userDid);
+        console.log(workoutRecords);
+        console.log(exerciseRecords);
+    }
+
+    async function handleWriteRec(){
+        const recExerciseList = getRandomElements(exerciseList, 4);
+        const workoutRecord = await fitbitService.createWorkout({"Name":"Rec Workout", "Day":"NA"});
+        console.log("workout record", workoutRecord);
+        
+        for(let e of recExerciseList){
+            await fitbitService.createExercise(e, workoutRecord.id, userDid)
+        }
+    }
+
+    async function handleExercise(){
+        const exercises = await fitbitService.queryAllExerciseRecords(userDid);
+        console.log(exercises);
+    }
+
+    return (
+        <div>
+        <h1>Fitbit Server</h1>
+        <button onClick={handleReadWorkout}> Get All Workouts from user</button>
+        <div>
+        <button onClick={handleExercise}> Get All Exercises user without parent</button>
+        </div>
+        <div>
+        <button onClick={handleWriteRec}> Write Rec Exercises</button>
+        </div>
+        </div>
+    );
+};
+
+export default FitbitServer;

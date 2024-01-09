@@ -4,8 +4,11 @@ import exerciseList from "../data/exercises.js"
 import FitbitService from "../utils/fitbitService";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Web5Context } from "../context/Web5Context";
 
 const CreateWorkout = () => {
+    const { web5, did, protocolDefinition} = useContext(Web5Context);
+
     const fitbitService = FitbitService();
     const [selectedExercises, setselectedExercises] = useState([]);
     const [workout, setWorkout] = useState([]);
@@ -51,8 +54,9 @@ const CreateWorkout = () => {
     async function createWorkout(){
         const workoutRecord = await fitbitService.createWorkout({"Name": workoutName.current.value, "Day": workoutDay.current.value});
         console.log("workout record", workoutRecord);
+
         for(let e of selectedExercises){
-            await fitbitService.createExercise(e, workoutRecord.id)
+            await fitbitService.createExercise(e, workoutRecord.id, did)
         }
         navigate("/workout/my");
     }
@@ -70,7 +74,7 @@ const CreateWorkout = () => {
                         <div className="d-flex justify-content-center">
                             <img className="me-4" src={calendarIcon} style={{ width: '80px' }} />
                             {/* <input ref={workoutDay} type="number" className="form-control style-input" id="workout-day" placeholder="Workout Day" /> */}
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
+                            <input ref={workoutDay} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
                         </div>
                         <button onClick={createWorkout} className="bttn fw-bold">Create</button>
                     </div>

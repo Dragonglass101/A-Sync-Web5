@@ -43,8 +43,8 @@ export default function Navbar() {
                                 {/* <Button style={{fontFamily:'Space Mono', textTransform:'capitalize'}} className="p-3 mt-2 mx-2 fw-bold" variant="outlined" color="inherit" startIcon={<FitnessCenterIcon />}> */}
                                 {/* </Button> */}
                                 <div style={{fontFamily:'Space Mono'}} className='fw-bold w-50 d-flex justify-content-end'>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/create">Create Workouts</Link>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/my">My Workouts</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/create">Create Workouts</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/my">My Workouts</Link>
                                 </div>
                             </>
                             :

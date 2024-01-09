@@ -22,23 +22,23 @@ const ContextProvider = ({ children }) => {
 
   const protocolDefinition = 
   {
-    "protocol": "https://user.com",
+    "protocol": "https://usertest2.com",
     "published": true,
     "types": {
         "fitbit": {
-            "schema": "https://schema.org/user/fitbit",
+            "schema": "https://schema.org/usertest2/fitbit",
             "dataFormats": ["application/json"]
         },
         "userworkout": {
-            "schema": "https://schema.org/user/userworkout",
+            "schema": "https://schema.org/usertest2/userworkout",
             "dataFormats": ["application/json"]
         },
         "workout": {
-            "schema": "https://schema.org/user/workout",
+            "schema": "https://schema.org/usertest2/workout",
             "dataFormats": ["application/json"]
         },
         "exercise": {
-            "schema": "https://schema.org/user/exercise",
+            "schema": "https://schema.org/usertest2/exercise",
             "dataFormats": ["application/json"]
         }
     },
@@ -51,34 +51,22 @@ const ContextProvider = ({ children }) => {
                 "exercise": {
                     "$actions": [
                         {
-                            "who": "recipient",
-                            "of": "workout",
+                            "who": "anyone",
                             "can": "write"
                         },
                         {
-                            "who": "recipient",
-                            "of": "workout",
-                            "can": "read"
-                        },
-                        {
-                            "role": "fitbit",
+                            "who": "anyone",
                             "can": "read"
                         }
                     ]
                 },
                 "$actions": [
                     {
-                        "who": "author",
-                        "of": "workout",
+                        "who": "anyone",
                         "can": "write"
                     },
                     {
-                        "who": "recipient",
-                        "of": "workout",
-                        "can": "read"
-                    },
-                    {
-                        "role": "fitbit",
+                        "who": "anyone",
                         "can": "read"
                     }
                 ]
@@ -88,10 +76,6 @@ const ContextProvider = ({ children }) => {
                     "who": "author",
                     "of": "userworkout",
                     "can": "write"
-                },
-                {
-                    "role": "fitbit",
-                    "can": "read"
                 }
             ]
         }
