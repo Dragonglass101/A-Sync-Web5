@@ -228,6 +228,38 @@ const FitbitService = () => {
     }
   };
 
+  const updateExerciseStatus = async (exerciseRecordId, toggleVal) => {
+    console.log("e id", exerciseRecordId)
+    try {
+      const {record} = await web5.dwn.records.read({
+        message: {
+          filter: {
+            schema: protocolDefinition.types.exercise.schema,
+            recordId: exerciseRecordId,
+          },
+        },
+      });
+  
+      const currentExercise = await record.data.json();
+      console.log(currentExercise)
+  
+      await record.update({
+        data: {
+          name : currentExercise["name"],
+          type: currentExercise["type"],
+          imageurl: currentExercise["imageurl"],
+          cal: currentExercise["cal"],
+          reps: currentExercise["reps"],
+          completed: toggleVal,
+        },
+      });
+  
+      console.log("Exercise status toggled successfully!");
+    } catch (error) {
+      console.error("Error toggling exercise status: ", error);
+    }
+  }
+
   return {
     getUserWorkout,
     createUserWorkout,
@@ -238,7 +270,8 @@ const FitbitService = () => {
     queryExerciseRecords,
     queryAllExerciseRecords,
     deleteWithRecordId,
-    createRecExercise
+    createRecExercise,
+    updateExerciseStatus
   };
 };
 
