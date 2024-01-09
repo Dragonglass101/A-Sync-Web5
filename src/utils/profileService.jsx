@@ -15,7 +15,6 @@ const ProfileService = () => {
               },
             },
           });
-          console.log(status);
           const newList = await Promise.all(
             records.map(async (record) => {
               const data = await record.data.json();
@@ -40,9 +39,7 @@ const ProfileService = () => {
                     "dataFormat": "application/json"
                 }
             });
-            console.log(record)
             const {status} = await record.send(did);
-            console.log(status);
         } catch (error) {
             console.error("Error Creating Profile : ", error);
         }    

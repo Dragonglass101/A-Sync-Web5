@@ -35,7 +35,7 @@ const FitbitServer = () => {
     }
 
     async function handleWriteRec(recExerciseList) {
-        const workoutRecord = await fitbitService.createWorkout({ "Name": "Rec Workout", "Day": "NA" });
+        const workoutRecord = await fitbitService.createWorkout({ "Name": "Share Workout Demo", "Day": "NA" });
         console.log("workout record", workoutRecord);
 
         for (let e of recExerciseList) {

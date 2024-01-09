@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Web5Context } from "../context/Web5Context";
-import { useNavigate } from "react-router-dom";
 
 const NutrifitService = () => {
     const { web5, did, protocolDefinition} = useContext(Web5Context);
-    const navigate = useNavigate();
 
     const getUserMeal = async() => {
         try {
@@ -17,7 +15,6 @@ const NutrifitService = () => {
               },
             },
           });
-          console.log(status);
           const newList = await Promise.all(
             records.map(async (record) => {
               const data = await record.data.json();
@@ -46,7 +43,6 @@ const NutrifitService = () => {
                 }
             });
             const {status} = await record.send(did);
-            console.log(status);
         } catch (error) {
             console.error("Error Creating Usermeal : ", error);
         }    
@@ -68,7 +64,6 @@ const NutrifitService = () => {
                 }
             });
             const {status} = await record.send(did);
-            console.log("create meal status:", record, status);
             return record;
         } catch (error) {
             console.error("Error Creating meal : ", error);
@@ -91,7 +86,6 @@ const NutrifitService = () => {
                 }
             });
             const {status} = await record.send(did);
-            console.log(status);
             return record;
         } catch (error) {
             console.error("Error Creating Food : ", error);
@@ -109,7 +103,6 @@ const NutrifitService = () => {
                 },
               },
             });
-            console.log(records, status);
             const newList = await Promise.all(
               records.map(async (record) => {
                 const data = await record.data.json();
@@ -133,7 +126,6 @@ const NutrifitService = () => {
             },
           },
         });
-        console.log(records, status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -157,7 +149,6 @@ const NutrifitService = () => {
             }
           },
         });
-        console.log(status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -181,7 +172,6 @@ const NutrifitService = () => {
             },
           },
         });
-        console.log(records, status);
         const newList = await Promise.all(
           records.map(async (record) => {
             const data = await record.data.json();
@@ -203,7 +193,6 @@ const NutrifitService = () => {
             recordId: RecordId,
           },
         });
-        console.log("record deleted successfully")
       } catch (error) {
         console.error("Error Deleting with RecordId: ", error);
       }
@@ -220,9 +209,7 @@ const NutrifitService = () => {
                   "dataFormat": "application/json"
               }
           });
-          console.log("rec" ,response);
           const {status} = await record.send(userDid);
-          // console.log(status);
           return record;
       } catch (error) {
           console.error("Error Creating Rec Food : ", error);

@@ -62,6 +62,12 @@ const MyWorkouts = () => {
     createWorkoutElements(workoutRecords);
   };
 
+  const readSWorkout = async (e) => {
+    const sharedWorkout = await fitbitService.readSharedWorkout();
+    createSharedWorkoutElements(sharedWorkout);
+    console.log(sharedWorkout);
+  };
+
 
   const handleOpen = async (wr) => {
     setSelectedWorkout(wr);
@@ -133,48 +139,46 @@ const MyWorkouts = () => {
     setWorkouts(workoutElement);
   }
 
-  // function createSharedWorkoutElements(sharedWorkoutList) {
-  //   console.log("shared")
-  //   console.log(sharedWorkoutList);
-  //   const sharedWorkoutElement = [];
+  function createSharedWorkoutElements(sharedWorkoutList) {
+    console.log("shared")
+    console.log(sharedWorkoutList);
+    const sharedWorkoutElement = [];
 
-  //   for (let w of Object.values(sharedWorkoutList)) {
-  //     if (w.data.record.author != did) {
-  //       sharedWorkoutElement.push(
-  //         <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
-  //           <span className="h-100 m-0" style={{ width: '20%' }}>
-  //             <img src={benchImg} className="w-100" />
-  //           </span>
-  //           <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
-  //           <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-  //           <button onClick={() => { myWorkoutService.deleteWorkout(w.id) }} className="btn btn-light">
-  //             <DeleteIcon className="text-dark" />
-  //           </button>
-  //         </article>
-  //       )
-  //     }
-  //   }
-  //   setSharedWorkouts(sharedWorkoutElement);
-  // }
+    for (let w of Object.values(sharedWorkoutList)) {
+      if (w.data.record.author != did) {
+        sharedWorkoutElement.push(
+          <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
+            <span className="h-100 m-0" style={{ width: '20%' }}>
+              <img src={benchImg} className="w-100" />
+            </span>
+            <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
+            <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+            <button onClick={() => { 
+              fitbitService.deleteWithRecordId(w.id);
+              readSWorkout();
+            }} className="btn btn-light">
+              <DeleteIcon className="text-dark" />
+            </button>
+          </article>
+        )
+      }
+    }
+    setSharedWorkouts(sharedWorkoutElement);
+  }
 
   useEffect(() => {
     if (web5) {
       getWorkouts();
+      readSWorkout();
     }
   }, [web5, did])
 
-  const readSharedWorkout = (e) => {
-    e.preventDefault();
-    console.log('Entering readSharedWorkout');
-    fitbitService.readSharedWorkout();
-    console.log('Exiting readSharedWorkout');
-  };
-  const handleShareWorkout = (e) => {
+  const handleShareWorkout = async (e) => {
     console.log('Entering handleShareWorkout');
-    console.log(recipientdidRef.current.value);
     console.log(selectedWorkout);
-    fitbitService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
+    await fitbitService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
     console.log('Exiting handleShareWorkout');
+    handleClose();
   };
 
   return (
@@ -192,9 +196,6 @@ const MyWorkouts = () => {
               <Button onClick={() => { navigate("/workout/create") }} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
                 Create New Workout
               </Button>
-              <Button onClick={ readSharedWorkout} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
-                Read Shared Workout
-              </Button>
               {workouts}
             </div>
           </TabPanel>
@@ -206,37 +207,6 @@ const MyWorkouts = () => {
         </Tabs>
       </div>
 
-      {/* <section className="programs">
-        <div className="container programstocontainer">
-          <div className="row justify-content-evenly">
-            <div className="col-6">
-              <div className="sectiontohead undefined">
-                <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-                <h2 className="fw-bold">Your Workouts</h2>
-              </div>
-              <div className="programstowrapper d-flex flex-column">
-                <Button onClick={() => { navigate("/workout/create") }} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
-                  Create New Workout
-                </Button>
-                {workouts}
-              </div>
-            </div>
-            <div className="col text-center d-flex">
-              <div className="mx-auto" style={{ borderLeft: '6px solid white', height: '500px' }}></div>
-            </div>
-
-            <div className="col-4">
-              <div className="sectiontohead undefined">
-                <img className="me-4" src={dumbleImg} style={{ width: '50px' }} />
-                <h2 className="fw-bold mb-0">Shared Workouts</h2>
-              </div>
-              <div className="programstowrapper d-flex flex-column">
-                {sharedWorkouts}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
       <div>
         <Modal
           aria-labelledby="transition-modal-title"
