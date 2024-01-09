@@ -15,7 +15,7 @@ const MainHeader = () => {
           </h1>
           <p className="text-secondary" style={{fontSize:'small'}}>
           
-          Design personalized training plans, and celebrate your achievements – all while safeguarding your privacy. Your fitness, your rules. Move with Kinetica.
+          Design personalized training plans, and celebrate your achievements – all while safeguarding your privacy. Your fitness, your rules. Move with Fitbit.
           </p>
           <Link to="/plans" className="bttn lg fw-bold" style={{textDecoration:'none', fontFamily:'Space Mono'}}>Get Started</Link>
         </div>

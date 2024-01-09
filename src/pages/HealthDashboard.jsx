@@ -3,7 +3,6 @@ import MainHeader from "../WorkoutComponents/MainHeader"
 import Programs from "../WorkoutComponents/HealthPrograms"
 import workoutAnalytics from "../assets/images/transportable.svg"
 import dumbleImg from "../assets/images/fruitpile.png"
-import Footer from "../pages/Footer";
 import Image from "../assets/images/bowl1_ai.png"
 import { Link } from "react-router-dom"
 import chestPressImg from "../assets/images/chestPress.jpeg"
@@ -11,6 +10,7 @@ import HealthNavbar from "./HealthNavbar"
 import fruitPileImg from "../assets/images/fruitpile.png"
 import junkPileImg from "../assets/images/junkpile.png"
 import healthOverview from "../assets/images/healthOverview.svg"
+import FooterHealth from "./FooterHealth"
 // import Values from "../WorkoutComponents/Values"
 // import FAQs from "../WorkoutComponents/FAQs"
 // import Testimonails from "../WorkoutComponents/Testimonails"
@@ -24,11 +24,10 @@ const HealthDashboard = () => {
                 <header className="maintoheader">
                     <div className="container maintoheader-container">
                         <div className="maintoheader-left">
-                            <h4>#100DaysOfWorkOut</h4>
+                            <h4>#100DaysOfHealth</h4>
                             <h1 className="fw-bold text-light">Join The Legends Of The Fitness World</h1>
                             <p className="text-secondary">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Sit amet justo donec enim diam. Enim nulla aliquet porttitor lacus.
+                            Elevate your well-being with NutriFit, a healthy diet app that puts you in control of your data, making your wellness journey personal and empowering.
                             </p>
                             <Link to="/plans" className="bttn lg fw-bold" style={{ textDecoration: 'none', fontFamily: 'Space Mono' }}>Get Started</Link>
                         </div>
@@ -49,7 +48,7 @@ const HealthDashboard = () => {
                         </div>
                     </div>
                 </section>
-                <Footer />
+                <FooterHealth/>
 
 
 

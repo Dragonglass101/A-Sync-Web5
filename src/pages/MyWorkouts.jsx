@@ -170,14 +170,14 @@ const MyWorkouts = () => {
   return (
     <>
       <Navbar />
-      <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
+      <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '90vh' }}>
 
-        <Tabs defaultValue={0} className="mx-auto justify-content-center py-5">
+        <Tabs defaultValue={0} className="mx-auto justify-content-center align-items-top py-5">
           <TabsList className='flex-row'>
             <Tab value={0}> <AccountCircleIcon className="me-3" /> My Workouts</Tab>
             <Tab value={1}> <AppsIcon className="me-3" />Shared Workouts</Tab>
           </TabsList>
-          <TabPanel value={0} style={{overflowY:'scroll'}}>
+          <TabPanel value={0} style={{overflowY:'scroll'}} className="scrollset">
             <div className="d-flex flex-column">
               <Button onClick={() => { navigate("/workout/create") }} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
                 Create New Workout
@@ -185,7 +185,7 @@ const MyWorkouts = () => {
               {workouts}
             </div>
           </TabPanel>
-          <TabPanel value={1} style={{overflowY:'scroll'}}>
+          <TabPanel value={1} style={{overflowY:'scroll'}} className="scrollset">
             <div className="d-flex flex-column">
               {sharedWorkouts}
             </div>
