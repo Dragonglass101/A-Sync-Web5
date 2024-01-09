@@ -5,7 +5,7 @@ import workoutAnalytics from "../assets/images/transportable.svg"
 import dumbleImg from "../assets/images/workoutIcon.png"
 import Footer from "../pages/Footer";
 import Navbar from "./Navbar"
-import pushWallImg from '../assets/images/pushWall.png'
+import pushWallImg from '../assets/images/pushwall.png'
 
 const WorkoutDashboard = () => {
 
