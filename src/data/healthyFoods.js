@@ -1,7 +1,7 @@
 var healthyFoodsList = [
     {
         type: 'Chest',
-        name: 'Incline Bench Press',
+        name: 'Roti',
         imageurl: 'https://img.freepik.com/free-photo/top-view-tasty-cooked-vegetables-with-seasonings-greens-blue-table-dish-meal-meat-cuisine-food-family-taste_140725-144670.jpg?w=1480&t=st=1704789829~exp=1704790429~hmac=178cc801b5a842f466cc4198239a9f850a239e9e325190e8a173ea545e798682',
         cal: 50,
         completed: false,
@@ -9,7 +9,7 @@ var healthyFoodsList = [
     },
     { 
         type: 'Chest', 
-        name: 'Decline Bench Press', 
+        name: 'Paneer', 
         imageurl: 'https://img.freepik.com/free-photo/dietary-salad-with-mussels-quail-eggs-cucumbers-radish-lettuce-healthy-food-seafood-salad-top-view-flat-lay_2829-6491.jpg?w=1480&t=st=1704788904~exp=1704789504~hmac=4e9feb87df3755131c182f1c9f0d4d6b03521c234b8920f7735048ef49c07b14',
         cal: 50,
         completed: false,
@@ -17,7 +17,7 @@ var healthyFoodsList = [
     },
     { 
         type: 'Chest', 
-        name: 'Decline Push Up', 
+        name: 'Lassi', 
         imageurl: 'https://img.freepik.com/free-photo/vegetables-with-olives-tomatoes-dark-surface_2829-14086.jpg?w=1480&t=st=1704788904~exp=1704789504~hmac=e276e27f35ff92c16702e398c7cc1ac5e164f59e691a4e4ee45fac7d57ecb8ec',
         cal: 50,
         completed: false,
@@ -25,7 +25,7 @@ var healthyFoodsList = [
     },
     { 
         type: 'Chest', 
-        name: 'Push Up', 
+        name: 'Dahi', 
         imageurl: 'https://img.freepik.com/free-photo/baked-meatballs-chicken-fillet-with-garnish-with-quinoa-boiled-broccoli-proper-nutrition-sports-nutrition-dietary-menu-top-view_2829-20095.jpg?w=1480&t=st=1704788907~exp=1704789507~hmac=aa46beccf7a83a15dbed072707c060d7c82975a77e2196a2091901c144936f19', 
         cal: 50,
         completed: false,

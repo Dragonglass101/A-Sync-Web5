@@ -3,6 +3,7 @@ import DnDFlow from "./DnDFlow";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import FitbitService from "../utils/fitbitService";
+import NutrifitService from "../utils/nutrifitService";
 
 import '../style/Dashboard.css';
 import img_spotify2 from "../assets/images/spotify2.jpeg";
@@ -46,15 +47,21 @@ const style = {
 
 const Dashboard = () => {
     const fitbitService = FitbitService();
+    const nutrifitService = NutrifitService();
     const [open, setOpen] = useState(false);
     const [selected, setselected] = useState('');
     const navigate = useNavigate();
 
     const handleOpen = async (e) => {
-        const userworkoutList = await fitbitService.getUserWorkout();
-        console.log(userworkoutList);
+        var baseList = null;
+        if(e.target.id == "workout")
+            baseList = await fitbitService.getUserWorkout();
+        if(e.target.id == "health")
+            baseList = await nutrifitService.getUserMeal();
 
-        if (userworkoutList.length === 0) {
+        console.log(baseList);
+
+        if (baseList.length === 0) {
             setselected(e.target.id);
             setOpen(true);
         }
@@ -67,7 +74,11 @@ const Dashboard = () => {
         setOpen(false);
     }
     const handleNavigate = async () => {
-        await fitbitService.createUserWorkout();
+        if(selected == "workout")
+            await fitbitService.createUserWorkout();
+        if(selected == "health")
+            await nutrifitService.createUserMeal();
+
         navigate(selected + '/dashboard');
     }
 
@@ -171,7 +182,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <div className='collection-card'>
-                                <img onClick={handleOpen} src={img_health} className='dashboard-app-card' />
+                                <img id="health" onClick={handleOpen} src={img_health} className='dashboard-app-card' />
                                 <div className='' style={{ width: '300px' }}>
                                     <h4 className='text-white fw-bold'>Nourish</h4>
                                     <span className='text-secondary'>A personalized journey to a healthier you.</span>
