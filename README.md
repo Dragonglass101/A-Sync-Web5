@@ -20,7 +20,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h1 align="center"> Fitbit-5.0-NutriFit-5.0 </h1>
+  <h1 align="center"> Access Sync (A-Sync) </h1>
 
   <p align="center">
     <br />
@@ -28,13 +28,13 @@
     <br />
     <a href="https://youtu.be/m3xArqbYJ1A">View Demo</a>
      <br />
-    <a href="https://decentralizedangellist.web.app">Fit-Bit Deployed</a>
-    <a href="https://decentralizedangellist.web.app">Nutri-Fit Deployed</a>
+    <a href="https://async-5.web.app">A-sync Deployed</a>
 
   </p>
 </div>
 
-<img src='assets/devilslist-pic.jpg'>
+<img width="1280" alt="Screenshot 2024-01-10 at 12 54 27 AM" src="https://github.com/Dragonglass101/web5-project/assets/79003706/2630a46b-506c-4451-8c95-bb3aaed30f12">
+
 
 <!-- TABLE OF CONTENTS -->
 
@@ -71,8 +71,8 @@ This strategic collaboration between the Workout and Diet Assistance application
 
 In essence, our Web5 project empowers users to selectively share and leverage their data across applications, offering a level of customization and personalization that was previously unimaginable. Through this interconnected ecosystem, we aim to set a new standard for user-centric technologies, where privacy, data ownership, and informed decision-making are paramount.
 
-### Architecture
-<img src='assets/images/Architecture.png'>
+
+<img src='/src/assets/images/Architecture.png'/>
 
 ### Features
 
