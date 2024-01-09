@@ -38,8 +38,8 @@ export default function HealthNavbar() {
                         document.location.href.split('/')[3] == "health" ?
                             <>
                                 <div style={{fontFamily:'Space Mono'}} className='fw-bold w-50 d-flex justify-content-end'>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/create">Create Meals</Link>
-                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="workout/my">My Meals</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/health/create">Create Meals</Link>
+                                    <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/health/my">My Meals</Link>
                                 </div>
                             </>
                             :

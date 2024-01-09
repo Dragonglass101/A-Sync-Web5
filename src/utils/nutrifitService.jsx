@@ -2,18 +2,18 @@ import { useContext, useState } from "react";
 import { Web5Context } from "../context/Web5Context";
 import { useNavigate } from "react-router-dom";
 
-const FitbitService = () => {
+const NutrifitService = () => {
     const { web5, did, protocolDefinition} = useContext(Web5Context);
     const navigate = useNavigate();
 
-    const getUserWorkout = async() => {
+    const getUserMeal = async() => {
         try {
           const { records, status } = await web5.dwn.records.query({
             message: {
               protocol: protocolDefinition.protocol,
               filter: {
-                protocolPath: "userworkout",
-                schema: protocolDefinition.types.userworkout.schema,
+                protocolPath: "usermeal",
+                schema: protocolDefinition.types.usermeal.schema,
               },
             },
           });
@@ -27,66 +27,66 @@ const FitbitService = () => {
           return newList;
       
         } catch (error) {
-          console.error("Error Getting Workouts", error);
+          console.error("Error Getting Usermeals", error);
         }
     };
 
-    const createUserWorkout = async() => {
+    const createUserMeal = async() => {
         try {
             const { record } = await web5.dwn.records.write({
                 "data": {
-                    "name": "userworkout"
+                    "name": "usermeal"
                 },
                 "message": {
                     "published": true,
                     "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout",
-                    "schema": protocolDefinition.types.userworkout.schema,
+                    "protocolPath": "usermeal",
+                    "schema": protocolDefinition.types.usermeal.schema,
                     "dataFormat": "application/json"
                 }
             });
             const {status} = await record.send(did);
             console.log(status);
         } catch (error) {
-            console.error("Error Creating Workout : ", error);
+            console.error("Error Creating Usermeal : ", error);
         }    
     };
 
-    const createWorkout = async(workoutdata) => {
-        const userWorkout = await getUserWorkout();
+    const createMeal = async(mealdata) => {
+        const usermeal = await getUserMeal();
         try {
             const {record} = await web5.dwn.records.write({
-                "data": workoutdata,
+                "data": mealdata,
                 "message": {
                     "published": true,
-                    "parentId": userWorkout[0].id,
-                    "contextId": userWorkout[0].id,
+                    "parentId": usermeal[0].id,
+                    "contextId": usermeal[0].id,
                     "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout/workout",
-                    "schema": protocolDefinition.types.workout.schema,
+                    "protocolPath": "usermeal/meal",
+                    "schema": protocolDefinition.types.meal.schema,
                     "dataFormat": "application/json"
                 }
             });
             const {status} = await record.send(did);
-            console.log("create workout status:", record, status);
+            console.log("create meal status:", record, status);
             return record;
         } catch (error) {
-            console.error("Error Creating Workout : ", error);
+            console.error("Error Creating meal : ", error);
         }    
     };
 
-    const createExercise = async(exerciseData, workoutRecordId) => {
-        const userWorkout = await getUserWorkout();
+    const createFood = async(foodData, mealRecordId) => {
+        const usermeal = await getUserMeal();
         try {
             const { record } = await web5.dwn.records.write({
-                "data": exerciseData,
+                "data": foodData,
                 "message": {
                     "published": true,
-                    "parentId": workoutRecordId,
-                    "contextId": userWorkout[0].id,
+                    "parentId": mealRecordId,
+                    "contextId": usermeal[0].id,
                     "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout/workout/exercise",
-                    "schema": protocolDefinition.types.exercise.schema,
+                    "protocolPath": "usermeal/meal/food",
+                    "schema": protocolDefinition.types.food.schema,
                     "dataFormat": "application/json"
                 }
             });
@@ -94,7 +94,7 @@ const FitbitService = () => {
             console.log(status);
             return record;
         } catch (error) {
-            console.error("Error Creating Workout : ", error);
+            console.error("Error Creating Food : ", error);
         }    
     };
 
@@ -119,17 +119,17 @@ const FitbitService = () => {
             return newList;
         
           } catch (error) {
-            console.error("Error Getting Workouts", error);
+            console.error("Error Getting with parent Id", error);
           }
     };
 
-    const queryWorkoutRecords = async(DID) => {
+    const queryMealRecords = async(DID) => {
       try {
         const { records, status } = await web5.dwn.records.query({
           from: DID,
           message: {
             filter: {
-              schema: protocolDefinition.types.workout.schema,
+              schema: protocolDefinition.types.meal.schema,
             },
           },
         });
@@ -143,16 +143,17 @@ const FitbitService = () => {
         return newList;
     
       } catch (error) {
-        console.error("Error Getting Workouts", error);
+        console.error("Error Getting Meals", error);
       }
     }
-    const queryAllExerciseRecords = async(DID) => {
+
+    const queryAllFoodRecords = async(DID) => {
       try {
         const {records, status} = await web5.dwn.records.query({
           from: DID,
           message: {
             filter: {
-              schema: protocolDefinition.types.exercise.schema,
+              schema: protocolDefinition.types.food.schema,
             }
           },
         });
@@ -165,19 +166,19 @@ const FitbitService = () => {
         );
         return newList;
       } catch (error) {
-        console.error("Error Getting Workouts", error);
+        console.error("Error Getting All Food", error);
       }
     }
-    const queryExerciseRecords = async(parentID, DID) => {
+
+    const queryFoodRecords = async(parentID, DID) => {
       try {
         const { records, status } = await web5.dwn.records.query({
           from: DID,
           message: {
             filter: {
               parentId: parentID,
-              schema: protocolDefinition.types.exercise.schema,
+              schema: protocolDefinition.types.food.schema,
             },
-            dateSort: 'createdDescending',
           },
         });
         console.log(records, status);
@@ -190,7 +191,7 @@ const FitbitService = () => {
         return newList;
     
       } catch (error) {
-        console.error("Error Getting Workouts", error);
+        console.error("Error Getting Food with parentId", error);
       }
     }
 
@@ -204,18 +205,18 @@ const FitbitService = () => {
         });
         console.log("record deleted successfully")
       } catch (error) {
-        console.error("Error Deleting Workout Name: ", error);
+        console.error("Error Deleting with RecordId: ", error);
       }
     };
 
-    const createRecExercise = async(exerciseData, userDid) => {
+    const createRecFood = async(foodData, userDid) => {
       try {
           const response = await web5.dwn.records.write({
-              "data": exerciseData,
+              "data": foodData,
               "message": {
                   "protocol": protocolDefinition.protocol,
-                  "protocolPath": "userworkout/workout/exercise",
-                  "schema": protocolDefinition.types.exercise.schema,
+                  "protocolPath": "usermeal/meal/food",
+                  "schema": protocolDefinition.types.food.schema,
                   "dataFormat": "application/json"
               }
           });
@@ -224,22 +225,22 @@ const FitbitService = () => {
           // console.log(status);
           return record;
       } catch (error) {
-          console.error("Error Creating Workout : ", error);
+          console.error("Error Creating Rec Food : ", error);
       }    
   };
 
   return {
-    getUserWorkout,
-    createUserWorkout,
-    createWorkout,
-    createExercise,
+    getUserMeal,
+    createUserMeal,
+    createMeal,
+    createFood,
     getRecordsWithParentId,
-    queryWorkoutRecords,
-    queryExerciseRecords,
-    queryAllExerciseRecords,
+    queryMealRecords,
+    queryFoodRecords,
+    queryAllFoodRecords,
     deleteWithRecordId,
-    createRecExercise
+    createRecFood
   };
 };
 
-export default FitbitService;
+export default NutrifitService;

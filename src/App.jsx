@@ -11,9 +11,11 @@ import DnDFlow from "./pages/DnDFlow";
 import WorkoutDashboard from "./pages/WorkoutDashboard";
 import HealthDashboard from "./pages/HealthDashboard";
 import CreateHealth from "./pages/CreateHealth";
+import MyMeals from "./pages/MyMeals";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import FitbitServer from "./pages/FitbitServer";
+import NutrifitServer from "./pages/NutrifitServer";
 
 const App = () => {
 
@@ -23,13 +25,17 @@ const App = () => {
         {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/workout/create" element={<CreateWorkout />} />
-          <Route path="/workout/my" element={<MyWorkouts />} />
           <Route path="/protocolmap" element={<DnDFlow />} />
           <Route path="/workout/dashboard" element={<WorkoutDashboard/>} />
+          <Route path="/workout/create" element={<CreateWorkout />} />
+          <Route path="/workout/my" element={<MyWorkouts />} />
+
           <Route path="/health/dashboard" element={<HealthDashboard/>} />
           <Route path="/health/create" element={<CreateHealth/>} />
+          <Route path="/health/my" element={<MyMeals/>} />
+
           <Route path="/fitbitserver" element={<FitbitServer/>} />
+          <Route path="/nutrifitserver" element={<NutrifitServer/>} />
           
         </Routes>
       </Router>

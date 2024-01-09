@@ -34,16 +34,41 @@ const ContextProvider = ({ children }) => {
             "dataFormats": ["application/json"]
         },
         "workout": {
-            "schema": "https://schema.org/usertest1/workouts",
+            "schema": "https://schema.org/usertest1/workout",
             "dataFormats": ["application/json"]
         },
         "exercise": {
             "schema": "https://schema.org/usertest1/exercise",
             "dataFormats": ["application/json"]
+        },
+        "nutrifit": {
+            "schema": "https://schema.org/usertest1/nutrifit",
+            "dataFormats": ["application/json"]
+        },
+        "usermeal": {
+            "schema": "https://schema.org/usertest1/usermeal",
+            "dataFormats": ["application/json"]
+        },
+        "meal": {
+            "schema": "https://schema.org/usertest1/meal",
+            "dataFormats": ["application/json"]
+        },
+        "food": {
+            "schema": "https://schema.org/usertest1/food",
+            "dataFormats": ["application/json"]
         }
     },
     "structure": {
         "fitbit": {
+            "$globalRole": true,
+            "$actions": [
+                {
+                    "who": "anyone",
+                    "can": "write"
+                }
+            ]
+        },
+        "nutrifit": {
             "$globalRole": true,
             "$actions": [
                 {
@@ -93,6 +118,51 @@ const ContextProvider = ({ children }) => {
                 },
                 {
                     "role": "fitbit",
+                    "can": "read"
+                }
+            ]
+        },
+        "usermeal": {
+            "meal": {
+                "food": {
+                    "$actions": [
+                        {
+                            "who": "recipient",
+                            "of": "meal",
+                            "can": "write"
+                        },
+                        {
+                            "who": "recipient",
+                            "of": "meal",
+                            "can": "read"
+                        }
+                    ]
+                },
+                "$actions": [
+                    {
+                        "who": "author",
+                        "of": "meal",
+                        "can": "write"
+                    },
+                    {
+                        "who": "recipient",
+                        "of": "meal",
+                        "can": "read"
+                    },
+                    {
+                        "role": "nutrifit",
+                        "can": "read"
+                    }
+                ]
+            },
+            "$actions": [
+                {
+                    "who": "author",
+                    "of": "userworkout",
+                    "can": "write"
+                },
+                {
+                    "role": "nutrifit",
                     "can": "read"
                 }
             ]
