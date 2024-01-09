@@ -64,7 +64,7 @@ const CreateWorkout = () => {
         console.log("workout record", workoutRecord);
 
         for(let e of selectedExercises){
-            await fitbitService.createExercise(e, workoutRecord.id, did)
+            await fitbitService.createExercise(e, workoutRecord.id)
         }
         navigate("/workout/my");
     }

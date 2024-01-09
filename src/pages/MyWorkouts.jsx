@@ -27,6 +27,9 @@ const style = {
   p: 4,
 };
 
+const fitbitServerDid = "did:ion:EiCgPzS1oP09RTqUT-vCcKIwIpNSELbfJBejHrVQ8zBNLg:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoiN0w3eEFkc0pyTzY0ZXM1VFNBY1pFZGVlbDBnY0hjTWhNUU9Jb2F4VWtmYyJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiJ2V3VyNmtDeExDLWhNbG5iRFc4bnZQZWM2RUFtNFExQzJvSV8wOEVleUtFIiwieSI6InlEZHpTZGFPUUdZZzU0dmNjVlUtWERybmFPSG9vTzg2MzdRLWNEM0Q0TlkifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduMyIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduMSJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlEamZfTkEzZ3QxXzF6TWFWZ1FxaTNWb0x1ZzFXYjBNU3ZYYzF6UjI3SlI5ZyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpQkRzaWM1NE9sUGpHaFJ2dTZXY1hwTFZJY2NKNEgxNTNFUllON0xQQTRRUVEiLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUFocWNoa1A3SmhxQUQ3c2JfR01wY1o5azF6NG1vRUNDbEFza3FaTTFQUlBBIn19"
+const nutrifitServerDid = ""
+
 
 const MyWorkouts = () => {
   const { web5, did} = useContext(Web5Context);
@@ -140,8 +143,16 @@ const MyWorkouts = () => {
     setSharedWorkouts(sharedWorkoutElement);
   }
 
+  async function getallExercise(){
+      const workoutRecords = await fitbitService.queryWorkoutRecords(fitbitServerDid);
+      const exerciseRecords = await fitbitService.queryExerciseRecords(workoutRecords[0].id, fitbitServerDid);
+      console.log(workoutRecords);
+      console.log(exerciseRecords);
+  }
+
   useEffect(() => {
     if(web5){
+      getallExercise();
       getWorkouts();
     }
   }, [web5, did])
