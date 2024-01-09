@@ -53,57 +53,48 @@
 
 ### Motivation 
 
-Our motivation to embark on the Web5 project is rooted in a profound commitment to redefine the landscape of the internet, ushering in an era where users wield genuine authority over their online identities and data. At the heart of our initiative lies a dedication to the core principles of Web5, envisioning a digital realm that places a premium on user-centricity, privacy, seamless data flow, and empowerment.
+Our Inspiration to embark on the Web5 project is rooted in a profound commitment to redefine the landscape of the internet, ushering in an era where users wield genuine authority over their online identities and data. At the heart of our initiative lies a dedication to the core principles of Web5, envisioning a digital realm that places a premium on user-centricity, privacy, seamless data flow, and empowerment.
 
-Crucially, within the Web5 framework, the security and ownership of user data is priortized. With a focus on privacy, all user-generated data is now securely stored in the user's Digital Web Node (DWN). This ensures that users have complete control and ownership over their data, granting them the authority to decide which applications can access and utilize their information. This empowerment represents a fundamental shift in how data is handled, placing the user at the center of their digital experience.
+Crucially, within the Web5 framework, the security and ownership of user data is priortized. With a focus on privacy, all user-generated data is now securely stored in the user's (DWN). This ensures that users have complete control and ownership over their data, granting them the authority to decide which applications can access and utilize their information. This empowerment represents a fundamental shift in how data is handled, placing the user at the center of their digital experience.
 
-In pursuit of this vision, we have meticulously crafted two interlinked applications – a Workout Assistance and a Diet Assistance tool – leveraging the transformative potential of Web5 to offer a glimpse into the dynamic future of the web. These applications, thoughtfully curated to showcase the inherent capabilities of Web5, are designed to significantly contribute to the well-being of users, acting as a testament to the positive impact that technology can have on people's lives.
-
+In pursuit of this vision, we have meticulously crafted A-Sync application. The application itself, has three inbuilt independent application, that leverages the power of web5 and give us glimpse of future with web5.
 
 
 ### Introduction
 
-The Workout Assistance application facilitates the tracking and planning of workouts, while the Diet Assistance application enables users to monitor and plan their dietary choices. What sets our approach apart is the seamless integration of these two applications. We recognize the intrinsic connection between exercise and nutrition and have bridged the gap by leveraging the power of Web5.
+A-Sync isn't just an application; it's a visionary ecosystem that mirrors the future of the web through the lens of Web5. Comprising two autonomous applications—Fitbit (Workout Assistance) and NutriFit (Diet Assistance)—our approach distinguishes itself by seamlessly integrating these two facets. The inherent link between exercise and nutrition is addressed using our third gear, the Access Interface.
 
-Consider this scenario: a typical workout application may recommend high-intensity cardio exercises without any insight into the user's dietary habits. This lack of context can have critical implications for an individual's health. However, through the implementation of Web5, our applications transcend these limitations. User data generated across both applications is securely stored in the user's Digital Web Node (DWN). Now, with explicit user permission, the Workout Assistance application gains access to the user's diet data.
+In the Web5 paradigm, user-generated data often needs to flow seamlessly between applications to enhance user experiences. With data securely residing in the user's Digital Web Node (DWN), under the user's sole control, our Fitbit and NutriFit applications break free from conventional limitations. Consider a scenario where a workout app recommends high-intensity cardio without knowledge of dietary habits. A-Sync transcends these constraints; user data from both applications is securely stored in the DWN. With user permission, Fitbit gains insights into dietary data, enabling tailored workout and meal recommendations for the next day.
 
-This strategic collaboration between the Workout and Diet Assistance applications, made possible by Web5, ensures that the workout recommendations for the next day are tailored with precision. No longer confined by siloed data and isolated insights, our users benefit from a holistic approach that considers their exercise routines in tandem with their dietary patterns.
-
-In essence, our Web5 project empowers users to selectively share and leverage their data across applications, offering a level of customization and personalization that was previously unimaginable. Through this interconnected ecosystem, we aim to set a new standard for user-centric technologies, where privacy, data ownership, and informed decision-making are paramount.
-
-
+This strategic collaboration, made possible by Web5, marks a departure from isolated data silos. Users benefit from a holistic approach that harmonizes exercise routines with dietary patterns, setting a new standard for user-centric technologies. A-Sync empowers users to selectively share and leverage their data across applications, ushering in a level of customization and personalization previously unimaginable. In this interconnected ecosystem, privacy, data ownership, and informed decision-making take center stage.
 <img src='/src/assets/images/Architecture.png'/>
+#### What's Cooking:
+Fitbit and NutriFit stand independently as third-party applications, each providing features such as creating, deleting, editing, and sharing workouts or meals, along with analytics. Both applications run on their servers, and users sign in automatically with their Decentralized Identifiers (DID). By default, Fitbit has access to read Fitbit-generated data from the user's DWN, but users can grant permission to read NutriFit-generated data. The Access Manager facilitates this, offering users an intriguing UI to grant and revoke permissions. User profile information enriches the experience, envisioning a dashboard for managing identity and data across all used applications.
+
+Note: Fitbit and NutriFit are standalone applications, and Access Manager is a user-side feature for intuitive permission management. The additional NutriFit application serves demo purposes, creating a compelling preview of our futuristic Web5 interface.
 
 ### Features
 
 #### Grant Access Permissions 
 
-One of the groundbreaking features we've implemented in our Web5 project is the user-configurable data access protocol, a testament to the core strength of Web5 and its transformative potential. This feature empowers users with unprecedented control over their data, allowing them to grant explicit permissions to other applications for accessing information generated across different platforms. The ability to seamlessly share specific data points between applications is a game-changer, marking a paradigm shift in how users interact with their digital environment.
+#### Configurable Protocols: 
+Enabling the dynamism of Web5 in real-life scenarios requires protocols to be adaptable, allowing users to grant or revoke permissions at any time. Our achievement lies in the implementation of dynamic protocols, stored in the user's Digital Web Node (DWN). We successfully fetch, overwrite, and update these protocols within the user's DWN, ensuring a flexible and user-centric approach to data access.
 
-At the heart of this innovation is a user-friendly interface that facilitates the effortless configuration of access permissions. With just a few clicks, users can specify which applications are granted access to particular datasets, ensuring a tailored and personalized digital experience. The real-time nature of our user-configurable protocol means that access permissions are updated instantly as users make changes, creating a dynamic and responsive ecosystem.
+#### Assigning Roles:
+Beyond utilizing default "who" attributes, we've introduced custom roles to address the structural complexity of our application. This innovation in our configurable protocols introduces new roles dynamically and adjusts permissions for all record types based on user actions. This achievement enhances the granularity of access control and ensures a tailored experience for users.
 
-#### Share Workouts and Meals with Friends.
-
-The ability to share our workout routines and meals seamlessly with friends through their Decentralized Identifiers (DID) is an extraordinary feature embedded in both our applications. This functionality not only enhances the social aspect of our health and wellness journey but also fosters a supportive and collaborative environment. By leveraging DIDs, users can effortlessly connect with friends, allowing them to share fitness achievements, meal plans, and progress in a secure and privacy-focused manner. This feature opens up avenues for mutual encouragement, goal-sharing, and even friendly competitions, creating a community-driven approach to health and well-being.
-
-#### Recommended Workouts and Meals.
-
-In essence, our "Recommended Workouts or Meals" feature represents a pivotal aspect of our applications, prioritizing a personalized and comprehensive approach to health and wellness. Beyond mere convenience, this feature becomes a necessity, guiding users towards their fitness objectives and fostering a balanced lifestyle. Leveraging the power of Web5, our implementation of Grant Permission and data-sharing capabilities enables a revolutionary synergy between workout and diet applications. By analyzing user data from both realms, we provide tailored recommendations that consider individual exercise history and nutritional habits. This interconnected approach breaks free from isolated data silos, offering a holistic understanding of the user's health profile and, consequently, generating more effective and sustainable fitness plans. 
-
-
+#### Share Records Tree: 
+Our accomplishment extends beyond simple record sharing; we've successfully constructed a structural tree of records using parent-child relationships. This achievement signifies our capability not only to share individual records but entire hierarchical structures. The implementation of a shared records tree adds depth and complexity to data sharing within the Web5 framework.
 
 <p align="right"><a href="#readme-top">Top</a></p>
 
 ## Challenges Faced
 
 
-### Major issues
-
-
 <p align="right"><a href="#readme-top">Top</a></p>
 
 ## Future Aspects and Scope
-In the realm of Web5, the future holds exciting prospects for innovation.Our health and wellness applications are poised for future innovation, with machine learning at the forefront to refine personalized recommendations. Continuous analysis of user data, collaboration with health professionals, and integration of wearables ensure a dynamic and responsive approach.Collaborative ecosystems, driven by standardized protocols, will facilitate seamless interaction among applications, creating a more interconnected and interoperable digital space.
+A-Sync, functioning as an ecosystem, features a pivotal Access Manager—an essential component for the user dashboard or wallet, centralizing Web5-related management. Fitbit, a key application in A-Sync, currently provides workout recommendations and basic analytics. Future plans involve integrating AI/ML for more advanced features, enhancing collaboration, and supporting various file formats. A-Sync aims to be a dynamic platform, empowering users in Web5 activities while fostering collaboration in the health and wellness space.
 
 <p align="right"><a href="#readme-top">Top</a></p>
 
