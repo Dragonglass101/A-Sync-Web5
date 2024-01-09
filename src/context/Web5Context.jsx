@@ -81,6 +81,23 @@ const ContextProvider = ({ children }) => {
                 }
             ]
         },
+        "profile": {
+          "$actions": [
+            {
+              "who": "author",
+              "of": "profile",
+              "can": "write"
+            },
+            {
+              "role": "fitbit",
+              "can": "read"
+            },
+            {
+              "role": "nutrifit",
+              "can": "read"
+            },
+          ]
+        },
         "userworkout": {
             "workout": {
                 "exercise": {

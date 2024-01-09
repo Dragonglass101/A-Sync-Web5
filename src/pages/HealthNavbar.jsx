@@ -1,21 +1,36 @@
-import * as React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import WalletIcon from '@mui/icons-material/Wallet';
-import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import Avatar from '@mui/material/Avatar';
+import chadMan from '../assets/images/chadMan.jpeg'
+import { Web5Context } from "../context/Web5Context";
+import ProfileService from '../utils/profileService';
 
 import workoutIcon from '../assets/images/workoutIcon.png'
 
 export default function HealthNavbar() {
+    const profileService = ProfileService();
+    const { web5, did, protocolDefinition} = useContext(Web5Context);
+    const [username, setUsername] = useState(null);
+
+    const queryProfile = async () => {
+        const profileInfoList = await profileService.getProfile();
+        if(profileInfoList.length != 0) {
+            setUsername(profileInfoList[0].data.username);
+        }
+        return profileInfoList;
+    }
+    
+    useEffect(() => {
+        if(web5){
+            queryProfile();
+        }
+    }, [web5, did])
+    
     return (
         <React.Fragment>
             <AppBar style={{ backgroundColor: 'black' }} position="fixed" color='secondary' enableColorOnDark>
@@ -45,9 +60,12 @@ export default function HealthNavbar() {
                             :
                             <></>
                     }
-                    {/* <Button className="p-3 mt-2 fw-bold" variant="outlined" color="inherit" startIcon={<WalletIcon />}>
-                        Wallet Connect
-                    </Button> */}
+                    <IconButton sx={{ p: 0 }} className='ms-5'>
+                        <Avatar alt="Remy Sharp" src={chadMan} />
+                    </IconButton>
+                    <Button variant='outlined' className='ms-2 fw-bold' style={{textTransform:'capitalize', fontFamily:'Space Mono', color:'rgb(18, 185, 129)'}}>
+                        {username}
+                    </Button>
                 </Toolbar>
                 <div
                     style={{

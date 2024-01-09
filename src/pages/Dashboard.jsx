@@ -1,9 +1,11 @@
 
 import DnDFlow from "./DnDFlow";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import FitbitService from "../utils/fitbitService";
 import NutrifitService from "../utils/nutrifitService";
+import ProfileService from "../utils/profileService";
+import { Web5Context } from "../context/Web5Context";
 
 import '../style/Dashboard.css';
 import img_spotify2 from "../assets/images/spotify2.jpeg";
@@ -47,11 +49,53 @@ const style = {
 };
 
 const Dashboard = () => {
+    const { web5, did, protocolDefinition} = useContext(Web5Context);
+    
     const fitbitService = FitbitService();
     const nutrifitService = NutrifitService();
+    const profileService = ProfileService();
     const [open, setOpen] = useState(false);
     const [selected, setselected] = useState('');
     const navigate = useNavigate();
+
+    const [profile, setProfile] = useState(null);
+    const usernameRef = useRef();
+    const fullnameRef = useRef();
+    const emailRef = useRef();
+
+    const queryProfile = async () => {
+        const profileInfoList = await profileService.getProfile();
+        if(profileInfoList.length != 0) {
+            setProfile(
+                {
+                    "username": profileInfoList[0].data.username,
+                    "fullname": profileInfoList[0].data.fullname,
+                    "email": profileInfoList[0].data.email,
+                }
+            );
+        }
+        return profileInfoList;
+    }
+    
+    useEffect(() => {
+        if(web5){
+            queryProfile();
+        }
+    }, [web5, did])
+
+    async function handleProfileCreate(){
+        if(profile == null){
+            await profileService.createProfile(
+                {
+                    "username": usernameRef.current.value,
+                    "fullname": fullnameRef.current.value,
+                    "email": emailRef.current.value
+                }
+            )
+            queryProfile();
+        }
+    }
+    
 
     const handleOpen = async (e) => {
         var baseList = null;
@@ -160,17 +204,27 @@ const Dashboard = () => {
                         <div className="w-50 my-2 h-100">
                             <Avatar className="mb-3 mx-auto" src={chadMan} style={{height:'150px', width:'150px'}}/>
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">User Name</label>
-                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
-
+                            {profile ?  
+                            <input value={profile.username} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" disabled/>
+                            : 
+                            <input ref={usernameRef} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Userame"/>
+                            }
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">Full Name</label>
-                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
-
+                            {profile ?  
+                            <input value={profile.fullname} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" disabled/>
+                            : 
+                            <input ref={fullnameRef} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name"/>
+                            }
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">Email Account</label>
-                            <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
-
-                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
+                            {profile ?  
+                            <input value={profile.email} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" disabled/>
+                            : 
+                            <>
+                            <input ref={emailRef} type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Email"/>
+                            <Button onClick={handleProfileCreate} className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
                                 submit
-                            </Button>
+                            </Button> </>
+                            }
                         </div>
                     </TabPanel>
                     <TabPanel value={1}>
