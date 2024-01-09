@@ -106,20 +106,20 @@ const MyMeals = () => {
 
     for (let ml of Object.values(mealRecords)) {
       mealElement.push(
-        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '25px' }} >
+        <article className="card programstoprogram d-flex flex-row align-items-center p-0" style={{ borderRadius: '0px' }} >
           <span className="h-100 m-0" style={{ width: '20%' }}>
             <img src={benchImg} className="w-100" />
           </span>
-          <h4 className="fw-bold w-50">{ml.data.Name}</h4>
-          <button id={ml.data.Name} onClick={() => { handleOpen(ml) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-          <button
+          <p className="fw-bold w-50 text-light mb-2 ps-3 text-start">{ml.data.Name}</p>
+          <Button id={ml.data.Name} onClick={() => { handleOpen(ml) }} variant="outlined" size="small" className="fw-bold me-2" style={{ width: '20%' }}>Edit</Button>
+          <Button variant="contained" size="small"
             onClick={async () => {
               nutrifitService.deleteWithRecordId(ml.id);
               getMeals();
             }}
             className="btn btn-light">
             <DeleteIcon className="text-dark" />
-          </button>
+          </Button>
         </article>
       )
     }
