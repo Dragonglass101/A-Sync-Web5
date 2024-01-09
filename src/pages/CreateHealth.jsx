@@ -46,8 +46,8 @@ const CreateHealth = () => {
                         <p className="text-secondary small m-0 p-0">{fd.type}</p>
                     </div>
                     <div className="w-25 border-start py-3">
-                        <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{fd.cal} kcal</p>
-                        <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{fd.reps} reps</p>
+                        <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{fd.cal} cals</p>
+                        <p className="text-white small m-0 p-0" style={{ fontSize: 'xx-small' }}>{fd.reps} grms</p>
                     </div>
                 </div>
             </article>
