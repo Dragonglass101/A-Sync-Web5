@@ -62,7 +62,7 @@ const DnDFlow = () => {
       },
     });
   
-    console.log("protocol", protocols[0]);
+    console.log("protocol", protocols);
     setnewProtocol(protocols[0].definition);
   }
 
@@ -73,26 +73,7 @@ const DnDFlow = () => {
     }
   }, [web5, did])
 
-  const initialEdges = [
-    {
-      source: 'fitbit',
-      sourceHandle: "green",
-      target: 'nutrifit',
-      targetHandle: "lightred",
-      animated: true,
-      markerEnd: {
-        type: MarkerType.ArrowClosed,
-        width: 20,
-        height: 20,
-        color: '#FF0072',
-      },
-      style: {
-        strokeWidth: 2,
-        stroke: '#FF0072',
-      },
-      updatable: "target"
-    }
-  ];
+  const initialEdges = [];
 
   const edgeUpdateSuccessful = useRef(true);
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
@@ -112,13 +93,13 @@ const DnDFlow = () => {
     const actions1 = tempProtocol.structure.usermeal["$actions"];
     const actions2 = tempProtocol.structure.userworkout["$actions"];
     if(params.source == "fitbit" && params.target == "nutrifit"){
-      if(!actions1.map(JSON.stringify).includes(JSON.stringify(permission1))){
+      if(!actions1.some(obj => permission1.role === obj["role"] && permission1.can === obj["can"])){
         tempProtocol.structure.usermeal["$actions"].push(permission1);
       }
     }
     if(params.source == "nutrifit" && params.target == "fitbit"){
       console.log("for nutrifit")
-      if(!actions2.map(JSON.stringify).includes(JSON.stringify(permission2))){
+      if(!actions2.some(obj => permission2.role === obj["role"] && permission2.can === obj["can"])){
         tempProtocol.structure.userworkout["$actions"].push(permission2);
       }
     }
@@ -156,13 +137,50 @@ const DnDFlow = () => {
     setEdges((els) => updateEdge(oldEdge, newConnection, els));
   }, []);
 
+  function objExists(arr, obj){
+    for(let ob of arr){
+      if(ob['role'] === obj['role'] && ob['can'] === obj['can']) 
+        return true;
+    }
+    return false;
+  }
+
   const onEdgeUpdateEnd = useCallback((_, edge) => {
+    const tempProtocol = newProtocol;
+    const permission1 = {
+      "role": "fitbit",
+      "can": "read"
+    }
+    const permission2 = {
+      "role": "nutrifit",
+      "can": "read"
+    }
+    const actions1 = tempProtocol.structure.usermeal["$actions"];
+    const actions2 = tempProtocol.structure.userworkout["$actions"];
+    if(edge.source == "fitbit" && edge.target == "nutrifit"){
+      if(objExists(actions1, permission1)){
+        console.log("1")
+        const tempActions = tempProtocol.structure.usermeal["$actions"];
+        tempProtocol.structure.usermeal["$actions"] = tempActions.filter(obj => permission1.role !== obj["role"] || permission1.can !== obj["can"]);
+      }
+    }
+    if(edge.source == "nutrifit" && edge.target == "fitbit"){
+      if(objExists(actions2, permission2)){
+        console.log("2")
+        var tempActions = tempProtocol.structure.userworkout["$actions"];
+        tempActions = tempActions.filter(obj => permission2.role !== obj["role"] || permission2.can !== obj["can"]);
+        tempProtocol.structure.userworkout["$actions"] = tempActions;
+      }
+    }
+    console.log(tempProtocol);
+    setnewProtocol(tempProtocol)
+
     if (!edgeUpdateSuccessful.current) {
       setEdges((eds) => eds.filter((e) => e.id !== edge.id));
     }
 
     edgeUpdateSuccessful.current = true;
-  }, []);
+  }, [newProtocol]);
 
   const installNewProtocol = async () => {
     try {

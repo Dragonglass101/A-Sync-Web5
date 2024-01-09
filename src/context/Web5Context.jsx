@@ -167,12 +167,30 @@ const ContextProvider = ({ children }) => {
 }
   
   useEffect(() => {
+    const queryProtocol = async () => {
+      const { protocols, status } = await web5.dwn.protocols.query({
+        message: {
+          filter: {
+            protocol: protocolDefinition.protocol,
+          },
+        },
+      });
+    
+      console.log("protocol", protocols);
+      return protocols;
+    }
     const installProtocol = async () => {
       try {
         console.log("Installing protocol ...");
+
+        var protocolsList = await queryProtocol();
+        var protocolDef = protocolDefinition;
+        if(protocolsList.length != 0){
+          protocolDef = protocolsList[0].definition;
+        }
         const { protocol, status } = await web5.dwn.protocols.configure({
           message: {
-            definition: protocolDefinition,
+            definition: protocolDef,
           },
         });
         await protocol.send(did);
