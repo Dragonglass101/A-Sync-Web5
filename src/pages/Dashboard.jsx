@@ -176,39 +176,38 @@ const Dashboard = () => {
                         <Fade in={open}>
                             <Box sx={style} className="bg-dark text-white">
                                 {/* <Typography id="transition-modal-title" variant="h6" component="h2">
-                                Harmony 5.0 wants to access your Google Account
+                                A-Sync wants to access your Google Account
                             </Typography>
                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                                 Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                             </Typography> */}
                                 <div className="w-75 mx-auto">
                                     <h3 className="fw-bold w-75 text-center mx-auto">
-                                        <mark className="ps-0 pe-3" style={{ color: 'lime', background: 'none' }}>Harmony 5.0</mark>
-                                        wants to access your Google Account
+                                        <mark className="ps-0 pe-3" style={{ color: 'lime', background: 'none' }}>A-Sync</mark>
+                                        wants to access your Web5 Account
                                     </h3>
 
                                     <div className="d-flex mt-3 justify-content-center align-items-center">
                                         <Avatar sx={{ width: 30, height: 30 }}>
                                             <FolderIcon />
                                         </Avatar>
-                                        <span className="ps-2">info@bart.com.hk</span>
+                                        <span className="ps-2">info@web5.com.hk</span>
                                     </div>
 
                                     <div className="my-4 fw-bold">
-                                        <span>This will allow
-                                            <mark className="px-2" style={{ color: 'lime', background: 'none' }}>Harmony 5.0</mark>
-                                            to:
+                                        <span>This will allow the app to:
+                                            {/* <mark className="px-2" style={{ color: 'lime', background: 'none' }}>A-Sync</mark> */}
                                         </span>
                                     </div>
                                     <div className="my-2 d-flex">
                                         <FolderIcon />
-                                        <p className="px-3 text-secondary">View and manage Google Drive files and folders that you have opened or created with this app</p>
+                                        <p className="px-3 text-secondary">Enables the app to optimize your experience by accessing profile permissions</p>
                                         <InfoIcon />
                                     </div>
                                     <div className="mt-4">
-                                        <h5 className="fw-bold">Make sure you trust Harmony 5.0</h5>
+                                        <h5 className="fw-bold">Make sure you trust the app</h5>
                                         <p className="text-secondary">
-                                            You may be sharing sensitive info with this site or app. Find out how Simple Gmail Notes will handle your data by reviewing its terms of service and privacy policies. You can always see or remove access in your Google account.
+                                        To enhance your experience with our app, we kindly request access to profile permissions. Your authorization ensures a personalized and seamless user journey. Rest assured, our app strictly adheres to robust data protection protocols, aligning with legal and industry standards. Your privacy is our priority, and we appreciate your cooperation in safeguarding your data.
                                         </p>
                                     </div>
                                     <div className="d-flex justify-content-end mt-5">
@@ -273,7 +272,7 @@ const Dashboard = () => {
                             <div className='collection-card'>
                                 <img src={img_music2} className='dashboard-app-card' />
                                 <div className='' style={{ width: '300px' }}>
-                                    <h4 className='text-white fw-bold' >Harmony 5.0</h4>
+                                    <h4 className='text-white fw-bold' >A-Sync</h4>
                                     <span className='text-secondary'>Build your music world with Harmony.</span>
                                 </div>
                             </div>
