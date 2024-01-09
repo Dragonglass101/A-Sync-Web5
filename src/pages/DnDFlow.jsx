@@ -12,6 +12,8 @@ import fitbitLogo from "../assets/images/workout.jpeg"
 import applemusicLogo from "../assets/images/music2.jpeg"
 import nutritionLogo from "../assets/images/health.jpeg"
 import Button from '@mui/material/Button';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { Web5Context } from "../context/Web5Context";
 
@@ -182,9 +184,17 @@ const DnDFlow = () => {
     edgeUpdateSuccessful.current = true;
   }, [newProtocol]);
 
+  const [backdropOpen, setBackdropOpen] = useState(false);
+  const closeBackdrop = () => {
+      setBackdropOpen(false);
+  };
+  const openBackdrop = () => {
+      setBackdropOpen(true);
+  };
+
   const installNewProtocol = async () => {
     try {
-      console.log("Installing new protocol ...");
+      openBackdrop();
       const { protocol, status } = await web5.dwn.protocols.configure({
         message: {
           definition: newProtocol,
@@ -192,7 +202,7 @@ const DnDFlow = () => {
       });
       await protocol.send(did);
       queryProtocol();
-      console.log("New Protocol installed successfully.");
+      closeBackdrop();
     } catch (error) {
       console.error("Error installing new protocol: : ", error);
     }
@@ -200,6 +210,15 @@ const DnDFlow = () => {
 
   return (
     <>
+      <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={backdropOpen}
+      >
+        <div className="d-flex justify-content-center p-5" style={{backgroundColor:'black'}}>
+            <CircularProgress color="inherit" />
+            <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Installing New Protocol ...</h3>
+        </div>
+      </Backdrop>
     <div className='graph-background' style={{width:"600px", height:"600px", borderRadius: "25px"}}>
       <ReactFlow
         nodes={nodes}
