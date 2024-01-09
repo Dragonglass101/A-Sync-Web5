@@ -34,6 +34,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AppsIcon from '@mui/icons-material/Apps';
 
+//BACKDROP
+import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -47,6 +51,16 @@ const style = {
 };
 
 const Dashboard = () => {
+    //BACKDROP
+    const [backdropOpen, setBackdropOpen] = React.useState(false);
+    const closeBackdrop = () => {
+        setBackdropOpen(false);
+    };
+    const openBackdrop = () => {
+        setBackdropOpen(true);
+    };
+    //BACKDROP
+
     const fitbitService = FitbitService();
     const nutrifitService = NutrifitService();
     const [open, setOpen] = useState(false);
@@ -55,9 +69,9 @@ const Dashboard = () => {
 
     const handleOpen = async (e) => {
         var baseList = null;
-        if(e.target.id == "workout")
+        if (e.target.id == "workout")
             baseList = await fitbitService.getUserWorkout();
-        if(e.target.id == "health")
+        if (e.target.id == "health")
             baseList = await nutrifitService.getUserMeal();
 
         console.log(baseList);
@@ -75,9 +89,9 @@ const Dashboard = () => {
         setOpen(false);
     }
     const handleNavigate = async () => {
-        if(selected == "workout")
+        if (selected == "workout")
             await fitbitService.createUserWorkout();
-        if(selected == "health")
+        if (selected == "health")
             await nutrifitService.createUserMeal();
 
         navigate(selected + '/dashboard');
@@ -86,6 +100,19 @@ const Dashboard = () => {
     return (
         <>
             <div className="container d-flex flex-column align-items-center justify-content-center mt-3">
+                <div>
+                    <Button onClick={openBackdrop}>Show backdrop</Button>
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={backdropOpen}
+                        onClick={closeBackdrop}
+                    >
+                        <div className="d-flex justify-content-center p-5" style={{backgroundColor:'black'}}>
+                            <CircularProgress color="inherit" />
+                            <h3 className="ms-5 fw-bold" style={{ color: 'rgb(18, 185, 129)' }}>Protocol Loading ...</h3>
+                        </div>
+                    </Backdrop>
+                </div>
                 <h3 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Access Manager</h3>
 
                 <div>
@@ -158,7 +185,7 @@ const Dashboard = () => {
                     </TabsList>
                     <TabPanel value={0}>
                         <div className="w-50 my-2 h-100">
-                            <Avatar className="mb-3 mx-auto" src={chadMan} style={{height:'150px', width:'150px'}}/>
+                            <Avatar className="mb-3 mx-auto" src={chadMan} style={{ height: '150px', width: '150px' }} />
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">User Name</label>
                             <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
 
@@ -168,7 +195,7 @@ const Dashboard = () => {
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">Email Account</label>
                             <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
 
-                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
+                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{ color: '#12b981', borderColor: '#12b981' }}>
                                 submit
                             </Button>
                         </div>
@@ -210,7 +237,7 @@ const Dashboard = () => {
                         <div>
                             <DnDFlow />
                             {/* <button>Update Protocols</button> */}
-                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{color:'#12b981', borderColor:'#12b981'}}>
+                            <Button className="mt-5 d-block w-100 fw-bold" variant="outlined" color="primary" style={{ color: '#12b981', borderColor: '#12b981' }}>
                                 Update Protocol
                             </Button>
                         </div>
