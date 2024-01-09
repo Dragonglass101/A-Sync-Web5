@@ -22,7 +22,17 @@ const protocolDefinition =
     },
     "structure": {
         "fitbit": {
-            "$globalRole": true
+            "$globalRole": true,
+            "$actions": [
+                {
+                    "who": "anyone",
+                    "can": "write"
+                },
+                {
+                    "who": "anyone",
+                    "can": "read"
+                }
+            ]
         },
         "userworkout": {
             "workout": {
@@ -36,10 +46,6 @@ const protocolDefinition =
                         {
                             "who": "recipient",
                             "of": "workout",
-                            "can": "read"
-                        },
-                        {
-                            "role": "fitbit",
                             "can": "read"
                         }
                     ]
@@ -76,27 +82,14 @@ const protocolDefinition =
     }
 }
 
-// creating user
-bafyreibpc6hngckqvdh4adpe7yprwredvozurabsyf7q3raic5kka7xfdm
-{
-    "data": "user-1",
-    "message": {
-        "protocol": "https://user.com",
-        "protocolPath": "user",
-        "schema": "https://schema.org/user1/user",
-        "dataFormat": "application/json"
-    }
-}
-
 // creating userworkout
-bafyreifhoqzsiclbofae7at6tqo7kclebbgtmbjhfxrjyx6sa4yzgffzgy
+bafyreib5xbinoxrcxcx76yadssmgmcktfhp6jyc77buobfvzhgwfv56ybu
 {
     "data": {
         "name": "userworkout"
     },
     "message": {
-        "parentId": "bafyreibpc6hngckqvdh4adpe7yprwredvozurabsyf7q3raic5kka7xfdm",
-        "contextId": "bafyreibpc6hngckqvdh4adpe7yprwredvozurabsyf7q3raic5kka7xfdm",
+        "published": true,
         "protocol": "https://user.com",
         "protocolPath": "user/userworkout",
         "schema": "https://schema.org/user1/userworkout",
@@ -105,47 +98,51 @@ bafyreifhoqzsiclbofae7at6tqo7kclebbgtmbjhfxrjyx6sa4yzgffzgy
 }
 
 // creating workout
-bafyreia2tfdbjbbzzft4kw76p2pjfyejz7opj6xepuvtadkperghd3tkiu
+bafyreicnpxjtdlqx3ywmn6dl2h44zwyx6jika4bbf6ztkno2vu4i5mbshe
 {
     "data": {
         "name": "workout"
     },
     "message": {
-        "parentId": "bafyreifhoqzsiclbofae7at6tqo7kclebbgtmbjhfxrjyx6sa4yzgffzgy",
-        "contextId": "bafyreibpc6hngckqvdh4adpe7yprwredvozurabsyf7q3raic5kka7xfdm",
+        "published": true,
+        "parentId": "bafyreib5xbinoxrcxcx76yadssmgmcktfhp6jyc77buobfvzhgwfv56ybu",
+        "contextId": "bafyreib5xbinoxrcxcx76yadssmgmcktfhp6jyc77buobfvzhgwfv56ybu",
         "protocol": "https://user.com",
-        "protocolPath": "user/userworkout/workout",
-        "schema": "https://schema.org/user1/workouts",
+        "protocolPath": "userworkout/workout",
+        "schema": "https://schema.org/user/workouts",
         "dataFormat": "application/json"
     }
 }
 
 // creating exercise
-
+bafyreifnks6kx6u22zonnyeejpiktfaplcwn6hr6smehurwl43tz4oaayu
 {
     "data": {
         "name": "exercise"
     },
     "message": {
-        "parentId": "bafyreidph3dhxuzjvsczrek3dtrdob22zw5ex2ynma2dhuvyjxy6ppixki",
-        "contextId": "bafyreie2wqqluvlny4be474u6i2lekkxzzeh4t4m3njkt3nxlvu5vxgyd4",
+        "published": true,
+        "parentId": "bafyreicnpxjtdlqx3ywmn6dl2h44zwyx6jika4bbf6ztkno2vu4i5mbshe",
+        "contextId": "bafyreib5xbinoxrcxcx76yadssmgmcktfhp6jyc77buobfvzhgwfv56ybu",
         "protocol": "https://user.com",
-        "protocolPath": "user/userworkout/workout/exercise",
-        "schema": "https://schema.org/user1/exercise",
+        "protocolPath": "userworkout/workout/exercise",
+        "schema": "https://schema.org/user/exercise",
         "dataFormat": "application/json"
     }
 }
 
 // sending role permission
+bafyreiftcxzarytcm3s5oszapghadcgyajpusgxk65pgmndlzkyagcckme
 {
     "data": {
         "name": "role admin"
     },
     "message": {
+        "published": true,
         "recipient": "",
         "protocol": "https://user.com",
         "protocolPath": "fitbit",
-        "schema": "https://schema.org/user1/fitbit",
+        "schema": "https://schema.org/user/fitbit",
         "dataFormat": "application/json"
     }
 }

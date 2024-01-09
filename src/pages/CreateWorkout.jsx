@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Web5Context } from "../context/Web5Context";
 
@@ -91,18 +91,9 @@ const CreateWorkout = () => {
                             <img className="input-group-text bg-dark" src={workoutIcon} style={{ width: '80px' }} />
                             <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-name" placeholder="Workout Name" />
                         </div>
-                        <div className="d-flex justify-content-center">
-                            <img className="me-4" src={calendarIcon} style={{ width: '80px' }} />
-                            {/* <input ref={workoutDay} type="number" className="form-control style-input" id="workout-day" placeholder="Workout Day" /> */}
+                        <div className="input-group my-3">
+                            <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
                             <input ref={workoutDay} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
-                        </div>
-                        <div className="input-group my-3">
-                            <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
-                        </div>
-                        <div className="input-group my-3">
-                            <img className="input-group-text bg-dark" src={calendarIcon} style={{ width: '80px' }} />
-                            <input ref={workoutName} type="text" className="form-control bg-dark text-light workout-input" id="workout-id" placeholder="Workout Day" />
                         </div>
                         <button onClick={createWorkout} className="bttn fw-bold w-100 mt-4" style={{ borderRadius: '8px !important' }}>Create</button>
                     </div>

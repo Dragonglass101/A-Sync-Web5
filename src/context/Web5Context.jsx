@@ -22,51 +22,65 @@ const ContextProvider = ({ children }) => {
 
   const protocolDefinition = 
   {
-    "protocol": "https://usertest2.com",
+    "protocol": "https://usertest1.com",
     "published": true,
     "types": {
         "fitbit": {
-            "schema": "https://schema.org/usertest2/fitbit",
+            "schema": "https://schema.org/usertest1/fitbit",
             "dataFormats": ["application/json"]
         },
         "userworkout": {
-            "schema": "https://schema.org/usertest2/userworkout",
+            "schema": "https://schema.org/usertest1/userworkout",
             "dataFormats": ["application/json"]
         },
         "workout": {
-            "schema": "https://schema.org/usertest2/workout",
+            "schema": "https://schema.org/usertest1/workouts",
             "dataFormats": ["application/json"]
         },
         "exercise": {
-            "schema": "https://schema.org/usertest2/exercise",
+            "schema": "https://schema.org/usertest1/exercise",
             "dataFormats": ["application/json"]
         }
     },
     "structure": {
         "fitbit": {
-            "$globalRole": true
+            "$globalRole": true,
+            "$actions": [
+                {
+                    "who": "anyone",
+                    "can": "write"
+                }
+            ]
         },
         "userworkout": {
             "workout": {
                 "exercise": {
                     "$actions": [
                         {
-                            "who": "anyone",
+                            "who": "recipient",
+                            "of": "workout",
                             "can": "write"
                         },
                         {
-                            "who": "anyone",
+                            "who": "recipient",
+                            "of": "workout",
                             "can": "read"
                         }
                     ]
                 },
                 "$actions": [
                     {
-                        "who": "anyone",
+                        "who": "author",
+                        "of": "workout",
                         "can": "write"
                     },
                     {
-                        "who": "anyone",
+                        "who": "recipient",
+                        "of": "workout",
+                        "can": "read"
+                    },
+                    {
+                        "role": "fitbit",
                         "can": "read"
                     }
                 ]
@@ -76,11 +90,15 @@ const ContextProvider = ({ children }) => {
                     "who": "author",
                     "of": "userworkout",
                     "can": "write"
+                },
+                {
+                    "role": "fitbit",
+                    "can": "read"
                 }
             ]
         }
     }
-  }
+}
   
   useEffect(() => {
     const installProtocol = async () => {

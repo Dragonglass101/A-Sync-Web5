@@ -5,14 +5,10 @@ import workoutAnalytics from "../assets/images/transportable.svg"
 import dumbleImg from "../assets/images/workoutIcon.png"
 import Footer from "../pages/Footer";
 import Navbar from "./Navbar"
-import exerciseList from "../data/exercises.js"
 import pushWallImg from '../assets/images/pushWall.png'
-// import Values from "../WorkoutComponents/Values"
-// import FAQs from "../WorkoutComponents/FAQs"
-// import Testimonails from "../WorkoutComponents/Testimonails"
-// import Footer from "../WorkoutComponents/Footer"
 
 const WorkoutDashboard = () => {
+
   return (
     <>
       <Navbar />
