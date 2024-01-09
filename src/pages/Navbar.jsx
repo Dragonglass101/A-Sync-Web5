@@ -14,6 +14,7 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import Avatar from '@mui/material/Avatar';
 
 import workoutIcon from '../assets/images/workoutIcon.png'
+import chadMan from '../assets/images/chadMan.jpeg'
 
 export default function Navbar() {
     return (
@@ -31,13 +32,13 @@ export default function Navbar() {
                     </IconButton> */}
                     {/* <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color:'#c88500' }} /> */}
                     {/* <img className='ms-3' src={workoutIcon} style={{height:'80px', width:'auto'}}/> */}
-                    <Typography className='ms-4 fw-bold' style={{fontFamily:'Tektur', fontSize:'25px'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to="/workout/dashboard" >Kinetica</Link>
+                    <Typography className='ms-4 fw-bold' style={{ fontFamily: 'Tektur', fontSize: '25px' }} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Link to="/workout/dashboard" style={{ textDecoration: 'none', color: 'white' }} >Fitbit</Link>
                     </Typography>
                     {
                         document.location.href.split('/')[3] == "workout" ?
                             <>
-                                <div style={{fontFamily:'Space Mono'}} className='fw-bold w-50 d-flex justify-content-end'>
+                                <div style={{ fontFamily: 'Space Mono' }} className='fw-bold w-50 d-flex justify-content-end'>
                                     <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/create">Create Workouts</Link>
                                     <Link className='text-white mx-4' style={{ textDecoration: 'none' }} to="/workout/my">My Workouts</Link>
                                 </div>
@@ -45,9 +46,10 @@ export default function Navbar() {
                             :
                             <></>
                     }
-                    {/* <Button className="p-3 mt-2 fw-bold" variant="outlined" color="inherit" startIcon={<WalletIcon />}>
-                        Wallet Connect
-                    </Button> */}
+                    <IconButton sx={{ p: 0 }} className='ms-5'>
+                        <Avatar alt="Remy Sharp" src={chadMan} />
+                    </IconButton>
+                    <Button variant='outlined' className='ms-2 fw-bold' style={{textTransform:'capitalize', fontFamily:'Space Mono', color:'rgb(18, 185, 129)'}}>User Name</Button>
                 </Toolbar>
                 <div
                     style={{

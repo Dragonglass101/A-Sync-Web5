@@ -4,15 +4,16 @@ import { FaLinkedin, FaFacebookF } from "react-icons/fa"
 import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai"
 
 import img_workout from "../assets/images/workoutIcon.png"
-import img_health from "../assets/images/health.jpeg"
+import img_health from "../assets/images/fruitPile.png"
+import Image from "../assets/images/bowl1_ai.png"
 
-const Footer = () => {
+const FooterHealth = () => {
   return (
     <footer>
       <div className="container footertocontainer">
         <article>
           {/* <Link className="logo"> */}
-            <img src={img_workout} style={{height:'64px', width:'auto'}} alt="Footer Logo" />
+            <img src={Image} style={{height:'64px', width:'auto'}} alt="Footer Logo" />
           {/* </Link> */}
           <p>
             Design personalized training plans, and celebrate your achievements – all while safeguarding your privacy.
@@ -52,4 +53,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default FooterHealth

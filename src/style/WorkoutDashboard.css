@@ -430,11 +430,11 @@ section {
 
 .card {
   /* background: var(--color-gray-500); */
-  background: rgb(18, 24, 39);
+  background: transparent;
   filter: brightness(0.9);
-  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+  /* box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2); */
   /* background: radial-gradient(30.34% 30.34% at 34.14% 12.45%, #375DBE 3%, #102A6D 93%, rgba(16, 42, 109, 0) 100%)'; */
-  border: 2px solid transparent;
+  border-color: var(--color-gray-400);
   text-align: center;
   padding: 3rem 2rem;
   border-radius: 3rem 3rem 3rem 3rem;
@@ -455,7 +455,7 @@ section {
 
 .card:hover {
   background: black;
-  border-color: var(--color-gray-400);
+  border: 1px solid white;
   cursor: default;
 }
 
@@ -535,7 +535,8 @@ section {
   height: 3rem;
   /* background: var(--color-primary); */
   /* background: #20073A; */
-  background: #242a38;
+  background: transparent;
+  /* border-radius: 25px !important; */
   color: var(--color-gray-100);
   font-size: 1.5rem;
   padding: 0.8rem;
@@ -549,9 +550,9 @@ section {
 
 .card:hover span {
   /* background: var(--color-secondary); */
-  background: #03326D;
+  /* background: #ffffff; */
   /* color: var(--color-gray-600); */
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .card small {

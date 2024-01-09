@@ -10,6 +10,7 @@ import img_spotify2 from "../assets/images/spotify2.jpeg";
 import img_music2 from "../assets/images/music2.jpeg";
 import img_workout from "../assets/images/workout.jpeg"
 import img_health from "../assets/images/health.jpeg"
+import chadMan from "../assets/images/chadMan.jpeg"
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -84,8 +85,8 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
-                <h1 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Wallet</h1>
+            <div className="container d-flex flex-column align-items-center justify-content-center mt-3">
+                <h3 className='fw-bold' style={{ fontFamily: "Space Mono", color: '#12b981' }}>Access Manager</h3>
 
                 <div>
                     <Modal
@@ -157,7 +158,7 @@ const Dashboard = () => {
                     </TabsList>
                     <TabPanel value={0}>
                         <div className="w-50 my-2 h-100">
-                            <Avatar className="mb-3 mx-auto" style={{height:'150px', width:'150px'}}/>
+                            <Avatar className="mb-3 mx-auto" src={chadMan} style={{height:'150px', width:'150px'}}/>
                             <label for="exampleFormControlInput1" className="form-label font15 fw-bold">User Name</label>
                             <input type="text" className="mb-4 form-control bg-dark text-light" id="exampleFormControlInput1" placeholder="Full Name" />
 
@@ -177,14 +178,14 @@ const Dashboard = () => {
                             <div className='collection-card'>
                                 <img id="workout" onClick={handleOpen} src={img_workout} className='dashboard-app-card' />
                                 <div className='' style={{ width: '300px' }}>
-                                    <h4 className='text-white fw-bold'>Kinetica</h4>
+                                    <h4 className='text-white fw-bold'>Fitbit</h4>
                                     <span className='text-secondary'>Own Your Sweat, Own Your Goals. Train free with Kinetica</span>
                                 </div>
                             </div>
                             <div className='collection-card'>
                                 <img id="health" onClick={handleOpen} src={img_health} className='dashboard-app-card' />
                                 <div className='' style={{ width: '300px' }}>
-                                    <h4 className='text-white fw-bold'>Nourish</h4>
+                                    <h4 className='text-white fw-bold'>NutriFit</h4>
                                     <span className='text-secondary'>A personalized journey to a healthier you.</span>
                                 </div>
                             </div>
