@@ -128,29 +128,29 @@ const MyWorkouts = () => {
     setWorkouts(workoutElement);
   }
 
-  function createSharedWorkoutElements(sharedWorkoutList) {
-    console.log("shared")
-    console.log(sharedWorkoutList);
-    const sharedWorkoutElement = [];
+  // function createSharedWorkoutElements(sharedWorkoutList) {
+  //   console.log("shared")
+  //   console.log(sharedWorkoutList);
+  //   const sharedWorkoutElement = [];
 
-    for (let w of Object.values(sharedWorkoutList)) {
-      if (w.data.record.author != did) {
-        sharedWorkoutElement.push(
-          <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
-            <span className="h-100 m-0" style={{ width: '20%' }}>
-              <img src={benchImg} className="w-100" />
-            </span>
-            <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
-            <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
-            <button onClick={() => { myWorkoutService.deleteWorkout(w.id) }} className="btn btn-light">
-              <DeleteIcon className="text-dark" />
-            </button>
-          </article>
-        )
-      }
-    }
-    setSharedWorkouts(sharedWorkoutElement);
-  }
+  //   for (let w of Object.values(sharedWorkoutList)) {
+  //     if (w.data.record.author != did) {
+  //       sharedWorkoutElement.push(
+  //         <article className="card programstoprogram d-flex flex-row align-items-center p-0 pe-2" style={{ borderRadius: '0px' }} >
+  //           <span className="h-100 m-0" style={{ width: '20%' }}>
+  //             <img src={benchImg} className="w-100" />
+  //           </span>
+  //           <h4 className="fw-bold w-50">{w.data.data.Name}</h4>
+  //           <button id={w.data.Name} onClick={() => { handleOpen(w) }} className="btn btn-outline-light fw-bold me-2" style={{ width: '20%' }}>Edit</button>
+  //           <button onClick={() => { myWorkoutService.deleteWorkout(w.id) }} className="btn btn-light">
+  //             <DeleteIcon className="text-dark" />
+  //           </button>
+  //         </article>
+  //       )
+  //     }
+  //   }
+  //   setSharedWorkouts(sharedWorkoutElement);
+  // }
 
   useEffect(() => {
     if (web5) {
@@ -158,12 +158,17 @@ const MyWorkouts = () => {
     }
   }, [web5, did])
 
-
+  const readSharedWorkout = (e) => {
+    e.preventDefault();
+    console.log('Entering readSharedWorkout');
+    fitbitService.readSharedWorkout();
+    console.log('Exiting readSharedWorkout');
+  };
   const handleShareWorkout = (e) => {
     console.log('Entering handleShareWorkout');
     console.log(recipientdidRef.current.value);
     console.log(selectedWorkout);
-    myWorkoutService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
+    fitbitService.shareWorkout(selectedWorkout, recipientdidRef.current.value);
     console.log('Exiting handleShareWorkout');
   };
 
@@ -181,6 +186,9 @@ const MyWorkouts = () => {
             <div className="d-flex flex-column">
               <Button onClick={() => { navigate("/workout/create") }} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
                 Create New Workout
+              </Button>
+              <Button onClick={ readSharedWorkout} variant="outlined" className="py-3" style={{ textTransform: 'capitalize', fontFamily: 'Space Mono' }} startIcon={<AddCircleIcon />}>
+                Read Shared Workout
               </Button>
               {workouts}
             </div>

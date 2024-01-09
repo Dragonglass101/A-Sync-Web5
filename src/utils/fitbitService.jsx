@@ -262,6 +262,123 @@ const FitbitService = () => {
     }
   };
 
+  const readSharedExercises = async (workoutId) => {
+    try {
+      console.log("reading Exercises");
+      const {records, status} = await web5.dwn.records.query({
+        message: {
+          protocol: protocolDefinition.protocol,
+          protocolPath: "sharedExercises",
+          filter: {
+            schema: protocolDefinition.types.sharedExercises.schema,
+            parentId: workoutId,
+          }
+        },
+      });
+      console.log(status);
+      console.log(records);
+      const newList = await Promise.all(
+        records.map(async (record) => {
+          const data = await record.data.json();
+          console.log(data);
+          return { record, data, id: record.id };
+        })
+      );
+      return newList;
+    } catch (error) {
+      console.error("Error Getting Workouts", error);
+    }
+  }
+
+  const readSharedWorkout = async () => {
+    try {
+      
+      const {records, status} = await web5.dwn.records.query({
+        message: {
+          protocol: protocolDefinition.protocol,
+          protocolPath: "sharedWorkouts",
+          filter: {
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+          }
+        },
+      });
+      console.log(status);
+      const newList = await Promise.all(
+        records.map(async (record) => {
+          const data = await record.data.json();
+          console.log(data);
+          return { record, data, id: record.id };
+        })
+      );
+      const etc = await readSharedExercises(newList[0].id);
+
+
+      return newList;
+    } catch (error) {
+      console.error("Error Getting Workouts", error);
+    }
+  }
+
+
+
+  const shareWorkout = async(workoutRecord, recipientDID) => {
+    try {
+      const { record, status: statusWrite } = await web5.dwn.records.write({
+        data: { ...workoutRecord },
+        message: {
+            published: true,
+            protocol: protocolDefinition.protocol,
+            protocolPath: "sharedWorkouts",
+            schema: protocolDefinition.types.sharedWorkouts.schema,
+            dataFormat: 'application/json',
+            recipient: recipientDID,
+        },
+      });
+      const{status: statusSend} = record.send(recipientDID);
+      console.log(statusWrite);
+      console.log("Workout Record Shared Sucessfully !")
+
+      const { records, status: statusQuery } = await web5.dwn.records.query({
+        message: {
+            protocol: protocolDefinition.protocol,
+            protocolPath: "userworkout/workout/exercise",
+            schema: protocolDefinition.types.exercise.schema,
+            filter:{
+              parentId: workoutRecord.id,
+            },
+        },
+      });
+      console.log(records);
+      console.log("Fetched All Exercises!");
+
+      const newList = await Promise.all(
+        records.map(async (exe) => {
+          const data = await exe.data.json();
+          console.log(data);
+          const { record, status: statusWriteExe } = await web5.dwn.records.write({
+          data: { ...data },
+          message: {
+              published: true,
+              protocol: protocolDefinition.protocol,
+              protocolPath: "sharedExercises",
+              schema: protocolDefinition.types.sharedExercises.schema,
+              dataFormat: 'application/json',
+              recipient: recipientDID,
+          },
+        });
+        console.log(statusWriteExe);
+        const {status: statusSendToRecipient} = await record.send(recipientDID);
+        console.log(statusSendToRecipient);
+        console.log("Exercise Record Shared Sucessfully !")
+          return { exe, data, id: record.id };
+        })
+      );
+      // alert(`Workout Added Successfully!`)
+    } catch (error) {
+      console.error("Error Creating Workout : ", error);
+    }    
+  }
+
   return {
     getUserWorkout,
     createUserWorkout,
@@ -273,7 +390,9 @@ const FitbitService = () => {
     queryAllExerciseRecords,
     deleteWithRecordId,
     toggleExerciseStatus,
-    createRecExercise
+    createRecExercise,
+    shareWorkout,
+    readSharedWorkout,
   };
 };
 
