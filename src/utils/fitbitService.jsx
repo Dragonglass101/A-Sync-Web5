@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Web5Context } from "../context/Web5Context";
-import { useNavigate } from "react-router-dom";
 
 const FitbitService = () => {
     const { web5, did, protocolDefinition} = useContext(Web5Context);
-    const navigate = useNavigate();
 
     const getUserWorkout = async() => {
         try {
@@ -29,73 +27,6 @@ const FitbitService = () => {
         } catch (error) {
           console.error("Error Getting Workouts", error);
         }
-    };
-
-    const createUserWorkout = async() => {
-        try {
-            const { record } = await web5.dwn.records.write({
-                "data": {
-                    "name": "userworkout"
-                },
-                "message": {
-                    "published": true,
-                    "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout",
-                    "schema": protocolDefinition.types.userworkout.schema,
-                    "dataFormat": "application/json"
-                }
-            });
-            const {status} = await record.send(did);
-            console.log(status);
-        } catch (error) {
-            console.error("Error Creating Workout : ", error);
-        }    
-    };
-
-    const createWorkout = async(workoutdata) => {
-        const userWorkout = await getUserWorkout();
-        try {
-            const {record} = await web5.dwn.records.write({
-                "data": workoutdata,
-                "message": {
-                    "published": true,
-                    "parentId": userWorkout[0].id,
-                    "contextId": userWorkout[0].id,
-                    "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout/workout",
-                    "schema": protocolDefinition.types.workout.schema,
-                    "dataFormat": "application/json"
-                }
-            });
-            const {status} = await record.send(did);
-            console.log("create workout status:", record, status);
-            return record;
-        } catch (error) {
-            console.error("Error Creating Workout : ", error);
-        }    
-    };
-
-    const createExercise = async(exerciseData, workoutRecordId) => {
-        const userWorkout = await getUserWorkout();
-        try {
-            const { record } = await web5.dwn.records.write({
-                "data": exerciseData,
-                "message": {
-                    "published": true,
-                    "parentId": workoutRecordId,
-                    "contextId": userWorkout[0].id,
-                    "protocol": protocolDefinition.protocol,
-                    "protocolPath": "userworkout/workout/exercise",
-                    "schema": protocolDefinition.types.exercise.schema,
-                    "dataFormat": "application/json"
-                }
-            });
-            const {status} = await record.send(did);
-            console.log(status);
-            return record;
-        } catch (error) {
-            console.error("Error Creating Workout : ", error);
-        }    
     };
 
     const getRecordsWithParentId = async(parentID, DID) => {
@@ -146,6 +77,7 @@ const FitbitService = () => {
         console.error("Error Getting Workouts", error);
       }
     }
+
     const queryAllExerciseRecords = async(DID) => {
       try {
         const {records, status} = await web5.dwn.records.query({
@@ -168,6 +100,7 @@ const FitbitService = () => {
         console.error("Error Getting Workouts", error);
       }
     }
+
     const queryExerciseRecords = async(parentID, DID) => {
       try {
         const { records, status } = await web5.dwn.records.query({
@@ -194,34 +127,67 @@ const FitbitService = () => {
       }
     }
 
-    const deleteWithRecordId = async (RecordId) => {
+    const createUserWorkout = async() => {
       try {
-        await web5.dwn.records.delete({
-          message: {
-            protocol: protocolDefinition.protocol,
-            recordId: RecordId,
-          },
-        });
-        console.log("record deleted successfully")
+          const { record } = await web5.dwn.records.write({
+              "data": {
+                  "name": "userworkout"
+              },
+              "message": {
+                  "published": true,
+                  "protocol": protocolDefinition.protocol,
+                  "protocolPath": "userworkout",
+                  "schema": protocolDefinition.types.userworkout.schema,
+                  "dataFormat": "application/json"
+              }
+          });
+          const {status} = await record.send(did);
+          console.log(status);
       } catch (error) {
-        console.error("Error Deleting Workout Name: ", error);
-      }
-    };
+          console.error("Error Creating Workout : ", error);
+      }    
+  };
 
-    const createRecExercise = async(exerciseData, userDid) => {
+  const createWorkout = async(workoutdata) => {
+      const userWorkout = await getUserWorkout();
       try {
-          const response = await web5.dwn.records.write({
+          const {record} = await web5.dwn.records.write({
+              "data": workoutdata,
+              "message": {
+                  "published": true,
+                  "parentId": userWorkout[0].id,
+                  "contextId": userWorkout[0].id,
+                  "protocol": protocolDefinition.protocol,
+                  "protocolPath": "userworkout/workout",
+                  "schema": protocolDefinition.types.workout.schema,
+                  "dataFormat": "application/json"
+              }
+          });
+          const {status} = await record.send(did);
+          console.log("create workout status:", record, status);
+          return record;
+      } catch (error) {
+          console.error("Error Creating Workout : ", error);
+      }    
+  };
+
+  const createExercise = async(exerciseData, workoutRecordId) => {
+      const userWorkout = await getUserWorkout();
+      try {
+          const { record } = await web5.dwn.records.write({
               "data": exerciseData,
               "message": {
+                  "published": true,
+                  "parentId": workoutRecordId,
+                  "contextId": userWorkout[0].id,
                   "protocol": protocolDefinition.protocol,
                   "protocolPath": "userworkout/workout/exercise",
                   "schema": protocolDefinition.types.exercise.schema,
                   "dataFormat": "application/json"
               }
           });
-          console.log("rec" ,response);
-          const {status} = await record.send(userDid);
-          // console.log(status);
+          const {status} = await record.send(did);
+          console.log(status);
           return record;
       } catch (error) {
           console.error("Error Creating Workout : ", error);
@@ -262,6 +228,39 @@ const FitbitService = () => {
     }
   };
  
+  const createRecExercise = async(exerciseData, userDid) => {
+    try {
+        const response = await web5.dwn.records.write({
+            "data": exerciseData,
+            "message": {
+                "protocol": protocolDefinition.protocol,
+                "protocolPath": "userworkout/workout/exercise",
+                "schema": protocolDefinition.types.exercise.schema,
+                "dataFormat": "application/json"
+            }
+        });
+        console.log("rec" ,response);
+        const {status} = await record.send(userDid);
+        // console.log(status);
+        return record;
+    } catch (error) {
+        console.error("Error Creating Workout : ", error);
+    }    
+};
+
+  const deleteWithRecordId = async (RecordId) => {
+    try {
+      await web5.dwn.records.delete({
+        message: {
+          protocol: protocolDefinition.protocol,
+          recordId: RecordId,
+        },
+      });
+      console.log("record deleted successfully")
+    } catch (error) {
+      console.error("Error Deleting Workout Name: ", error);
+    }
+  };
 
   return {
     getUserWorkout,
